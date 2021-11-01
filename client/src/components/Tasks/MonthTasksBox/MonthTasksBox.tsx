@@ -8,8 +8,8 @@ import {
 } from '../../../services/ServerApiServices';
 import AddTaskForm from '../AddTaskForm/AddTaskForm';
 import { getSeason } from './getSeasonFunction';
-import './MonthTasksBox.css';
 import { MyPlant, Task } from '../../../common/types';
+import styles from './MonthTasksBox.module.scss';
 
 interface MonthProps {
   monthNumber: number;
@@ -42,7 +42,7 @@ function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
   }
 
   return (
-    <div className={`MonthTaskBox MonthTaskBox__${monthNumber}`}>
+    <div className={`${styles['MonthTaskBox']} MonthTaskBox__${monthNumber}`}>
       <h2>
         {monthName} {seasonIcon}
       </h2>

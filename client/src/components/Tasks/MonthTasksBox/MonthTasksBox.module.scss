@@ -1,8 +1,11 @@
+@import '../../../common/layout.scss';
+
 h2::first-letter {
   text-transform: capitalize;
 }
 
 .MonthTaskBox {
+  @include column;
   height: 40vh;
   overflow-y: scroll;
   overflow-x: hidden;
