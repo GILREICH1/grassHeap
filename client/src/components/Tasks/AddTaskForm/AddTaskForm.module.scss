@@ -1,4 +1,9 @@
 @import '../../../common/typography.scss';
+@import '../../../common/layout.scss';
+
+.submitForm {
+  @include column;
+}
 
 .submit {
   background-color: transparent;

@@ -49,7 +49,7 @@ function AddTaskForm({
   };
 
   return (
-    <form className="submitForm" onSubmit={e => submitHandler(e)}>
+    <form className={styles.submitForm} onSubmit={e => submitHandler(e)}>
       <input
         className="form__input"
         value={task}
