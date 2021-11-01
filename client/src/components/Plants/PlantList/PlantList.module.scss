@@ -1,8 +1,8 @@
-.PlantList {
-  margin: 2%;
-}
+@import '../../../common/layout.scss';
 
-.PlantList__sort {
+.footer {
+  @include column;
+  height: 222px;
 }
 
 .PlantList__sort--btn {
@@ -18,14 +18,13 @@
   border-radius: 15px;
 }
 
+.PlantList__sort {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 /* for desktop/laptop */
 @media only screen and (min-width: 600px) {
-  .PlantList__sort {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
   .PlantList {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
