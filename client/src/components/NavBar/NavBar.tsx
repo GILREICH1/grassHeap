@@ -51,14 +51,6 @@ function Navbar(): JSX.Element {
               href={'https://www.gardenfocused.co.uk/index.php'}
               rel="noreferrer"
               target="_blank">
-              Task Info
-              <span className="NavElement__icon">🥔</span>
-            </a>
-            <a
-              className="dropdown NavLink navElement"
-              href={'https://www.gardenfocused.co.uk/index.php'}
-              rel="noreferrer"
-              target="_blank">
               Veg Info
               <span className="NavElement__icon">🥦</span>
             </a>
