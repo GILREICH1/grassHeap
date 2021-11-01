@@ -1,7 +1,7 @@
 import { SERVER_URL as base_url } from '../utils/config';
 import { Plant } from '../common/types';
 
-export const getAllPlants = async (): Promise<Plant[]> => {
+export const getAllPlants = async (): Promise<Plant[] | unknown> => {
   try {
     const JSONPlants = await fetch(`${base_url}/plants`);
     const plants = await JSONPlants.json();
@@ -11,7 +11,7 @@ export const getAllPlants = async (): Promise<Plant[]> => {
   }
 };
 
-export const getPlantByName = async (name = ''): Promise<Plant> => {
+export const getPlantByName = async (name = ''): Promise<Plant | unknown> => {
   try {
     const JSONPlant = await fetch(`${base_url}/crops/${name}`);
     const plant = await JSONPlant.json();
