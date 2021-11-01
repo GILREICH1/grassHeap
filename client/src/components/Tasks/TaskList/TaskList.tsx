@@ -9,7 +9,7 @@ interface TaskListProps {
 function TaskList({ tasks, deleteThisTask }: TaskListProps): JSX.Element {
   const noTasks: JSX.Element = (
     <div className="TaskList_empty">
-      <p>no tasks for your plants this month</p>
+      <p>No tasks for your plants this month!</p>
     </div>
   );
   const showTasks: JSX.Element[] = tasks.map((task, i) => (

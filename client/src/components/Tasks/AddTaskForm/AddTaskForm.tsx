@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { saveTask } from '../../../services/ServerApiServices';
-import './AddTaskForm.css';
 import { Task } from '../../../common/types';
+import styles from './AddTaskForm.module.scss';
 
 interface AddTaskFormProps {
   month: string;
@@ -49,7 +49,7 @@ function AddTaskForm({
   };
 
   return (
-    <form className="submitForm" onSubmit={e => submitHandler(e)}>
+    <form className={styles.submitForm} onSubmit={e => submitHandler(e)}>
       <input
         className="form__input"
         value={task}
@@ -62,7 +62,7 @@ function AddTaskForm({
         type="text"
         placeholder="Add relevant crop"
         onChange={e => setCrop(e.target.value.toLowerCase())}></input>
-      <input type="submit" value="submit"></input>
+      <input className={styles.submit} type="submit" value="Submit"></input>
     </form>
   );
 }

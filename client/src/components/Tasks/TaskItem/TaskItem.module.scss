@@ -14,3 +14,9 @@
   visibility: visible;
   z-index: 1;
 }
+
+.TaskItem {
+  h3::first-letter {
+    text-transform: capitalize;
+  }
+}

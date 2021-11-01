@@ -1,9 +1,8 @@
-import Tasks from '../Tasks/Tasks/Tasks';
 import React from 'react';
+import Tasks from '../Tasks/Tasks/Tasks';
 import Weather from '../Weather/Weather';
-import './Dashboard.css';
 
-function Dashboard (): JSX.Element {
+function Dashboard(): JSX.Element {
   return (
     <div>
       <Weather />
