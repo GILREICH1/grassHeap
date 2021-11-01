@@ -9,7 +9,7 @@
 
 A lot of task/to-do apps work on a timeframe of days or hours. On the other hand, gardening works in the timeframe of months. grassHeap helps you keep track of garden tasks for the month and for the specific plants in your garden. Powered by the <a href="https://github.com/Growstuff/growstuff/wiki/API-Version-0"> GrowStuff API</a>.
 
-You can view the app at https://grassheap.netlify.app/
+You can view the app at https://www.grassheap.live/
 
 <span>
 <img src="https://user-images.githubusercontent.com/78416008/125106980-2ac45600-e0d8-11eb-8e54-1998f7336a6d.png" width=15%>
