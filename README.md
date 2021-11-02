@@ -45,7 +45,7 @@ You can view the app at https://www.grassheap.live/
 
 ## Deployment
 
-- For deployment purposes, there are two additional git repos within this one (one in server and one in client) each with their own remotes.
+- The front end of this app is deployed using Netlify and ther server is deployed on Heroku
 
 ## Contributors
 
