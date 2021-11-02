@@ -1,17 +1,17 @@
-import './WeatherDetails.css';
-
 import React, { useEffect, useState } from 'react';
-
 import { getGIF } from '../../../services/ServerApiServices';
-import './WeatherDetails.css';
 import { APIWeather } from '../../../common/types';
+import styles from './WeatherDetails.module.scss';
 
-interface WeatherDetailsProps{
+interface WeatherDetailsProps {
   weather: APIWeather;
   changeCity: () => string;
 }
 
-function WeatherDetails({ weather, changeCity } : WeatherDetailsProps) : JSX.Element {
+function WeatherDetails({
+  weather,
+  changeCity,
+}: WeatherDetailsProps): JSX.Element {
   const [gifPath, setGifPath] = useState('');
 
   useEffect(() => {
@@ -24,26 +24,21 @@ function WeatherDetails({ weather, changeCity } : WeatherDetailsProps) : JSX.Ele
   }, [weather]);
 
   return (
-    <div className="WeatherDetails">
-      <div className="WeatherDetails__text desktop">
+    <div className={styles.WeatherDetails}>
+      <div className={styles['WeatherDetails__text desktop']}>
         <h1>
           Weather in <a onClick={changeCity}>{weather.name}</a> today:{' '}
           {weather.weather[0]?.description}
         </h1>
       </div>
-      <div className="WeatherDetails__text mobile">
-        <h1>
-          <a onClick={changeCity}>{weather.name}</a>:{' '}
-          {weather.weather[0]?.description}
-        </h1>
-      </div>
-      <div className="WeatherDetails__GIF">
+      <div className={styles['WeatherDetails__Container']}>
         <a
           href={`https://www.bbc.co.uk/weather/${weather.id}`}
           rel="noreferrer"
           target="_blank">
-          <img className="Weather__icon" src={gifPath}></img>
+          <img className={styles['Weather__icon']} src={gifPath}></img>
         </a>
+        <p>click the gif for more detailed weather</p>
       </div>
     </div>
   );
