@@ -12,11 +12,13 @@ function Navbar(): JSX.Element {
     <div className="Navbar">
       <div className="Navbar__appLinks">
         <Link className="NavLink navElement" to="/">
-          Dashboard <span className="NavElement__icon">🌱</span>
+          Dashboard
         </Link>
+        <span className="NavElement__icon">🌱</span>
         <Link className="NavLink navElement" to="/plants">
-          Browse Plants <span className="NavElement__icon">🥕</span>
+          Browse Plants
         </Link>
+        <span className="NavElement__icon">🥕</span>
       </div>
       <div className="p-menu1">
         <nav id="navbar" className="navigation" role="navigation">
@@ -29,31 +31,30 @@ function Navbar(): JSX.Element {
 
           {/* <div className="Navbar__externalLinks menu1"> */}
           <div className="Navbar__externalLinks">
-            <span className="dropdown navElement">External Links:</span>
             <a
               className="dropdown NavLink navElement"
               href={`https://www.rhs.org.uk/advice/in-month/${currentMonth}`}
               rel="noreferrer"
               target="_blank">
               RHS
-              <span className="NavElement__icon">🍀</span>
             </a>
+            <span className="NavElement__icon">🍀</span>
             <a
               className="dropdown NavLink navElement"
               href={'https://www.bbc.co.uk/weather'}
               rel="noreferrer"
               target="_blank">
               BBC Weather
-              <span className="NavElement__icon">⛅</span>
             </a>
+            <span className="NavElement__icon">⛅</span>
             <a
               className="dropdown NavLink navElement"
               href={'https://www.gardenfocused.co.uk/index.php'}
               rel="noreferrer"
               target="_blank">
               Veg Info
-              <span className="NavElement__icon">🥦</span>
             </a>
+            <span className="NavElement__icon">🥦</span>
           </div>
         </nav>
       </div>

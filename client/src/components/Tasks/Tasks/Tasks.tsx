@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MonthTaskBox from '../MonthTasksBox/MonthTasksBox';
 import { months } from '../../../utils/months';
-import './Tasks.css';
+import './Tasks.scss';
 
 function Tasks(): JSX.Element {
   const [currentMonth, setCurrentMonth] = useState<number>(0);

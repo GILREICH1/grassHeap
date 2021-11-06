@@ -2,8 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { getWeather } from '../../services/WeatherApiServices';
 import WeatherDetails from './WeatherDetails/WeatherDetails';
-import './Weather.css';
 import { APIWeather } from '../../common/types';
+import styles from './Weather.module.scss';
 
 const initialWeather = {
   weather: [
@@ -37,7 +37,7 @@ function Weather(): JSX.Element {
     setCity(sentResult);
     return sentResult;
   }
-  
+
   useEffect(() => {
     localStorage.getItem('city')
       ? setCity(localStorage.getItem('city')!)
@@ -47,7 +47,7 @@ function Weather(): JSX.Element {
   }, []);
 
   return (
-    <div className="Weather">
+    <div className={styles.Weather}>
       {error ? (
         <h1>
           No weather found for {city} :(
