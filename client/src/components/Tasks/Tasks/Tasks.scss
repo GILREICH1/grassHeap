@@ -11,11 +11,13 @@
 }
 
 .tasks__month {
+  color: var(--cultured);
   width: 30%;
   margin: 0.2rem;
   padding: 0.1rem;
   background-color: transparent;
   border-radius: 15px;
+  border: solid 2px var(--maize-crayola);
 }
 
 .tasks__scroller--btn {
