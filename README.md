@@ -30,22 +30,21 @@ You can view the app at https://www.grassheap.live/
 ## ROADMAP
 
 - [ ] User Auth.
+- [ ] Modal for location.
 - [ ] Styling.
+- [ ] Search functionality.
 - [ ] More detailed weather report.
 
 ## Running the App Locally
 
-- You will need a running instance of mongoDB
-- Add a .env file according to .env-example format (you will need a free API key from https://openweathermap.org/api) and from GIPHY (https://developers.giphy.com/docs/api#quick-start-guide)
+You will need a running instance of mongoDB
+
+- Add a .env file according to .env-example format (you will need a free API key from <a target="_blank" rel="noopener noreferrer" href='https://openweathermap.org/api'>openweather</a> and from <a href='https://developers.giphy.com/docs/api#quick-start-guide' target="_blank" rel="noopener noreferrer" >GIPHY</a>
 - Run `npm i` in the server and client folders.
-- Run `npm start` in client/src.
+- Run `npm start` in client.
 - Run `npm start` in server.
 
   ( To see the full app, import some default tasks into your mongoDB grassHeap database, tasks collection using https://docs.google.com/spreadsheets/d/1XVkuqPTibBkkK4_KE3KlAV9ufz_iZ7O8Ly-iar14ybE/edit?usp=sharing )
-
-## Deployment
-
-- The front end of this app is deployed using Netlify and ther server is deployed on Heroku
 
 ## Contributors
 
