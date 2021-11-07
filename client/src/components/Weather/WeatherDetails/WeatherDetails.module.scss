@@ -9,6 +9,13 @@
   text-align: center;
   width: 50%;
 }
+
+.WeatherDetails__Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 h1 {
   a {
     color: var(--primaryHighlight);

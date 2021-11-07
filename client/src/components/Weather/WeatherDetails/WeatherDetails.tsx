@@ -36,6 +36,7 @@ function WeatherDetails({
         </h1>
       </div>
       <div className={styles['WeatherDetails__Container']}>
+        <p>random weather-related Gif below</p>
         <a
           href={`https://www.bbc.co.uk/weather/${weather.id}`}
           rel="noreferrer"
