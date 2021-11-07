@@ -42,7 +42,7 @@ function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
   }
 
   return (
-    <div className={`${styles['MonthTaskBox']} MonthTaskBox__${monthNumber}`}>
+    <div className={styles['MonthTaskBox']}>
       <h2>
         {monthName} {seasonIcon}
       </h2>
