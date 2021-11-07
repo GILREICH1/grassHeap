@@ -83,11 +83,13 @@ function App(): JSX.Element {
         value={{ myPlants, plants, removePlant, savePlant, setPlants }}>
         <Router>
           <Navbar />
-          <Switch>
-            <Route path="/plants/:name" component={PlantDetails} />
-            <Route exact path="/plants" component={PlantList} />
-            <Route exact path="/" component={Dashboard} />
-          </Switch>
+          <div className="content">
+            <Switch>
+              <Route path="/plants/:name" component={PlantDetails} />
+              <Route exact path="/plants" component={PlantList} />
+              <Route exact path="/" component={Dashboard} />
+            </Switch>
+          </div>
         </Router>
       </plantsContext.Provider>
     </div>

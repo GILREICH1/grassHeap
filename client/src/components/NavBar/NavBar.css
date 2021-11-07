@@ -1,7 +1,9 @@
 .Navbar {
-  /* position: fixed; */
+  position: fixed; /* Make it stick/fixed */
+  top: 0; /* Stay on top */
+  width: 100%; /* Full width */
+  transition: top 0.3s; /* Transition effect */
   background-color: var(--primaryDark);
-  height: 4vh;
   padding: 5px 0;
   z-index: 1;
 }

@@ -8,6 +8,24 @@ function Navbar(): JSX.Element {
 
   const currentMonth = months[today.getMonth()];
 
+  let prevScrollpos = window.pageYOffset;
+  window.onscroll = function () {
+    const currentScrollPos = window.pageYOffset;
+    const NavBar = Array.from(
+      document.getElementsByClassName(
+        'Navbar',
+      ) as HTMLCollectionOf<HTMLElement>,
+    )[0];
+    if (window.scrollY < 30) {
+      NavBar.style.top = '0';
+    } else if (prevScrollpos > currentScrollPos) {
+      NavBar.style.top = '0';
+    } else {
+      NavBar.style.top = '-50px';
+    }
+    prevScrollpos = currentScrollPos;
+  };
+
   return (
     <div className="Navbar">
       <div className="Navbar__appLinks">
