@@ -15,18 +15,25 @@ function TaskItem({ task, deleteThisTask }: TaskItemProps): JSX.Element {
 
   return (
     <div className={styles.TaskItem}>
-      <h3>
-        {task.crop}{' '}
-        <img
-          className={styles.taskItem_crop_icon}
-          src={taskIcon}
-          onError={e => ((e.target as HTMLImageElement).src = backUpIcon)}
-        />
-      </h3>
-      <p>{task.task}</p>
-      {task.userCreated ? (
-        <button onClick={() => deleteThisTask(task._id!)}>X</button>
-      ) : null}
+      <div className={styles.div2}>
+        <h3>
+          {task.crop}{' '}
+          <img
+            className={styles.taskItem_crop_icon}
+            src={taskIcon}
+            onError={e => ((e.target as HTMLImageElement).src = backUpIcon)}
+          />
+        </h3>
+      </div>
+      <div className={styles.div3}>
+        <p>{task.task}</p>
+      </div>
+      <div className={styles.div1}>
+        {task.userCreated && <div className={styles.bar}></div>}
+        {task.userCreated && (
+          <button onClick={() => deleteThisTask(task._id!)}>X</button>
+        )}
+      </div>
     </div>
   );
 }
