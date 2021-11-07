@@ -30,8 +30,8 @@ You can view the app at https://www.grassheap.live/
 ## ROADMAP
 
 - [ ] User Auth.
-- [ ] Modal for location.
-- [ ] Styling.
+- [x] Styling Location Prompt.
+- [x] General App styling.
 - [ ] Search functionality.
 - [ ] More detailed weather report.
 
