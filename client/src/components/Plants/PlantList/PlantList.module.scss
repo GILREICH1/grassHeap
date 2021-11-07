@@ -3,6 +3,7 @@
 .footer {
   @include column;
   height: 222px;
+  color: var(--primaryWhite);
 }
 
 .PlantList__sort--btn {
