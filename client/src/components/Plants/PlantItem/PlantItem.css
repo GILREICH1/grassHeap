@@ -36,7 +36,7 @@
   font-weight: bold;
   border-radius: 50%;
   font-weight: bold;
-  color: var(--cultured);
+  color: var(--primaryWhite);
   position: absolute;
   top: -5%;
   right: -5%;
@@ -44,11 +44,11 @@
 }
 
 .PlantItem__save {
-  background-color: var(--oxford-blue);
+  background-color: var(--primaryDark);
 }
 
 .PlantItem__remove {
-  background-color: var(--maize-crayola);
+  background-color: var(--primaryHighlight);
   color: black;
 }
 

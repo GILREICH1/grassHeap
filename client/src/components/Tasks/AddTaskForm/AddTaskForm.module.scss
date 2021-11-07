@@ -16,10 +16,10 @@
   font-family: inherit;
   width: 100%;
   border: 0;
-  border-bottom: 2px solid var(--cultured);
+  border-bottom: 2px solid var(--primaryWhite);
   outline: 0;
   font-size: 1.3rem;
-  color: var(--cultured);
+  color: var(--primaryWhite);
   padding: 7px 0;
   background: transparent;
   transition: border-color 0.2s;
@@ -41,7 +41,7 @@
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: var(--cultured);
+  color: var(--primaryWhite);
 }
 
 .form__field:focus {
@@ -51,7 +51,7 @@
     display: block;
     transition: 0.2s;
     font-size: 1rem;
-    color: var(--oxford-blue);
+    color: var(--primaryDark);
     font-weight: 700;
   }
   padding-bottom: 6px;
@@ -59,8 +59,8 @@
   border-width: 3px;
   border-image: linear-gradient(
     to right,
-    var(--oxford-blue),
-    var(--maize-crayola)
+    var(--primaryDark),
+    var(--primaryHighlight)
   );
   border-image-slice: 1;
 }
@@ -75,8 +75,8 @@
 .submit {
   appearance: button;
   backface-visibility: hidden;
-  background-color: var(--oxford-blue);
-  color: var(--cultured);
+  background-color: var(--primaryDark);
+  color: var(--primaryWhite);
   border-radius: 6px;
   border-width: 0;
   box-sizing: border-box;
@@ -90,5 +90,5 @@
 }
 
 .submit:hover {
-  background-color: var(--blue-pantone);
+  background-color: var(--secondaryDark);
 }

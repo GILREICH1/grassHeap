@@ -2,7 +2,7 @@
 
 .WeatherDetails {
   @include column;
-  color: var(--cultured);
+  color: var(--primaryWhite);
 }
 
 .WeatherDetails__text {
@@ -11,7 +11,7 @@
 }
 h1 {
   a {
-    color: var(--maize-crayola);
+    color: var(--primaryHighlight);
     transition: all 200ms;
   }
   a:hover {

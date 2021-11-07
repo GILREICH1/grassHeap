@@ -11,13 +11,13 @@
 }
 
 .tasks__month {
-  color: var(--cultured);
+  color: var(--primaryWhite);
   width: 30%;
   margin: 0.2rem;
   padding: 0.1rem;
   background-color: transparent;
   border-radius: 15px;
-  border: solid 2px var(--maize-crayola);
+  border: solid 2px var(--primaryHighlight);
 }
 
 .tasks__scroller--btn {
@@ -26,13 +26,13 @@
   width: 5vh;
   border: none;
   border-radius: 10px;
-  background-color: var(--oxford-blue);
-  color: var(--cultured);
+  background-color: var(--primaryDark);
+  color: var(--primaryWhite);
   transition: all 0.2s, box-shadow 0.08s ease-in;
   cursor: pointer;
 }
 .tasks__scroller--btn:hover {
-  background-color: var(--blue-pantone);
+  background-color: var(--secondaryDark);
 }
 
 @media only screen and (max-width: 600px) {
