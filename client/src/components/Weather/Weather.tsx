@@ -4,6 +4,7 @@ import { getWeather } from '../../services/WeatherApiServices';
 import WeatherDetails from './WeatherDetails/WeatherDetails';
 import { APIWeather } from '../../common/types';
 import styles from './Weather.module.scss';
+import WeatherModal from './WeatherModal/WeatherModal';
 
 const initialWeather = {
   weather: [
@@ -15,46 +16,44 @@ const initialWeather = {
 };
 
 function Weather(): JSX.Element {
-  const storedCity = window.localStorage.getItem('city') || null;
+  const storedCity = window.localStorage.getItem('city');
   const [weather, setWeather] = useState<APIWeather>(initialWeather);
-  const [city, setCity] = useState(storedCity ? storedCity : 'london');
+  const [city, setCity] = useState(storedCity);
   const [error, setError] = useState(true);
+  const [modalDisplay, setModalDisplay] = useState(false);
 
-  useEffect(() => {
-    getWeather(city)
-      .then(APIweather => {
-        APIweather.icon_link = `https://openweathermap.org/img/wn/${APIweather.weather[0].icon}@2x.png`;
-        setWeather(APIweather);
-        setError(false);
-      })
-      .catch(() => setError(true));
-  }, [city]);
-
-  function changeCity(): string {
-    const promptResult = prompt('Please enter your city', 'london');
-    if (promptResult) localStorage.setItem('city', promptResult);
-    const sentResult = promptResult ? promptResult : 'london';
-    setCity(sentResult);
-    return sentResult;
+  function changeCity(city: string) {
+    localStorage.setItem('city', city);
+    setCity(city);
+    setModalDisplay(false);
   }
 
   useEffect(() => {
-    localStorage.getItem('city')
-      ? setCity(localStorage.getItem('city')!)
-      : changeCity();
-
-    return () => setError(false);
+    storedCity ? setCity(localStorage.getItem('city')) : setModalDisplay(true);
   }, []);
 
-  return (
+  useEffect(() => {
+    if (city) {
+      getWeather(city)
+        .then(APIweather => {
+          setWeather(APIweather);
+          setError(false);
+        })
+        .catch(() => setError(true));
+    }
+  }, [city]);
+
+  return modalDisplay ? (
+    <WeatherModal changeCity={changeCity} />
+  ) : (
     <div className={styles.Weather}>
       {error ? (
         <h1>
           No weather found for {city} :(
-          <a onClick={() => changeCity()}> try again</a>
+          <a onClick={() => setModalDisplay(true)}> try again</a>
         </h1>
       ) : (
-        <WeatherDetails changeCity={changeCity} weather={weather} />
+        <WeatherDetails setModalDisplay={setModalDisplay} weather={weather} />
       )}
     </div>
   );

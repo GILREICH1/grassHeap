@@ -5,30 +5,34 @@ import styles from './WeatherDetails.module.scss';
 
 interface WeatherDetailsProps {
   weather: APIWeather;
-  changeCity: () => string;
+  setModalDisplay: (arg: boolean) => void;
 }
 
 function WeatherDetails({
   weather,
-  changeCity,
+  setModalDisplay,
 }: WeatherDetailsProps): JSX.Element {
   const [gifPath, setGifPath] = useState('');
 
   useEffect(() => {
+    let isMounted = true;
     const query = weather.weather[0].main;
     getGIF(query).then(resultsObj => {
       const randomNumber = Math.floor(Math.random() * resultsObj.length);
       const imageURL = resultsObj[randomNumber].images.fixed_height.url;
-      setGifPath(imageURL);
+      if (isMounted) setGifPath(imageURL);
     });
+    return () => {
+      isMounted = false;
+    };
   }, [weather]);
 
   return (
     <div className={styles.WeatherDetails}>
       <div className={styles['WeatherDetails__text desktop']}>
         <h1>
-          Weather in <a onClick={changeCity}>{weather.name}</a> today:{' '}
-          {weather.weather[0]?.description}
+          Weather in <a onClick={() => setModalDisplay(true)}>{weather.name}</a>{' '}
+          today: {weather.weather[0]?.description}
         </h1>
       </div>
       <div className={styles['WeatherDetails__Container']}>
