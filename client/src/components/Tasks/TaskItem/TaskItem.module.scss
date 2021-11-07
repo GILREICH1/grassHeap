@@ -3,18 +3,6 @@
   width: 1rem;
 }
 
-:disabled {
-  cursor: not-allowed;
-}
-
-.tooltiptext {
-  visibility: hidden;
-}
-.disabled:hover .tooltiptext {
-  visibility: visible;
-  z-index: 1;
-}
-
 .TaskItem {
   h3::first-letter {
     text-transform: capitalize;
