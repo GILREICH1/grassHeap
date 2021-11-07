@@ -3,6 +3,11 @@
 
 .submitForm {
   @include column;
+  h3 {
+    width: 90%;
+    text-align: center;
+    border-bottom: 2px solid var(--primaryHighlight);
+  }
 }
 
 .form__group {
