@@ -1,3 +1,4 @@
+import React from 'react';
 import TaskItem from '../TaskItem/TaskItem';
 import { Task } from '../../../common/types';
 
@@ -13,11 +14,9 @@ function TaskList({ tasks, deleteThisTask }: TaskListProps): JSX.Element {
     </div>
   );
   const showTasks: JSX.Element[] = tasks.map((task, i) => (
-    <ul key={i}>
-      <li>
-        <TaskItem deleteThisTask={deleteThisTask} task={task} />
-      </li>
-    </ul>
+    <React.Fragment key={i}>
+      <TaskItem deleteThisTask={deleteThisTask} task={task} />
+    </React.Fragment>
   ));
 
   return (

@@ -10,8 +10,8 @@ function PlantDetails(): JSX.Element {
   const [plantDetails, setPlantDetails] = useState<Plant>(plants[0]);
 
   useEffect(() => {
-    const plant: Plant = plants.filter(plant => plant.slug === name)[0];
-    setPlantDetails(plant);
+    const plant: Plant | undefined = plants.find(plant => plant.slug === name);
+    if (plant) setPlantDetails(plant);
   }, [name]);
 
   const commonNames = plantDetails.details?.attributes?.common_names

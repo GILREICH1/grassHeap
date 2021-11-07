@@ -18,6 +18,10 @@
 
 .PlantItem__text a {
   text-decoration: none;
+  transition: all 200ms;
+}
+.PlantItem__text a:hover {
+  opacity: 60%;
 }
 
 .PlantItem__name {
@@ -36,7 +40,7 @@
   font-weight: bold;
   border-radius: 50%;
   font-weight: bold;
-  color: var(--cultured);
+  color: var(--primaryWhite);
   position: absolute;
   top: -5%;
   right: -5%;
@@ -44,11 +48,11 @@
 }
 
 .PlantItem__save {
-  background-color: var(--oxford-blue);
+  background-color: var(--primaryDark);
 }
 
 .PlantItem__remove {
-  background-color: var(--maize-crayola);
+  background-color: var(--primaryHighlight);
   color: black;
 }
 

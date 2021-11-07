@@ -1,25 +1,25 @@
 .Navbar {
   /* position: fixed; */
-  background-color: var(--oxford-blue);
+  background-color: var(--primaryDark);
   height: 4vh;
   padding: 5px 0;
   z-index: 1;
 }
 
 .navElement {
-  background-color: var(--oxford-blue);
+  background-color: var(--primaryDark);
   font-weight: bold;
   font-size: larger;
   padding: 0 5px;
   border-radius: 5px;
-  color: var(--cultured);
+  color: var(--primaryWhite);
   text-decoration: none; /* no underline */
   transition: all 0.2s, box-shadow 0.08s ease-in;
 }
 
 .NavLink:hover {
-  background-color: var(--blue-pantone);
-  color: var(--cultured);
+  background-color: var(--secondaryDark);
+  color: var(--primaryWhite);
 }
 
 .Navbar__appLinks {
@@ -56,7 +56,7 @@
     float: right;
   }
   .hamburger div {
-    background-color: var(--cultured);
+    background-color: var(--primaryWhite);
     position: relative;
     width: 40px;
     height: 5px;
@@ -90,7 +90,7 @@
   .Navbar__externalLinks {
     position: relative;
     width: 100%;
-    background-color: var(--oxford-blue);
+    background-color: var(--primaryDark);
     display: flex;
     flex-direction: column;
     padding: 0;

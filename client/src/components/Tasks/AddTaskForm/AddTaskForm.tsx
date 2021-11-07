@@ -49,27 +49,30 @@ function AddTaskForm({
   };
 
   return (
-    <form className={styles.submitForm} onSubmit={submitHandler}>
-      <div className={styles['form__group']}>
-        <input
-          className={styles['form__field']}
-          required
-          value={task}
-          onChange={e => setTask(e.target.value)}
-        />
-        <label className={styles['form__label']}>Task</label>
-      </div>
-      <div className={`${styles['form__group']}`}>
-        <input
-          className={styles['form__field']}
-          required
-          value={crop}
-          onChange={e => setCrop(e.target.value.toLowerCase())}
-        />
-        <label className={styles['form__label']}>Crop</label>
-      </div>
-      <input className={styles.submit} type="submit" value="Submit" />
-    </form>
+    <>
+      <form className={styles.submitForm} onSubmit={submitHandler}>
+        <h3>Add New Task</h3>
+        <div className={styles['form__group']}>
+          <input
+            className={styles['form__field']}
+            required
+            value={task}
+            onChange={e => setTask(e.target.value)}
+          />
+          <label className={styles['form__label']}>Task</label>
+        </div>
+        <div className={`${styles['form__group']}`}>
+          <input
+            className={styles['form__field']}
+            required
+            value={crop}
+            onChange={e => setCrop(e.target.value.toLowerCase())}
+          />
+          <label className={styles['form__label']}>Crop</label>
+        </div>
+        <input className={styles.submit} type="submit" value="Submit" />
+      </form>
+    </>
   );
 }
 

@@ -58,7 +58,7 @@ function PlantList(): JSX.Element {
         {plants && displayPlants(plants)}
       </div>
       <div className={styles.footer}>
-        <p>That&apos;s all!</p>
+        <h3>That&apos;s all!</h3>
         <PlantGif />
       </div>
     </>
