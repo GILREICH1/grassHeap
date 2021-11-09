@@ -9,7 +9,6 @@ function PlantList(): JSX.Element {
   const { plants, myPlants, setPlants } = useContext(plantsContext);
 
   function sortPlants(method = 'a'): void {
-    console.log(`sorting ${method}`);
     if (method === 'p') {
       setPlants(
         [...plants].sort(({ _score: score1 }, { _score: score2 }) =>
