@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Plant } from '../../common/types';
 import { plantsContext } from '../App/App';
 import PlantItem from '../Plants/PlantItem/PlantItem';
-import styles from './MyPlants.module.scss';
+import styles from './MyPlantsList.module.scss';
 
 function MyPlantsList(): JSX.Element {
   const { plants, myPlants } = useContext(plantsContext);
   const [myPlantsList, setMyPlantsList] = useState<Plant[]>([]);
+  const [myPlantsListSlice, setMyPlantsListSlice] = useState<Plant[]>([]);
+  const [startIndex, setStartIndex] = useState(0);
 
   useEffect(() => {
     const filteredPlants: Plant[] = plants.filter(plant =>
@@ -16,15 +18,34 @@ function MyPlantsList(): JSX.Element {
     setMyPlantsList(filteredPlants);
   }, []);
 
+  useEffect(() => {
+    setMyPlantsListSlice(_ =>
+      [...myPlantsList].slice(startIndex, startIndex + 5),
+    );
+  }, [startIndex]);
+
   return (
     <>
       <div className={styles.PlantList}>
-        {myPlantsList.map(plant => {
-          <React.Fragment key={plant._id}>
-            <PlantItem inMyPlants={true} plant={plant} />
-            );
-          </React.Fragment>;
+        {console.log(myPlantsList)}
+        <ScrollButton
+          type="back"
+          onClick={() => setStartIndex(startIndex - 1)}
+          disabled={startIndex === 0}
+        />
+        {myPlantsListSlice.map(plant => {
+          return (
+            <div className={styles.PlantList} key={plant._id}>
+              <PlantItem inMyPlants={true} plant={plant} />
+              );
+            </div>
+          );
         })}
+        <ScrollButton
+          type="forward"
+          onClick={() => setStartIndex(startIndex + 1)}
+          disabled={startIndex === 10}
+        />
       </div>
     </>
   );
