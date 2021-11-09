@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { plantsContext } from '../../App/App';
 import PlantItem from '../PlantItem/PlantItem';
 import { Plant } from '../../../common/types';
@@ -7,25 +7,21 @@ import styles from './PlantList.module.scss';
 
 function PlantList(): JSX.Element {
   const { plants, myPlants, setPlants } = useContext(plantsContext);
-  useEffect(() => {
-    displayPlants(plants);
-  }, [plants]);
 
   function sortPlants(method = 'a'): void {
+    console.log(`sorting ${method}`);
     if (method === 'p') {
-      setPlants(prev => {
-        const sortedArray = [...prev].sort((plant1, plant2) => {
-          return plant1._score < plant2._score ? 1 : -1;
-        });
-        return sortedArray;
-      });
+      setPlants(
+        [...plants].sort(({ _score: score1 }, { _score: score2 }) =>
+          score1 < score2 ? 1 : -1,
+        ),
+      );
     } else {
-      setPlants(prev => {
-        const sortedArray = [...prev].sort((plant1, plant2) => {
-          return plant1.name.toLowerCase() > plant2.name.toLowerCase() ? 1 : -1;
-        });
-        return sortedArray;
-      });
+      setPlants(
+        [...plants].sort(({ name: name1 }, { name: name2 }) =>
+          name1.toLowerCase() > name2.toLowerCase() ? 1 : -1,
+        ),
+      );
     }
   }
 
