@@ -6,9 +6,3 @@ export const getAllPlants = async (): Promise<Plant[]> => {
   const plants = await JSONPlants.json();
   return plants;
 };
-
-export const getPlantByName = async (name = ''): Promise<Plant> => {
-  const JSONPlant = await fetch(`${base_url}/crops/${name}`);
-  const plant = await JSONPlant.json();
-  return plant;
-};
