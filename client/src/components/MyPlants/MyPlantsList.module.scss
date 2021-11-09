@@ -1,0 +1,10 @@
+@import '../../common/layout.scss';
+
+/* for desktop/laptop */
+@media only screen and (min-width: 600px) {
+  .PlantList {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 25vh);
+  }
+}
