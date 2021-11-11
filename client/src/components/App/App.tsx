@@ -35,10 +35,6 @@ export const plantsContext = createContext<AppCtxt>({
 });
 
 function App(): JSX.Element {
-  // const [plants, setPlants] = useState<Plant[]>([]);
-  const [myPlants, setMyPlants] = useState<MyPlant[]>([]);
-  const [loadStatus, setLoadStatus] = useState<boolean>(false);
-
   function setPlants() {
     console.log('setting plants');
   }
@@ -47,7 +43,8 @@ function App(): JSX.Element {
     const newPlant: MyPlant = { name: plant.slug, plantID: parseInt(plant.id) };
     try {
       saveToMyPlants(newPlant);
-      setMyPlants((oldList: MyPlant[]) => [...oldList, newPlant]);
+      // TODO
+      // setMyPlants((oldList: MyPlant[]) => [...oldList, newPlant]);
     } catch (err) {
       console.log(err);
     }
@@ -56,9 +53,10 @@ function App(): JSX.Element {
   function removePlant(plantID: number): void {
     removeFromMyPlants(plantID);
     // const myPlantsCopy = myPlants.filter((plant) => plant.plantID !== plantID);
-    setMyPlants((oldPlants: MyPlant[]) =>
-      oldPlants.filter((plant: MyPlant) => plant.plantID !== plantID),
-    );
+    // TODO
+    // setMyPlants((oldPlants: MyPlant[]) =>
+    // oldPlants.filter((plant: MyPlant) => plant.plantID !== plantID),
+    // );
   }
 
   const { data: plants = [], isSuccess: gotPlants = false } = useQuery<
@@ -67,31 +65,26 @@ function App(): JSX.Element {
     Plant[]
   >('all-plants', () => getAllPlants());
 
-  // useEffect(() => {
-  //   // make request to GrowStuff API /crops endpoint for all crops
-  //   getAllPlants().then((plantsAugmented: Plant[]) => {
-  //     // filter plants by only those which have required details available at their endpoint
-  //     const plantsFiltered: Plant[] = plantsAugmented.filter(
-  //       (plant: Plant) => !!plant.details,
-  //     );
-  //     setPlants(plantsFiltered);
-  //   });
-  // }, []);
+  const plantsFiltered: Plant[] = plants.filter(
+    (plant: Plant) => !!plant.details,
+  );
 
-  useEffect(() => {
-    getMyPlants().then((myplants: MyPlant[]) => setMyPlants(myplants));
-  }, []);
+  const { data: myPlants = [], isSuccess: gotMyPlants = false } = useQuery<
+    any,
+    any,
+    MyPlant[]
+  >('my-plants', () => getMyPlants());
 
-  useEffect(() => {
-    if (plants.length) {
-      setLoadStatus(true);
-    }
-  }, [myPlants, plants]);
-
-  return loadStatus ? (
+  return gotPlants ? (
     <div className="App">
       <plantsContext.Provider
-        value={{ myPlants, plants, removePlant, savePlant, setPlants }}>
+        value={{
+          myPlants,
+          plants: plantsFiltered,
+          removePlant,
+          savePlant,
+          setPlants,
+        }}>
         <Router>
           <Navbar />
           <div className="content">
