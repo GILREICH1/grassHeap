@@ -16,6 +16,7 @@ import {
 } from '../../services/ServerApiServices';
 import { getAllPlants } from '../../services/GrowStuffApiServices';
 import './App.css';
+import { useQuery } from 'react-query';
 
 interface AppCtxt {
   myPlants: MyPlant[];
@@ -34,9 +35,13 @@ export const plantsContext = createContext<AppCtxt>({
 });
 
 function App(): JSX.Element {
-  const [plants, setPlants] = useState<Plant[]>([]);
+  // const [plants, setPlants] = useState<Plant[]>([]);
   const [myPlants, setMyPlants] = useState<MyPlant[]>([]);
   const [loadStatus, setLoadStatus] = useState<boolean>(false);
+
+  function setPlants() {
+    console.log('setting plants');
+  }
 
   function savePlant(plant: Plant): void {
     const newPlant: MyPlant = { name: plant.slug, plantID: parseInt(plant.id) };
@@ -56,16 +61,22 @@ function App(): JSX.Element {
     );
   }
 
-  useEffect(() => {
-    // make request to GrowStuff API /crops endpoint for all crops
-    getAllPlants().then((plantsAugmented: Plant[]) => {
-      // filter plants by only those which have required details available at their endpoint
-      const plantsFiltered: Plant[] = plantsAugmented.filter(
-        (plant: Plant) => !!plant.details,
-      );
-      setPlants(plantsFiltered);
-    });
-  }, []);
+  const { data: plants = [], isSuccess: gotPlants = false } = useQuery<
+    any,
+    any,
+    Plant[]
+  >('all-plants', () => getAllPlants());
+
+  // useEffect(() => {
+  //   // make request to GrowStuff API /crops endpoint for all crops
+  //   getAllPlants().then((plantsAugmented: Plant[]) => {
+  //     // filter plants by only those which have required details available at their endpoint
+  //     const plantsFiltered: Plant[] = plantsAugmented.filter(
+  //       (plant: Plant) => !!plant.details,
+  //     );
+  //     setPlants(plantsFiltered);
+  //   });
+  // }, []);
 
   useEffect(() => {
     getMyPlants().then((myplants: MyPlant[]) => setMyPlants(myplants));
