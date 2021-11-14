@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Plant } from '../../common/types';
 import { plantsContext } from '../App/App';
 import PlantItem from '../Plants/PlantItem/PlantItem';
@@ -18,22 +18,15 @@ function MyPlantsList(): JSX.Element {
     setMyPlantsList(filteredPlants);
   }, []);
 
-  useEffect(() => {
-    setMyPlantsListSlice(_ =>
-      [...myPlantsList].slice(startIndex, startIndex + 5),
-    );
-  }, [startIndex]);
-
   return (
     <>
       <div className={styles.PlantList}>
-        {console.log(myPlantsList)}
         <ScrollButton
           type="back"
           onClick={() => setStartIndex(startIndex - 1)}
           disabled={startIndex === 0}
         />
-        {myPlantsListSlice.map(plant => {
+        {myPlantsList.slice(startIndex, startIndex + 5).map(plant => {
           return (
             <div className={styles.PlantList} key={plant._id}>
               <PlantItem inMyPlants={true} plant={plant} />
@@ -44,7 +37,7 @@ function MyPlantsList(): JSX.Element {
         <ScrollButton
           type="forward"
           onClick={() => setStartIndex(startIndex + 1)}
-          disabled={startIndex === 10}
+          disabled={startIndex === myPlantsList.length - 5}
         />
       </div>
     </>
