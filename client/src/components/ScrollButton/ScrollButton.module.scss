@@ -1,7 +1,7 @@
 .scroll-btn {
   appearance: button;
-  height: 30vh;
-  width: 5vh;
+  height: 14em;
+  width: 3em;
   border: none;
   border-radius: 10px;
   background-color: var(--primaryDark);
@@ -24,9 +24,5 @@
 }
 
 .scroll-btn__back {
-  -moz-transform: scale(-1, 1);
-  -webkit-transform: scale(-1, 1);
-  -o-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
-  transform: scale(-1, 1);
+  transform: rotate(-180deg);
 }

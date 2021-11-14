@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { Plant } from '../../common/types';
 import { plantsContext } from '../App/App';
 import PlantItem from '../Plants/PlantItem/PlantItem';
-import styles from './MyPlantsList.module.scss';
 import ScrollButton from '../ScrollButton/ScrollButton';
+import styles from './MyPlantsList.module.scss';
 
 function MyPlantsList(): JSX.Element {
   const { plants, myPlants } = useContext(plantsContext);
@@ -19,28 +19,27 @@ function MyPlantsList(): JSX.Element {
   }, []);
 
   return (
-    <>
-      <div className={styles.PlantList}>
-        <ScrollButton
-          type="back"
-          onClick={() => setStartIndex(startIndex - 1)}
-          disabled={startIndex === 0}
-        />
-        {myPlantsList.slice(startIndex, startIndex + 5).map(plant => {
+    <div className={styles.MyPlantListContainer}>
+      <ScrollButton
+        type="back"
+        onClick={() => setStartIndex(startIndex - 1)}
+        disabled={startIndex === 0}
+      />
+      <div className={styles.MyPlantListItems}>
+        {myPlantsList.slice(startIndex, startIndex + 3).map(plant => {
           return (
-            <div className={styles.PlantList} key={plant._id}>
+            <div className={styles.MyPlantListItem} key={plant._id}>
               <PlantItem inMyPlants={true} plant={plant} />
-              );
             </div>
           );
         })}
-        <ScrollButton
-          type="forward"
-          onClick={() => setStartIndex(startIndex + 1)}
-          disabled={startIndex === myPlantsList.length - 5}
-        />
       </div>
-    </>
+      <ScrollButton
+        type="forward"
+        onClick={() => setStartIndex(startIndex + 1)}
+        disabled={startIndex === myPlantsList.length - 3}
+      />
+    </div>
   );
 }
 
