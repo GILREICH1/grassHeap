@@ -11,14 +11,10 @@ const ScrollButton = ({
   onClick,
   disabled,
 }: ScrollButtonProps): JSX.Element => {
-  const className = 'scroll-btn__' + type;
+  const className = `${styles['scroll-btn']} ${styles[`scroll-btn__${type}`]}`;
 
   return (
-    <button
-      disabled={disabled}
-      className={styles[className]}
-      onClick={onClick}
-      type="button">
+    <button disabled={disabled} className={className} onClick={onClick}>
       <p>▶</p>
     </button>
   );

@@ -1,3 +1,19 @@
+.scroll-btn {
+  appearance: button;
+  height: 30vh;
+  width: 5vh;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primaryDark);
+  color: var(--primaryWhite);
+  transition: all 0.2s, box-shadow 0.08s ease-in;
+  cursor: pointer;
+}
+
+.scroll-btn:hover {
+  background-color: var(--secondaryDark);
+}
+
 .scroll-btn__back {
   -moz-transform: scale(-1, 1);
   -webkit-transform: scale(-1, 1);

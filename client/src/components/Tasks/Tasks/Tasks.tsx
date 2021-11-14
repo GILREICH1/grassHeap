@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MonthTaskBox from '../MonthTasksBox/MonthTasksBox';
 import { months } from '../../../utils/months';
 import './Tasks.scss';
+import ScrollButton from '../../ScrollButton/ScrollButton';
 
 function Tasks(): JSX.Element {
   const [currentMonth, setCurrentMonth] = useState<number>(0);
@@ -17,11 +18,10 @@ function Tasks(): JSX.Element {
 
   return (
     <div className="Tasks">
-      <button
-        className="tasks__prev tasks__scroller--btn"
-        onClick={() => setCurrentMonth(lastMonth)}>
-        ◀
-      </button>
+      <ScrollButton
+        disabled={false}
+        type="back"
+        onClick={() => setCurrentMonth(lastMonth)}></ScrollButton>
       <div className="tasks__allmonths">
         <div className={`tasks__month tasks__month--${lastMonth}`}>
           <MonthTaskBox monthNumber={lastMonth} monthName={months[lastMonth]} />
@@ -36,11 +36,10 @@ function Tasks(): JSX.Element {
           <MonthTaskBox monthNumber={nextMonth} monthName={months[nextMonth]} />
         </div>
       </div>
-      <button
-        className="tasks__next tasks__scroller--btn"
-        onClick={() => setCurrentMonth(nextMonth)}>
-        ▶
-      </button>
+      <ScrollButton
+        disabled={false}
+        type="forward"
+        onClick={() => setCurrentMonth(nextMonth)}></ScrollButton>
     </div>
   );
 }
