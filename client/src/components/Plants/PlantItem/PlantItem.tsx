@@ -2,9 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddButton from './PlantItemAddBtn/AddBtn';
 import RemoveBtn from './PlantItemRemoveBtn/RemoveBtn';
-import './PlantItem.css';
 import { plantsContext } from '../../App/App';
 import { Plant } from '../../../common/types';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import './PlantItem.css';
 
 interface PlantItemProps {
   plant: Plant;
@@ -28,7 +29,9 @@ function PlantItem({ plant, inMyPlants }: PlantItemProps): JSX.Element {
       <div className="PlantItem__text">
         <Link className="PlantItem__a" to={`/plants/${plant.slug}`}>
           {plant.name}
-          <img src={`https://www.growstuff.org/crops/${plant.slug}.svg`} />
+          <LazyLoadImage
+            src={`https://www.growstuff.org/crops/${plant.slug}.svg`}
+          />
         </Link>
         <p className="PlantItem__p">
           {plant.scientific_name || 'not available'}
