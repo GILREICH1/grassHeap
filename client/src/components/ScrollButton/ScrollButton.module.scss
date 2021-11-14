@@ -14,6 +14,15 @@
   background-color: var(--secondaryDark);
 }
 
+.scroll-btn[disabled]:hover {
+  background-color: var(--primaryDark);
+  cursor: default;
+}
+
+.scroll-btn:disabled {
+  opacity: 40%;
+}
+
 .scroll-btn__back {
   -moz-transform: scale(-1, 1);
   -webkit-transform: scale(-1, 1);

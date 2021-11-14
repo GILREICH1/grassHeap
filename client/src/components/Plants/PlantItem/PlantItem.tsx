@@ -26,9 +26,7 @@ function PlantItem({ plant, inMyPlants }: PlantItemProps): JSX.Element {
         backgroundImage: `url("${plant.details.attributes.main_image_path}")`,
       }}>
       <div className="PlantItem__text">
-        <Link
-          className="PlantItem__a PlantItem__name"
-          to={`/plants/${plant.slug}`}>
+        <Link className="PlantItem__a" to={`/plants/${plant.slug}`}>
           {plant.name}
           <img src={`https://www.growstuff.org/crops/${plant.slug}.svg`} />
         </Link>
