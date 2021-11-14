@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddButton from './PlantItemAddBtn/AddBtn';
 import RemoveBtn from './PlantItemRemoveBtn/RemoveBtn';
