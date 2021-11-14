@@ -30,7 +30,9 @@ function PlantItem({ plant, inMyPlants }: PlantItemProps): JSX.Element {
           {plant.name}
           <img src={`https://www.growstuff.org/crops/${plant.slug}.svg`} />
         </Link>
-        <p className="PlantItem__p">{plant.scientific_name}</p>
+        <p className="PlantItem__p">
+          {plant.scientific_name || 'not available'}
+        </p>
       </div>
       <div className="PlantItem__btnDiv">
         {plantOwned ? (

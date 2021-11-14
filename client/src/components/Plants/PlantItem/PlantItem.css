@@ -1,6 +1,5 @@
 .plantItem {
   display: flex;
-  justify-content: space-between;
   background-size: cover;
   border-radius: 5px;
   filter: drop-shadow(5px 5px 2px rgba(88, 88, 88, 0.664))
@@ -12,8 +11,9 @@
 .PlantItem__text {
   display: flex;
   flex-direction: column;
-  text-align: center;
+  justify-content: space-around;
   align-items: center;
+  text-align: center;
   width: 40%;
   font-size: medium;
   background-color: rgba(255, 255, 255, 0.692);
@@ -34,6 +34,7 @@
 
 .PlantItem__text img {
   height: 3em;
+  display: inline-block;
 }
 .PlantItem__text p {
   font-style: italic;
