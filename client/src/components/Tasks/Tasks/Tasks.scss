@@ -20,21 +20,6 @@
   border: solid 2px var(--primaryHighlight);
 }
 
-.tasks__scroller--btn {
-  appearance: button;
-  height: 30vh;
-  width: 5vh;
-  border: none;
-  border-radius: 10px;
-  background-color: var(--primaryDark);
-  color: var(--primaryWhite);
-  transition: all 0.2s, box-shadow 0.08s ease-in;
-  cursor: pointer;
-}
-.tasks__scroller--btn:hover {
-  background-color: var(--secondaryDark);
-}
-
 @media only screen and (max-width: 600px) {
   .tasks__allmonths {
     flex-direction: column;
