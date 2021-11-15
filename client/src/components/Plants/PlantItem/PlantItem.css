@@ -28,9 +28,10 @@
   text-transform: capitalize;
   font-size: 1rem;
   font-weight: bold;
+  opacity: 1;
 }
 .PlantItem__text a:hover {
-  opacity: 60%;
+  opacity: 0.6;
 }
 
 .PlantItem__text img {
