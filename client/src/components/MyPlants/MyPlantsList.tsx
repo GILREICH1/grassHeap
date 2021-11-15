@@ -29,7 +29,7 @@ function MyPlantsList(): JSX.Element {
         {myPlantsList.slice(startIndex, startIndex + 3).map(plant => {
           return (
             <div className={styles.MyPlantListItem} key={plant._id}>
-              <PlantItem inMyPlants={true} plant={plant} />
+              <PlantItem showButtons={false} inMyPlants={true} plant={plant} />
             </div>
           );
         })}

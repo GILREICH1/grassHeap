@@ -10,9 +10,14 @@ import './PlantItem.css';
 interface PlantItemProps {
   plant: Plant;
   inMyPlants: boolean;
+  showButtons?: boolean;
 }
 
-function PlantItem({ plant, inMyPlants }: PlantItemProps): JSX.Element {
+function PlantItem({
+  plant,
+  inMyPlants,
+  showButtons = true,
+}: PlantItemProps): JSX.Element {
   const [plantOwned, setOwned] = useState(false);
   useEffect(() => {
     setOwned(inMyPlants);
@@ -38,15 +43,17 @@ function PlantItem({ plant, inMyPlants }: PlantItemProps): JSX.Element {
         </p>
       </div>
       <div className="PlantItem__btnDiv">
-        {plantOwned ? (
-          <RemoveBtn
-            removePlant={() => {
-              removePlant(parseInt(plant.id, 10));
-            }}
-          />
-        ) : (
-          <AddButton savePlant={() => savePlant(plant)} />
-        )}
+        {showButtons ? (
+          plantOwned ? (
+            <RemoveBtn
+              removePlant={() => {
+                removePlant(parseInt(plant.id));
+              }}
+            />
+          ) : (
+            <AddButton savePlant={() => savePlant(plant)} />
+          )
+        ) : null}
       </div>
     </div>
   );
