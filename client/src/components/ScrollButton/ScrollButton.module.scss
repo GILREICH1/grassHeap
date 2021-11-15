@@ -8,6 +8,7 @@
   color: var(--primaryWhite);
   transition: all 0.2s, box-shadow 0.08s ease-in;
   cursor: pointer;
+  opacity: 1;
 }
 
 .scroll-btn:hover {
@@ -20,7 +21,7 @@
 }
 
 .scroll-btn:disabled {
-  opacity: 40%;
+  opacity: 0.4;
 }
 
 .scroll-btn__back {
