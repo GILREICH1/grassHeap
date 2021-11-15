@@ -23,9 +23,10 @@ function PlantItem({ plant, inMyPlants }: PlantItemProps): JSX.Element {
   return (
     <div
       className="plantItem"
-      style={{
-        backgroundImage: `url("${plant.details.attributes.main_image_path}")`,
-      }}>
+      // style={{
+      //   backgroundImage: `url("${plant.details.attributes.main_image_path}")`,
+      // }}
+    >
       <div className="PlantItem__text">
         <Link
           className="PlantItem__a PlantItem__name"
@@ -46,6 +47,9 @@ function PlantItem({ plant, inMyPlants }: PlantItemProps): JSX.Element {
           <AddButton savePlant={() => savePlant(plant)} />
         )}
       </div>
+      <img
+        className="plantItem__background"
+        src={plant.details.attributes.main_image_path}></img>
     </div>
   );
 }

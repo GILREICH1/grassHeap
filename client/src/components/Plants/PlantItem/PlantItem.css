@@ -8,6 +8,12 @@
   margin: 5% 10%;
 }
 
+.plantItem__background {
+  height: 10em;
+  width: 6em;
+  border: solid 2px red;
+}
+
 .PlantItem__text {
   display: flex;
   flex-direction: column;
