@@ -1,37 +1,44 @@
 .plantItem {
   display: flex;
-  justify-content: space-between;
   background-size: cover;
   border-radius: 5px;
   filter: drop-shadow(5px 5px 2px rgba(88, 88, 88, 0.664))
     drop-shadow(-1px -1px 0 rgba(88, 88, 88, 0.664));
   margin: 5% 10%;
+  min-height: 8em;
 }
 
 .PlantItem__text {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
+  text-align: center;
   width: 40%;
+  padding: 0.8em;
+  font-size: medium;
   background-color: rgba(255, 255, 255, 0.692);
 }
 
 .PlantItem__text a {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   transition: all 200ms;
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: bold;
+  opacity: 1;
 }
 .PlantItem__text a:hover {
-  opacity: 60%;
+  opacity: 0.6;
 }
 
-.PlantItem__name {
-  text-transform: capitalize;
-  font-size: 1.2rem;
-  font-weight: bold;
+.PlantItem__text img {
+  height: 3em;
+  display: inline-block;
 }
-
 .PlantItem__text p {
-  padding: 0 15%;
   font-style: italic;
 }
 

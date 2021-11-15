@@ -28,7 +28,7 @@
 @media only screen and (min-width: 600px) {
   .PlantList {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 25vh);
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    grid-template-rows: repeat(auto-fill, 25vh);
   }
 }

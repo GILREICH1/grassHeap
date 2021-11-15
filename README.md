@@ -29,11 +29,12 @@ You can view the app at https://www.grassheap.live/
 
 ## ROADMAP
 
-- [ ] User Auth.
 - [x] Styling Location Prompt.
 - [x] General App styling.
+- [x] Display showing MyPlants.
 - [ ] Search functionality.
 - [ ] More detailed weather report.
+- [ ] User Auth.
 
 ## Running the App Locally
 

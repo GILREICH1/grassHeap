@@ -1,0 +1,29 @@
+.scroll-btn {
+  appearance: button;
+  height: 14em;
+  width: 3em;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primaryDark);
+  color: var(--primaryWhite);
+  transition: all 0.2s, box-shadow 0.08s ease-in;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.scroll-btn:hover {
+  background-color: var(--secondaryDark);
+}
+
+.scroll-btn[disabled]:hover {
+  background-color: var(--primaryDark);
+  cursor: default;
+}
+
+.scroll-btn:disabled {
+  opacity: 0.4;
+}
+
+.scroll-btn__back {
+  transform: rotate(-180deg);
+}
