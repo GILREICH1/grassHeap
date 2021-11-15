@@ -7,16 +7,21 @@
 <img src="https://img.shields.io/badge/Deployment-Live-green.svg?logo=github">
   </span>
 
-A lot of task/to-do apps work on a timeframe of days or hours. On the other hand, gardening works in the timeframe of months. grassHeap helps you keep track of garden tasks for the month and for the specific plants in your garden. Powered by the <a href="https://github.com/Growstuff/growstuff/wiki/API-Version-0"> GrowStuff API</a>.
+A lot of task/to-do apps work on a timeframe of days or hours. On the other hand, gardening works in the timeframe of months. grassHeap is a **responsive Single-Page App**
+that tracks and suggests tasks for the month and for the specific plants in your garden. Powered by the <a href="https://github.com/Growstuff/growstuff/wiki/API-Version-0"> GrowStuff API</a>.
 
 You can view the app at https://www.grassheap.live/
 
 <span>
-<img src="https://user-images.githubusercontent.com/78416008/125106980-2ac45600-e0d8-11eb-8e54-1998f7336a6d.png" width=15%>
 
-<img src="https://user-images.githubusercontent.com/78416008/125107221-6f4ff180-e0d8-11eb-8fd2-3a84b2df0631.png" width=15%>
+  <img src="https://user-images.githubusercontent.com/78416008/141751379-aadda49f-55aa-446a-9744-434188f6e8d8.png" width=50%>
+  <img src="https://user-images.githubusercontent.com/78416008/141751299-6b9be3ff-afac-4a5a-b6d6-8506dd811aaa.png" width=15%>
 
-<img src="https://user-images.githubusercontent.com/78416008/125108709-51838c00-e0da-11eb-9197-0303a51a8aeb.png" width=15%>
+</span>
+<br>
+<span>
+  <img src="https://user-images.githubusercontent.com/78416008/141751954-f158b601-7f7e-484b-bd2f-6406fe49932a.png" width=60%>
+  <img src="https://user-images.githubusercontent.com/78416008/141751667-268e754a-1513-42f3-928a-5c93a8eddc95.png" width=15%>
 </span>
 
 ## Features
