@@ -45,7 +45,6 @@ function App(): JSX.Element {
     const newPlant: MyPlant = { name: plant.slug, plantID: parseInt(plant.id) };
     try {
       saveToMyPlants(newPlant).then(() => {
-        console.log('refetching from save');
         queryClient.refetchQueries();
       });
     } catch (err) {
@@ -55,7 +54,6 @@ function App(): JSX.Element {
 
   function removePlant(plantID: number): void {
     removeFromMyPlants(plantID).then(() => {
-      console.log('refetching from remove');
       queryClient.refetchQueries();
     });
   }
