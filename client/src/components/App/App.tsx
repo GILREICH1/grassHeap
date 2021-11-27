@@ -23,7 +23,6 @@ interface AppCtxt {
   plants: Plant[];
   removePlant: (_plantID: number) => void;
   savePlant: (_plant: Plant) => void;
-  setPlants: React.Dispatch<React.SetStateAction<Plant[]>>;
 }
 
 export const plantsContext = createContext<AppCtxt>({
@@ -31,15 +30,10 @@ export const plantsContext = createContext<AppCtxt>({
   plants: [],
   removePlant: (_plantID: number) => null,
   savePlant: (_plant: Plant) => null,
-  setPlants: () => null,
 });
 
 function App(): JSX.Element {
   const queryClient = useQueryClient();
-
-  function setPlants() {
-    console.log('setting plants');
-  }
 
   function savePlant(plant: Plant): void {
     const newPlant: MyPlant = { name: plant.slug, plantID: parseInt(plant.id) };
@@ -86,7 +80,6 @@ function App(): JSX.Element {
           plants: plantsFiltered,
           removePlant,
           savePlant,
-          setPlants,
         }}>
         <Router>
           <Navbar />
