@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import Navbar from '../NavBar/NavBar';
@@ -15,8 +15,8 @@ import {
   saveToMyPlants,
 } from '../../services/ServerApiServices';
 import { getAllPlants } from '../../services/GrowStuffApiServices';
+import { useQuery, useQueryClient } from 'react-query';
 import './App.css';
-import { useQuery } from 'react-query';
 
 interface AppCtxt {
   myPlants: MyPlant[];
@@ -35,6 +35,8 @@ export const plantsContext = createContext<AppCtxt>({
 });
 
 function App(): JSX.Element {
+  const queryClient = useQueryClient();
+
   function setPlants() {
     console.log('setting plants');
   }
@@ -42,25 +44,26 @@ function App(): JSX.Element {
   function savePlant(plant: Plant): void {
     const newPlant: MyPlant = { name: plant.slug, plantID: parseInt(plant.id) };
     try {
-      saveToMyPlants(newPlant);
-      // TODO
-      // setMyPlants((oldList: MyPlant[]) => [...oldList, newPlant]);
+      saveToMyPlants(newPlant).then(() => {
+        console.log('refetching from save');
+        queryClient.refetchQueries();
+      });
     } catch (err) {
       console.log(err);
     }
   }
 
   function removePlant(plantID: number): void {
-    removeFromMyPlants(plantID);
-    // const myPlantsCopy = myPlants.filter((plant) => plant.plantID !== plantID);
-    // TODO
-    // setMyPlants((oldPlants: MyPlant[]) =>
-    // oldPlants.filter((plant: MyPlant) => plant.plantID !== plantID),
-    // );
+    removeFromMyPlants(plantID).then(() => {
+      console.log('refetching from remove');
+      queryClient.refetchQueries();
+    });
   }
 
   const { data: plants = [], isSuccess: gotPlants = false } = useQuery<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any,
     Plant[]
   >('all-plants', () => getAllPlants());
@@ -69,8 +72,10 @@ function App(): JSX.Element {
     (plant: Plant) => !!plant.details,
   );
 
-  const { data: myPlants = [], isSuccess: gotMyPlants = false } = useQuery<
+  const { data: myPlants = [] } = useQuery<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any,
     MyPlant[]
   >('my-plants', () => getMyPlants());
