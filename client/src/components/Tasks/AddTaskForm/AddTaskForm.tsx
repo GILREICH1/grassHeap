@@ -15,9 +15,7 @@ function AddTaskForm({ month }: AddTaskFormProps): JSX.Element {
   const [task, setTask] = useState<string>('');
   const queryClient = useQueryClient();
 
-  // const { myPlants } = useContext(plantsContext);
-
-  // const plantList = myPlants.map(plant => plant.name).sort();
+  // legacy
   function taskIsNew(newTask: Task, tasks: Task[]) {
     const exists = Boolean(
       tasks.find((task: Task) => {
