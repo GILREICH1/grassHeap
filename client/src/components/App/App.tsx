@@ -1,4 +1,6 @@
-import React, { createContext } from 'react';
+import { createContext } from 'react';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import Navbar from '../NavBar/NavBar';
@@ -6,9 +8,6 @@ import PlantList from '../Plants/PlantList/PlantList';
 import PlantDetails from '../Plants/PlantDetails/PlantDetails';
 import Loader from '../Loader/Loader';
 import { MyPlant, Plant } from '../../common/types';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config();
-
 import {
   getMyPlants,
   removeFromMyPlants,
@@ -52,25 +51,18 @@ function App(): JSX.Element {
     });
   }
 
-  const { data: plants = [], isSuccess: gotPlants = false } = useQuery<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    any,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    any,
-    Plant[]
-  >('all-plants', () => getAllPlants());
+  const { data: plants = [], isSuccess: gotPlants = false } = useQuery<Plant[]>(
+    'all-plants',
+    () => getAllPlants(),
+  );
 
   const plantsFiltered: Plant[] = plants.filter(
     (plant: Plant) => !!plant.details,
   );
 
-  const { data: myPlants = [] } = useQuery<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    any,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    any,
-    MyPlant[]
-  >('my-plants', () => getMyPlants());
+  const { data: myPlants = [] } = useQuery<MyPlant[]>('my-plants', () =>
+    getMyPlants(),
+  );
 
   return gotPlants ? (
     <div className="App">
