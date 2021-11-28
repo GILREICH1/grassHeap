@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import { saveTask } from '../../../services/ServerApiServices';
 import { Task } from '../../../common/types';
+import { useQueryClient } from 'react-query';
+
 import styles from './AddTaskForm.module.scss';
 
 interface AddTaskFormProps {
   month: string;
-  addNewTask: (task: Task) => void;
   tasks: Task[];
 }
 
-function AddTaskForm({
-  month,
-  addNewTask,
-  tasks,
-}: AddTaskFormProps): JSX.Element {
+function AddTaskForm({ month }: AddTaskFormProps): JSX.Element {
   const [crop, setCrop] = useState<string>('');
   const [task, setTask] = useState<string>('');
+  const queryClient = useQueryClient();
 
   // const { myPlants } = useContext(plantsContext);
 
@@ -33,17 +31,11 @@ function AddTaskForm({
     return !exists;
   }
 
-  async function saveAndAddTask(task: Task) {
-    const fullTask = await saveTask(task);
-    addNewTask(fullTask);
-  }
-
-  const submitHandler = (e: React.FormEvent) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     const newTask: Task = { month, crop, task, userCreated: true };
-    if (taskIsNew(newTask, tasks)) {
-      saveAndAddTask(newTask);
-    }
+    await saveTask(newTask);
+    queryClient.refetchQueries();
     setTask('');
     setCrop('');
   };

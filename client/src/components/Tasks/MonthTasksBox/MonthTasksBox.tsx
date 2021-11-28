@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import TaskList from '../TaskList/TaskList';
 import {
   deleteTask,
@@ -9,6 +8,7 @@ import {
 import AddTaskForm from '../AddTaskForm/AddTaskForm';
 import { getSeason } from './getSeasonFunction';
 import { MyPlant, Task } from '../../../common/types';
+import { useQuery, useQueryClient } from 'react-query';
 import styles from './MonthTasksBox.module.scss';
 
 interface MonthProps {
@@ -17,28 +17,29 @@ interface MonthProps {
 }
 
 function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
-  const [tasks, setTasks] = useState<Task[]>([]);
   const [seasonIcon, setSeasonIcon] = useState('');
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    getMyPlants().then((myPlants: MyPlant[]) => {
-      getTasksByMonth(monthName).then((tasks: Task[]) => {
-        // filter tasks to those which are relevant to plants saved in myPlants database OR added manually
-        const myTasks = tasks.filter((task: Task) =>
-          myPlants.some(plant => plant.name === task.crop || task.userCreated),
-        );
-        setTasks(myTasks);
-      });
-    });
-  }, [monthNumber, monthName]);
+  const { data: tasks } = useQuery<Task[]>(`tasks-for-${monthName}`, () =>
+    getTasksByMonth(monthName),
+  );
+  const { data: myPlants = [] } = useQuery<MyPlant[]>('my-plants', () =>
+    getMyPlants(),
+  );
+
+  const myTasks = tasks
+    ? tasks.filter((task: Task) =>
+        myPlants.some(plant => plant.name === task.crop || task.userCreated),
+      )
+    : [];
 
   useEffect(() => {
     setSeasonIcon(getSeason(monthNumber + 1));
   }, [monthNumber, monthName]);
 
-  function deleteThisTask(_id: string): void {
-    setTasks([...tasks].filter(task => task._id !== _id));
-    deleteTask(_id);
+  async function deleteThisTask(_id: string): Promise<void> {
+    await deleteTask(_id);
+    queryClient.refetchQueries();
   }
 
   return (
@@ -46,12 +47,12 @@ function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
       <h2>
         {monthName} {seasonIcon}
       </h2>
-      <TaskList deleteThisTask={deleteThisTask} tasks={tasks} />
-      <AddTaskForm
-        addNewTask={(task: Task) => setTasks([...tasks, task])}
-        month={monthName}
-        tasks={tasks}
-      />
+      {tasks ? (
+        <>
+          <TaskList deleteThisTask={deleteThisTask} tasks={myTasks} />
+          <AddTaskForm month={monthName} tasks={myTasks} />
+        </>
+      ) : null}
     </div>
   );
 }
