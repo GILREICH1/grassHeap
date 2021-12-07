@@ -6,6 +6,7 @@ import PlantList from '../Plants/PlantList/PlantList';
 import PlantDetails from '../Plants/PlantDetails/PlantDetails';
 import Loader from '../Loader/Loader';
 import { MyPlant, Plant } from '../../common/types';
+import { useGetPlantsQuery } from '../../services/GrowStuffApiServices';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
@@ -14,7 +15,6 @@ import {
   removeFromMyPlants,
   saveToMyPlants,
 } from '../../services/ServerApiServices';
-import { getAllPlants } from '../../services/GrowStuffApiServices';
 import './App.css';
 
 interface AppCtxt {
@@ -22,7 +22,6 @@ interface AppCtxt {
   plants: Plant[];
   removePlant: (_plantID: number) => void;
   savePlant: (_plant: Plant) => void;
-  setPlants: React.Dispatch<React.SetStateAction<Plant[]>>;
 }
 
 export const plantsContext = createContext<AppCtxt>({
@@ -30,11 +29,9 @@ export const plantsContext = createContext<AppCtxt>({
   plants: [],
   removePlant: (_plantID: number) => null,
   savePlant: (_plant: Plant) => null,
-  setPlants: () => null,
 });
 
 function App(): JSX.Element {
-  const [plants, setPlants] = useState<Plant[]>([]);
   const [myPlants, setMyPlants] = useState<MyPlant[]>([]);
   const [loadStatus, setLoadStatus] = useState<boolean>(false);
 
@@ -55,32 +52,23 @@ function App(): JSX.Element {
       oldPlants.filter((plant: MyPlant) => plant.plantID !== plantID),
     );
   }
-
-  useEffect(() => {
-    // make request to GrowStuff API /crops endpoint for all crops
-    getAllPlants().then((plantsAugmented: Plant[]) => {
-      // filter plants by only those which have required details available at their endpoint
-      const plantsFiltered: Plant[] = plantsAugmented.filter(
-        (plant: Plant) => !!plant.details,
-      );
-      setPlants(plantsFiltered);
-    });
-  }, []);
+  const { data, error, isLoading, isSuccess, isError } = useGetPlantsQuery();
+  const plants = data && data.filter((plant: Plant) => !!plant.details);
 
   useEffect(() => {
     getMyPlants().then((myplants: MyPlant[]) => setMyPlants(myplants));
   }, []);
 
   useEffect(() => {
-    if (plants.length) {
+    if (plants) {
       setLoadStatus(true);
     }
   }, [myPlants, plants]);
 
-  return loadStatus ? (
+  return loadStatus && plants ? (
     <div className="App">
       <plantsContext.Provider
-        value={{ myPlants, plants, removePlant, savePlant, setPlants }}>
+        value={{ myPlants, plants, removePlant, savePlant }}>
         <Router>
           <Navbar />
           <div className="content">
