@@ -12,7 +12,7 @@ async function augmentPlants(plants) {
       return plant;
     })
   );
-  return plantsAugmented;
+  return plantsAugmented.filter((plant) => plant.details);
 }
 
 async function getAllPlants(_, res) {
