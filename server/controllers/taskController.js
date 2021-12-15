@@ -1,11 +1,11 @@
-const Task = require('../models/Task')
+const Task = require("../models/Task");
 
 async function getTasks(req, res) {
   try {
     const tasks = await Task.find();
     res.status(200).send(tasks);
   } catch (err) {
-    res.status(400).send('failed to get')
+    res.status(400).send("failed to get");
   }
 }
 
@@ -15,17 +15,17 @@ async function saveTask(req, res) {
     await newTask.save();
     res.status(201).send(newTask);
   } catch (err) {
-    res.status(400).send('failed to save')
+    res.status(400).send("failed to save");
   }
 }
 
 async function deleteTask(req, res) {
   const { _id } = req.body;
   try {
-    const response = await Task.findByIdAndDelete({_id});
+    const response = await Task.findByIdAndDelete({ _id });
     res.status(201).send(response);
   } catch (err) {
-    res.status(400).send('failed to delete');
+    res.status(400).send("failed to delete");
   }
 }
 
@@ -34,11 +34,11 @@ async function getTasksByMonth(req, res) {
   month = month[0].toUpperCase() + month.slice(1).toLowerCase();
   try {
     const tasks = await Task.find({
-      month
+      month,
     });
     res.status(200).send(tasks);
   } catch (err) {
-    res.status(400).send('failed to get')
+    res.status(400).send("failed to get");
   }
 }
 
@@ -46,11 +46,11 @@ async function getTasksByCrop(req, res) {
   const crop = req.params.crop;
   try {
     const tasks = await Task.find({
-      crop
+      crop,
     });
     res.status(200).send(tasks);
   } catch (err) {
-    res.status(400).send('failed to get')
+    res.status(400).send("failed to get");
   }
 }
 
@@ -59,5 +59,5 @@ module.exports = {
   getTasksByCrop,
   getTasks,
   saveTask,
-  getTasksByMonth
-}
+  getTasksByMonth,
+};
