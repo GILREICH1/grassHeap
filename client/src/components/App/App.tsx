@@ -58,12 +58,8 @@ function App(): JSX.Element {
 
   useEffect(() => {
     // make request to GrowStuff API /crops endpoint for all crops
-    getAllPlants().then((plantsAugmented: Plant[]) => {
-      // filter plants by only those which have required details available at their endpoint
-      const plantsFiltered: Plant[] = plantsAugmented.filter(
-        (plant: Plant) => !!plant.details,
-      );
-      setPlants(plantsFiltered);
+    getAllPlants().then((plants: Plant[]) => {
+      setPlants(plants);
     });
   }, []);
 
