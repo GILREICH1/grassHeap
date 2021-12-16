@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Plant, TruthySunRequirements } from '../../../common/types';
 import styles from './Filter.module.scss';
 import FilterCheckBox from './FilterCheckBox';
+import { returnPlantsSearch } from './returnPlantsSearch';
 
 interface FilterProps {
   setFilteredPlants: (plants: Plant[]) => void;
@@ -42,28 +43,11 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
   }
 
   useEffect(() => {
-    const filtersAreActive = activeFilters.length !== 0;
-    let newFilteredPlants: Plant[] = [];
-
-    if (!searchTerm && !filtersAreActive) newFilteredPlants = plants;
-    else if (searchTerm && !filtersAreActive) {
-      const regexSearch = new RegExp(searchTerm, 'i');
-      newFilteredPlants = plants.filter(plant => regexSearch.test(plant.name));
-    } else if (!searchTerm && filtersAreActive) {
-      newFilteredPlants = plants.filter(plant => {
-        const plantSunReqs = plant.details.attributes.sun_requirements;
-        return plantSunReqs ? activeFilters.includes(plantSunReqs) : false;
-      });
-    } else if (searchTerm && filtersAreActive) {
-      const regexSearch = new RegExp(searchTerm, 'i');
-      const filteredBySearch = plants.filter(plant =>
-        regexSearch.test(plant.name),
-      );
-      newFilteredPlants = filteredBySearch.filter(plant => {
-        const plantSunReqs = plant.details.attributes.sun_requirements;
-        return plantSunReqs ? activeFilters.includes(plantSunReqs) : false;
-      });
-    }
+    const newFilteredPlants: Plant[] = returnPlantsSearch(
+      activeFilters,
+      searchTerm,
+      plants,
+    );
 
     setFilteredPlants(newFilteredPlants);
   }, [searchTerm, activeFilters]);
