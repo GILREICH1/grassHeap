@@ -54,14 +54,16 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
   }, [searchTerm, activeFilters]);
 
   return (
-    <>
-      <form className={styles.form} onChange={onSearch}>
-        <label className={styles.label} htmlFor="plant-search">
-          Search Plants
-        </label>
-        <input id="plant-search" type="text"></input>
+    <div className={styles.filters}>
+      <form className={styles.searchForm} onChange={onSearch}>
+        <input
+          className={styles['form__field']}
+          placeholder="tomato"
+          id="plant-search"
+          type="text"></input>
+        <input className={styles.submit} type="submit" value="Search" />
       </form>
-      <form className={styles.form}>
+      <form className={styles.checkBoxes}>
         {sunRequirements.map(label => (
           <FilterCheckBox
             onChange={toggleCheckbox}
@@ -74,7 +76,7 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
       {!searchTerm && activeFilters.length === 0 && (
         <SortingButtons setFilteredPlants={setFilteredPlants} plants={plants} />
       )}
-    </>
+    </div>
   );
 };
 

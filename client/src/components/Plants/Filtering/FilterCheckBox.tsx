@@ -22,7 +22,7 @@ const CheckBox = ({ onChange, label, value }: CheckBoxProps): JSX.Element => {
   };
 
   return (
-    <>
+    <div>
       <input
         id={label}
         type="checkbox"
@@ -30,7 +30,7 @@ const CheckBox = ({ onChange, label, value }: CheckBoxProps): JSX.Element => {
         onChange={handleChange}
       />
       <label htmlFor={label}>{label}</label>
-    </>
+    </div>
   );
 };
 
