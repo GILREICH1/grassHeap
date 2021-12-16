@@ -16,7 +16,7 @@ interface CheckBoxProps {
 const CheckBox = ({ onChange, label, value }: CheckBoxProps): JSX.Element => {
   const [checked, setChecked] = React.useState(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ checked, value });
     setChecked(e.target.checked);
   };
