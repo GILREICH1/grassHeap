@@ -1,11 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { plantsContext } from '../../App/App';
 import PlantItem from '../PlantItem/PlantItem';
-import { Plant } from '../../../common/types';
+import { MyPlant, Plant } from '../../../common/types';
 import { PlantGif } from '../../PlantGif/PlantGif';
 import styles from './PlantList.module.scss';
 
+const isInMyPlants = (myPlants: MyPlant[], plant: Plant): boolean => {
+  return myPlants.some(myPlant => myPlant.name === plant.slug);
+};
+
 function PlantList(): JSX.Element {
+  const [filteredPlants, setFilteredPlants] = useState<Plant[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const { plants, myPlants, setPlants } = useContext(plantsContext);
 
   function sortPlants(method = 'a'): void {
@@ -24,22 +30,23 @@ function PlantList(): JSX.Element {
     }
   }
 
-  function displayPlants(plants: Plant[]): JSX.Element {
-    const plantListArr = plants.map((plant, i) => {
-      const inMyPlants = myPlants.some(myPlant => myPlant.name === plant.slug);
-      return (
-        <PlantItem key={i} inMyPlants={inMyPlants} plant={plant}></PlantItem>
+  useEffect(() => {
+    if (!searchTerm) setFilteredPlants(plants);
+    else {
+      const regexSearch = new RegExp(searchTerm, 'i');
+      const newFilteredPlants = plants.filter(plant =>
+        regexSearch.test(plant.name),
       );
-    });
-
-    return <>{plantListArr}</>;
-  }
+      setFilteredPlants(newFilteredPlants);
+    }
+  }, [searchTerm]);
 
   return (
     <>
       <div className={styles.PlantList}>
         <div className={styles.PlantList__sort}>
           <button
+            style={{ backgroundColor: 'blue' }}
             className={styles['PlantList__sort--btn']}
             onClick={() => sortPlants('p')}>
             Sort by Popularity
@@ -50,7 +57,15 @@ function PlantList(): JSX.Element {
             Sort Alphabetically
           </button>
         </div>
-        {plants && displayPlants(plants)}
+        {plants &&
+          filteredPlants.map((plant, i) => {
+            return (
+              <PlantItem
+                key={i}
+                inMyPlants={isInMyPlants(myPlants, plant)}
+                plant={plant}></PlantItem>
+            );
+          })}
       </div>
       <div className={styles.footer}>
         <h3>That&apos;s all!</h3>
