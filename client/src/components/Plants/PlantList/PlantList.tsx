@@ -62,7 +62,11 @@ function PlantList(): JSX.Element {
           })}
       </div>
       <div className={styles.footer}>
-        <h3>That&apos;s all!</h3>
+        {filteredPlants.length === 0 ? (
+          <h3>No Results!</h3>
+        ) : (
+          <h3>That&apos;s all!</h3>
+        )}
         <PlantGif />
       </div>
     </>

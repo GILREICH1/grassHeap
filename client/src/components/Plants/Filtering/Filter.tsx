@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Plant } from '../../../common/types';
+import styles from './Filter.module.scss';
 
 interface FilterProps {
   setFilteredPlants: (plants: Plant[]) => void;
@@ -26,8 +27,10 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
   }, [searchTerm]);
 
   return (
-    <form onChange={onChange}>
-      <label htmlFor="plant-search">Search Plants</label>
+    <form className={styles.form} onChange={onChange}>
+      <label className={styles.label} htmlFor="plant-search">
+        Search Plants
+      </label>
       <input id="plant-search" type="text"></input>
     </form>
   );
