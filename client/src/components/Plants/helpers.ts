@@ -1,4 +1,5 @@
 import { Plant, TruthySunRequirements } from '../../common/types';
+import { SortingString } from './Filtering/SortingButtons';
 
 export function returnPlantsSearch(
   activeFilters: TruthySunRequirements[],
@@ -29,11 +30,11 @@ export function returnPlantsSearch(
 }
 
 export function sortPlants(
-  method = 'a',
+  method: SortingString,
   setFilteredPlants: (plants: Plant[]) => void,
   plants: Plant[],
 ): void {
-  if (method === 'p') {
+  if (method === 'pop') {
     setFilteredPlants(
       [...plants].sort(({ _score: score1 }, { _score: score2 }) =>
         score1 < score2 ? 1 : -1,
