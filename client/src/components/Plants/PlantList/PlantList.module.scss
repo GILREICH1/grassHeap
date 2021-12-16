@@ -30,5 +30,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
     grid-template-rows: repeat(auto-fill, 25vh);
+    margin: 1em;
   }
 }
