@@ -4,6 +4,7 @@ import PlantItem from '../PlantItem/PlantItem';
 import { MyPlant, Plant } from '../../../common/types';
 import { PlantGif } from '../../PlantGif/PlantGif';
 import styles from './PlantList.module.scss';
+import Filter from '../Filtering/Filter';
 
 const isInMyPlants = (myPlants: MyPlant[], plant: Plant): boolean => {
   return myPlants.some(myPlant => myPlant.name === plant.slug);
@@ -11,8 +12,11 @@ const isInMyPlants = (myPlants: MyPlant[], plant: Plant): boolean => {
 
 function PlantList(): JSX.Element {
   const [filteredPlants, setFilteredPlants] = useState<Plant[]>([]);
-  const [searchTerm, setSearchTerm] = useState<string>('');
   const { plants, myPlants, setPlants } = useContext(plantsContext);
+
+  useEffect(() => {
+    setFilteredPlants(plants);
+  }, []);
 
   function sortPlants(method = 'a'): void {
     if (method === 'p') {
@@ -30,19 +34,9 @@ function PlantList(): JSX.Element {
     }
   }
 
-  useEffect(() => {
-    if (!searchTerm) setFilteredPlants(plants);
-    else {
-      const regexSearch = new RegExp(searchTerm, 'i');
-      const newFilteredPlants = plants.filter(plant =>
-        regexSearch.test(plant.name),
-      );
-      setFilteredPlants(newFilteredPlants);
-    }
-  }, [searchTerm]);
-
   return (
     <>
+      <Filter setFilteredPlants={setFilteredPlants} plants={plants} />
       <div className={styles.PlantList}>
         <div className={styles.PlantList__sort}>
           <button
