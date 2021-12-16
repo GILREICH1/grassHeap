@@ -1,9 +1,16 @@
 import React from 'react';
+import { TruthySunRequirements } from '../../../common/types';
 
 interface CheckBoxProps {
-  onChange: ({ checked, value }: { checked: boolean; value: string }) => void;
+  onChange: ({
+    checked,
+    value,
+  }: {
+    checked: boolean;
+    value: TruthySunRequirements;
+  }) => void;
   label: string;
-  value: string;
+  value: TruthySunRequirements;
 }
 
 const CheckBox = ({ onChange, label, value }: CheckBoxProps): JSX.Element => {

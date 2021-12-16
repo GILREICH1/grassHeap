@@ -24,7 +24,13 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
     setSearchTerm(target.value);
   }
 
-  function toggleCheckbox({ checked, value }: any) {
+  function toggleCheckbox({
+    checked,
+    value,
+  }: {
+    checked: boolean;
+    value: TruthySunRequirements;
+  }) {
     if (checked) {
       setActiveFilters(prev => prev.filter(e => e !== value && e));
     } else {
@@ -34,18 +40,33 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
       });
     }
   }
-  console.log(activeFilters);
 
   useEffect(() => {
-    if (!searchTerm) setFilteredPlants(plants);
-    else {
+    const filtersAreActive = activeFilters.length !== 0;
+    let newFilteredPlants: Plant[] = [];
+
+    if (!searchTerm && !filtersAreActive) newFilteredPlants = plants;
+    else if (searchTerm && !filtersAreActive) {
       const regexSearch = new RegExp(searchTerm, 'i');
-      const newFilteredPlants = plants.filter(plant =>
+      newFilteredPlants = plants.filter(plant => regexSearch.test(plant.name));
+    } else if (!searchTerm && filtersAreActive) {
+      newFilteredPlants = plants.filter(plant => {
+        const plantSunReqs = plant.details.attributes.sun_requirements;
+        return plantSunReqs ? activeFilters.includes(plantSunReqs) : false;
+      });
+    } else if (searchTerm && filtersAreActive) {
+      const regexSearch = new RegExp(searchTerm, 'i');
+      const filteredBySearch = plants.filter(plant =>
         regexSearch.test(plant.name),
       );
-      setFilteredPlants(newFilteredPlants);
+      newFilteredPlants = filteredBySearch.filter(plant => {
+        const plantSunReqs = plant.details.attributes.sun_requirements;
+        return plantSunReqs ? activeFilters.includes(plantSunReqs) : false;
+      });
     }
-  }, [searchTerm]);
+
+    setFilteredPlants(newFilteredPlants);
+  }, [searchTerm, activeFilters]);
 
   return (
     <>
@@ -55,7 +76,7 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
         </label>
         <input id="plant-search" type="text"></input>
       </form>
-      <form className={styles.form} onChange={toggleCheckbox}>
+      <form className={styles.form}>
         {sunRequirements.map(label => (
           <FilterCheckBox
             onChange={toggleCheckbox}
