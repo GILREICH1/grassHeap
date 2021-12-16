@@ -16,7 +16,6 @@ function SortingButtons({
   const [sorting, setSorting] = useState<SortingString>('pop');
 
   function onClick(string: SortingString) {
-    console.log(string);
     sortPlants(string, setFilteredPlants, plants);
     setSorting(string);
   }
