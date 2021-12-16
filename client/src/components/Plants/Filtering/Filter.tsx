@@ -55,6 +55,7 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
 
   return (
     <div className={styles.filters}>
+      {/* TODO Make modular text input form */}
       <form className={styles.searchForm} onChange={onSearch}>
         <input
           className={styles['form__field']}
