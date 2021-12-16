@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Plant, TruthySunRequirements } from '../../../common/types';
 import styles from './Filter.module.scss';
 import FilterCheckBox from './FilterCheckBox';
-import { returnPlantsSearch } from './returnPlantsSearch';
+import { returnPlantsSearch } from '../helpers';
+import SortingButtons from './SortingButtons';
 
 interface FilterProps {
   setFilteredPlants: (plants: Plant[]) => void;
@@ -70,6 +71,9 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
           />
         ))}
       </form>
+      {!searchTerm && activeFilters.length === 0 && (
+        <SortingButtons setFilteredPlants={setFilteredPlants} plants={plants} />
+      )}
     </>
   );
 };

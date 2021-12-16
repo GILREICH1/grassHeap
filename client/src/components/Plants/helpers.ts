@@ -1,4 +1,4 @@
-import { Plant, TruthySunRequirements } from '../../../common/types';
+import { Plant, TruthySunRequirements } from '../../common/types';
 
 export function returnPlantsSearch(
   activeFilters: TruthySunRequirements[],
@@ -26,4 +26,24 @@ export function returnPlantsSearch(
     });
   }
   return newFilteredPlants;
+}
+
+export function sortPlants(
+  method = 'a',
+  setFilteredPlants: (plants: Plant[]) => void,
+  plants: Plant[],
+): void {
+  if (method === 'p') {
+    setFilteredPlants(
+      [...plants].sort(({ _score: score1 }, { _score: score2 }) =>
+        score1 < score2 ? 1 : -1,
+      ),
+    );
+  } else {
+    setFilteredPlants(
+      [...plants].sort(({ name: name1 }, { name: name2 }) =>
+        name1.toLowerCase() > name2.toLowerCase() ? 1 : -1,
+      ),
+    );
+  }
 }
