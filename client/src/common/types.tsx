@@ -1,6 +1,6 @@
 export type TruthySunRequirements = 'Full Sun' | 'Partial Sun' | 'Full Shade';
 
-export type sun_requirements = TruthySunRequirements | '' | null;
+export type SunRequirements = TruthySunRequirements | '' | null;
 
 export interface MyPlant {
   _id?: string;
@@ -23,7 +23,7 @@ interface OpenFarmData {
     main_image_path: string;
     common_names: string[];
     description: string;
-    sun_requirements: sun_requirements;
+    sun_requirements: SunRequirements;
   };
 }
 
