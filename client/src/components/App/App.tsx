@@ -6,6 +6,7 @@ import PlantList from '../Plants/PlantList/PlantList';
 import PlantDetails from '../Plants/PlantDetails/PlantDetails';
 import Loader from '../Loader/Loader';
 import { MyPlant, Plant } from '../../common/types';
+import Auth0ProviderWithHistory from '../../auth/auth0-provider-with-history';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
@@ -76,14 +77,16 @@ function App(): JSX.Element {
       <plantsContext.Provider
         value={{ myPlants, plants, removePlant, savePlant }}>
         <Router>
-          <Navbar />
-          <div className="content">
-            <Switch>
-              <Route path="/plants/:name" component={PlantDetails} />
-              <Route exact path="/plants" component={PlantList} />
-              <Route exact path="/" component={Dashboard} />
-            </Switch>
-          </div>
+          <Auth0ProviderWithHistory>
+            <Navbar />
+            <div className="content">
+              <Switch>
+                <Route path="/plants/:name" component={PlantDetails} />
+                <Route exact path="/plants" component={PlantList} />
+                <Route exact path="/" component={Dashboard} />
+              </Switch>
+            </div>
+          </Auth0ProviderWithHistory>
         </Router>
       </plantsContext.Provider>
     </div>
