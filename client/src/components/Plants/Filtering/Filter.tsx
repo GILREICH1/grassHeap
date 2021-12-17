@@ -56,7 +56,10 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
   return (
     <div className={styles.filters}>
       {/* TODO Make modular text input form */}
-      <form className={styles.searchForm} onChange={onSearch}>
+      <form
+        className={styles.searchForm}
+        onChange={onSearch}
+        onSubmit={e => e.preventDefault()}>
         <input
           className={styles['form__field']}
           placeholder="tomato"
