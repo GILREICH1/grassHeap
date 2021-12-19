@@ -1,6 +1,6 @@
-const base_url = "https://api.openweathermap.org/data/2.5";
+const base_url = 'https://api.openweathermap.org/data/2.5';
 const api_key = process.env.OPENWEATHER_API_KEY;
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 
 async function getWeather(req, res) {
   const { city } = req.body;
@@ -8,7 +8,7 @@ async function getWeather(req, res) {
     const path = `${base_url}/weather?units=metric&q=${city}&appid=${api_key}`;
     const JSONweather = await fetch(path);
     const weather = await JSONweather.json();
-    if (weather.cod !== "200") throw new Error();
+    if (weather.cod !== 200) throw new Error();
     res.status(200).send(weather);
   } catch (err) {
     res.status(400).send(err);
@@ -22,7 +22,7 @@ async function getFiveDayForecast(req, res) {
     const weather = await JSONweather.json();
     res.status(200).send(weather);
   } catch (err) {
-    return res.status(400).send("bad request");
+    return res.status(400).send('bad request');
   }
 }
 
