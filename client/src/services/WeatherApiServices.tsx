@@ -9,7 +9,7 @@ export const getWeather = async (city: string): Promise<APIWeather> => {
     },
     body: JSON.stringify({ city }),
   });
-  const weather = await JSONweather.json();
-  if (weather.cod !== '200') throw new Error();
+  const weather: APIWeather = await JSONweather.json();
+  if (weather.cod !== 200) throw new Error();
   return weather;
 };
