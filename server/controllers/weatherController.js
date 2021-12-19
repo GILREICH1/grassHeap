@@ -8,10 +8,10 @@ async function getWeather(req, res) {
     const path = `${base_url}/weather?units=metric&q=${city}&appid=${api_key}`;
     const JSONweather = await fetch(path);
     const weather = await JSONweather.json();
-    if (weather.cod === "400") throw new Error();
+    if (weather.cod !== "200") throw new Error();
     res.status(200).send(weather);
   } catch (err) {
-    res.status(400).send("bad request");
+    res.status(400).send(err);
   }
 }
 
