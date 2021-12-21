@@ -5,7 +5,7 @@ import PlantItem from '../Plants/PlantItem/PlantItem';
 import ScrollButton from '../ScrollButton/ScrollButton';
 import styles from './MyPlantsList.module.scss';
 
-function MyPlantsList(): JSX.Element {
+function MyPlantsList(): JSX.Element | null {
   const { plants, myPlants } = useContext(plantsContext);
   const [myPlantsList, setMyPlantsList] = useState<Plant[]>([]);
   const [startIndex, setStartIndex] = useState(0);
@@ -16,9 +16,9 @@ function MyPlantsList(): JSX.Element {
     );
 
     setMyPlantsList(filteredPlants);
-  }, []);
+  }, [myPlants]);
 
-  return (
+  return myPlants.length ? (
     <div className={styles.MyPlantListContainer}>
       <ScrollButton
         type="back"
@@ -37,10 +37,12 @@ function MyPlantsList(): JSX.Element {
       <ScrollButton
         type="forward"
         onClick={() => setStartIndex(startIndex + 1)}
-        disabled={startIndex === myPlantsList.length - 3}
+        disabled={
+          startIndex === myPlantsList.length - 3 || myPlantsList.length < 3
+        }
       />
     </div>
-  );
+  ) : null;
 }
 
 export default MyPlantsList;
