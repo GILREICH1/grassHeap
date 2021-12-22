@@ -17,6 +17,7 @@ import {
 import { getAllPlants } from '../../services/GrowStuffApiServices';
 import './App.css';
 import { useAuth0 } from '@auth0/auth0-react';
+import ExternalAPI from '../Authentication/ExternalAPI';
 
 interface AppCtxt {
   myPlants: MyPlant[];
@@ -88,6 +89,7 @@ function App(): JSX.Element {
               <Route exact path="/" component={Dashboard} />
             </Switch>
           </div>
+          <ExternalAPI />
         </Router>
       </plantsContext.Provider>
     </div>

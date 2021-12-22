@@ -1,31 +1,33 @@
-const Task = require("../models/Task");
+const Task = require('../models/Task');
 
 async function getTasks(req, res) {
   try {
     const tasks = await Task.find();
     res.status(200).send(tasks);
   } catch (err) {
-    res.status(400).send("failed to get");
+    res.status(400).send('failed to get');
   }
 }
 
+// TODO save to tasks of user
 async function saveTask(req, res) {
   try {
     const newTask = new Task(req.body);
     await newTask.save();
     res.status(201).send(newTask);
   } catch (err) {
-    res.status(400).send("failed to save");
+    res.status(400).send('failed to save');
   }
 }
 
+// TODO delete tasks of User
 async function deleteTask(req, res) {
   const { _id } = req.body;
   try {
     const response = await Task.findByIdAndDelete({ _id });
     res.status(201).send(response);
   } catch (err) {
-    res.status(400).send("failed to delete");
+    res.status(400).send('failed to delete');
   }
 }
 
@@ -38,7 +40,7 @@ async function getTasksByMonth(req, res) {
     });
     res.status(200).send(tasks);
   } catch (err) {
-    res.status(400).send("failed to get");
+    res.status(400).send('failed to get');
   }
 }
 
@@ -50,7 +52,7 @@ async function getTasksByCrop(req, res) {
     });
     res.status(200).send(tasks);
   } catch (err) {
-    res.status(400).send("failed to get");
+    res.status(400).send('failed to get');
   }
 }
 
