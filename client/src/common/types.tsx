@@ -4,6 +4,8 @@ export type SunRequirements = TruthySunRequirements | '' | null;
 
 export interface User {
   userEmail: string;
+  givenName?: string;
+  familyName?: string;
   userPlants?: MyPlant[];
   userTasks?: Task[];
 }

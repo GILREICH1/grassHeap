@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import Navbar from '../NavBar/NavBar';
@@ -16,6 +16,7 @@ import {
 } from '../../services/ServerApiServices';
 import { getAllPlants } from '../../services/GrowStuffApiServices';
 import './App.css';
+import { userContxt } from '../Authentication/UserContext';
 
 interface AppCtxt {
   myPlants: MyPlant[];
@@ -35,6 +36,7 @@ function App(): JSX.Element {
   const [plants, setPlants] = useState<Plant[]>([]);
   const [myPlants, setMyPlants] = useState<MyPlant[]>([]);
   const [loadStatus, setLoadStatus] = useState<boolean>(false);
+  const { user } = useContext(userContxt);
 
   function savePlant(plant: Plant): void {
     const newPlant: MyPlant = { name: plant.slug, plantID: parseInt(plant.id) };

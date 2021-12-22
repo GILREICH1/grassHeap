@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
 import App from './components/App/App';
-import UserContext from './components/Authentication/ExternalAPI';
+import UserContext from './components/Authentication/UserContext';
 
 ReactDOM.render(
   <BrowserRouter>

@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   userEmail: String,
+  givenName: String,
+  familyName: String,
   userPlants: {
     type: Array,
     default: [],

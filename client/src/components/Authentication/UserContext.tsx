@@ -5,7 +5,7 @@ import { User } from '../../common/types';
 import { SERVER_URL as base_url } from '../../utils/config';
 import Loader from '../Loader/Loader';
 
-const initialUser = { userEmail: '' };
+const initialUser = { userEmail: '', familyName: '', givenName: '' };
 
 interface UserContxt {
   user: User;
@@ -23,7 +23,7 @@ const UserContext = ({ children }: UserContextProps) => {
   const [localUser, setLocalUser] = useState(initialUser);
   const { user, getAccessTokenSilently, isLoading } = useAuth0();
 
-  const getUser = async ({ userEmail }: { userEmail: string }) => {
+  const getUser = async (userDetails: User) => {
     try {
       const token = await getAccessTokenSilently();
 
@@ -33,7 +33,7 @@ const UserContext = ({ children }: UserContextProps) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ userEmail }),
+        body: JSON.stringify(userDetails),
       });
 
       const responseData = await response.json();
@@ -45,10 +45,11 @@ const UserContext = ({ children }: UserContextProps) => {
 
   useEffect(() => {
     if (user && user.email) {
-      getUser({ userEmail: user.email }).then(user => {
-        console.log('returned user', user);
-        setLocalUser(user);
-      });
+      getUser({
+        userEmail: user.email,
+        givenName: user.given_name,
+        familyName: user.family_name,
+      }).then(user => setLocalUser(user));
     }
   }, [isLoading]);
 

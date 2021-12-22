@@ -1,30 +1,21 @@
 const User = require('../models/User');
 
-/* USER : {
-    userEmail: string,
-    plants: MyPlant[],
-    tasks: tasks[],
-  }
-*/
-
-async function signUpUser(userEmail) {
-  const newUser = new User({ userEmail });
+async function signUpUser({ userEmail, givenName, familyName }) {
+  const newUser = new User({ userEmail, givenName, familyName });
   const savedUser = await newUser.save();
   return savedUser;
 }
 
 async function getUser(req, res) {
   const { userEmail } = req.body;
-  console.log(userEmail);
+
   try {
     let user = await User.findOne({
       userEmail,
     });
 
-    console.log('initial user', user);
     if (!user) {
-      user = await signUpUser(userEmail);
-      console.log('signed up new user', user);
+      user = await signUpUser(req.body);
     }
 
     res.status(200).send(user);
