@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { months } from '../../utils/months';
+import AuthNav from '../Authentication/AuthNav';
 import './NavBar.css';
 
 function Navbar(): JSX.Element {
@@ -38,6 +39,7 @@ function Navbar(): JSX.Element {
         </Link>
         <span className="NavElement__icon">🥕</span>
       </div>
+      <AuthNav />
       <div className="p-menu1">
         <nav id="navbar" className="navigation" role="navigation">
           <input id="toggle1" type="checkbox" />

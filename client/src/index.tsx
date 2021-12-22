@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App/App';
+import AuthComponent from './components/Authentication/AuthComponent';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <AuthComponent />
   </BrowserRouter>,
   document.getElementById('root'),
 );
