@@ -1,24 +1,35 @@
 const User = require('../models/User');
 
 /* USER : {
-    userID: string,
+    userEmail: string,
     plants: MyPlant[],
     tasks: tasks[],
   }
 */
 
-async function signUpUser() {
-  return 'signed';
+async function signUpUser(userEmail) {
+  const newUser = new User({ userEmail });
+  const savedUser = await newUser.save();
+  return savedUser;
 }
 
-// TODO get user and return myplants property
-async function getUser(_, res) {
+async function getUser(req, res) {
+  const { userEmail } = req.body;
+  console.log(userEmail);
   try {
-    const plants = await Plant.find();
+    let user = await User.findOne({
+      userEmail,
+    });
 
-    res.status(200).send(plants);
+    console.log('initial user', user);
+    if (!user) {
+      user = await signUpUser(userEmail);
+      console.log('signed up new user', user);
+    }
+
+    res.status(200).send(user);
   } catch (err) {
-    res.status(400).send('failed to get myPlants');
+    res.status(400).send('failed to get user');
   }
 }
 

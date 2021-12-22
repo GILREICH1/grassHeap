@@ -3,12 +3,15 @@ import { useParams } from 'react-router';
 import { plantsContext } from '../../App/App';
 import './PlantDetails.css';
 import { Plant } from '../../../common/types';
+import { userContxt } from '../../Authentication/ExternalAPI';
 
 function PlantDetails(): JSX.Element {
   const { name } = useParams<{ name: string }>();
   const { plants } = useContext(plantsContext);
+  const { user } = useContext(userContxt);
   const [plantDetails, setPlantDetails] = useState<Plant>(plants[0]);
 
+  console.log(user);
   useEffect(() => {
     const plant: Plant | undefined = plants.find(plant => plant.slug === name);
     if (plant) setPlantDetails(plant);

@@ -48,7 +48,6 @@ router.post('/forecast', getFiveDayForecast);
 router.post('/gifs', getGIFByQuery);
 
 // Users
-router.post('/userSignup', signUpUser);
-router.get('/getUser', checkJwt, getUser);
+router.post('/getUser', checkJwt, getUser);
 
 module.exports = router;

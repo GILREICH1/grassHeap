@@ -16,8 +16,6 @@ import {
 } from '../../services/ServerApiServices';
 import { getAllPlants } from '../../services/GrowStuffApiServices';
 import './App.css';
-import { useAuth0 } from '@auth0/auth0-react';
-import ExternalAPI from '../Authentication/ExternalAPI';
 
 interface AppCtxt {
   myPlants: MyPlant[];
@@ -37,9 +35,6 @@ function App(): JSX.Element {
   const [plants, setPlants] = useState<Plant[]>([]);
   const [myPlants, setMyPlants] = useState<MyPlant[]>([]);
   const [loadStatus, setLoadStatus] = useState<boolean>(false);
-
-  const { user } = useAuth0();
-  console.log(user);
 
   function savePlant(plant: Plant): void {
     const newPlant: MyPlant = { name: plant.slug, plantID: parseInt(plant.id) };
@@ -89,7 +84,6 @@ function App(): JSX.Element {
               <Route exact path="/" component={Dashboard} />
             </Switch>
           </div>
-          <ExternalAPI />
         </Router>
       </plantsContext.Provider>
     </div>

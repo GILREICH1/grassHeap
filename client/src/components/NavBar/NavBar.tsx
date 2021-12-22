@@ -12,6 +12,7 @@ function Navbar(): JSX.Element {
   let prevScrollpos = window.pageYOffset;
   window.onscroll = function () {
     const currentScrollPos = window.pageYOffset;
+
     const NavBar = Array.from(
       document.getElementsByClassName(
         'Navbar',
