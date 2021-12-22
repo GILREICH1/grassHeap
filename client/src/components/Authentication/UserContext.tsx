@@ -9,10 +9,12 @@ const initialUser = { userEmail: '', familyName: '', givenName: '' };
 
 interface UserContxt {
   user: User;
+  isAuthenticated: boolean;
 }
 
 export const userContxt = createContext<UserContxt>({
   user: initialUser,
+  isAuthenticated: false,
 });
 
 interface UserContextProps {
@@ -20,8 +22,9 @@ interface UserContextProps {
 }
 
 const UserContext = ({ children }: UserContextProps) => {
-  const [localUser, setLocalUser] = useState(initialUser);
-  const { user, getAccessTokenSilently, isLoading } = useAuth0();
+  const [localUser, setLocalUser] = useState<User>(initialUser);
+  const { user, getAccessTokenSilently, isLoading, isAuthenticated } =
+    useAuth0();
 
   const getUser = async (userDetails: User) => {
     try {
@@ -36,7 +39,7 @@ const UserContext = ({ children }: UserContextProps) => {
         body: JSON.stringify(userDetails),
       });
 
-      const responseData = await response.json();
+      const responseData: User = await response.json();
       return responseData;
     } catch (error) {
       console.log(error);
@@ -49,14 +52,16 @@ const UserContext = ({ children }: UserContextProps) => {
         userEmail: user.email,
         givenName: user.given_name,
         familyName: user.family_name,
-      }).then(user => setLocalUser(user));
+      }).then(res => {
+        if (res) setLocalUser(res);
+      });
     }
   }, [isLoading]);
 
   return isLoading ? (
     <Loader />
   ) : (
-    <userContxt.Provider value={{ user: localUser }}>
+    <userContxt.Provider value={{ user: localUser, isAuthenticated }}>
       {children}
     </userContxt.Provider>
   );
