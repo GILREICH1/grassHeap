@@ -1,0 +1,10 @@
+@import '../../../common/layout.scss';
+
+.container {
+  @include column;
+}
+
+.gif {
+  width: auto;
+  height: 50px;
+}

@@ -16,6 +16,7 @@ async function getWeather(req, res) {
 }
 
 async function getFiveDayForecast(req, res) {
+  const { city } = req.body;
   try {
     const path = `${base_url}/forecast?units=metric&q=${city}&appid=${api_key}`;
     const JSONweather = await fetch(path);
