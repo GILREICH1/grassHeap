@@ -69,7 +69,7 @@ function App(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    getMyPlants().then((myplants: MyPlant[]) => setMyPlants(myplants));
+    if (user.userPlants) setMyPlants(user.userPlants);
   }, []);
 
   useEffect(() => {
