@@ -17,6 +17,7 @@ import {
 import { getAllPlants } from '../../services/GrowStuffApiServices';
 import './App.css';
 import { userContxt } from '../Authentication/UserContext';
+import { useAuth0 } from '@auth0/auth0-react';
 
 interface AppCtxt {
   myPlants: MyPlant[];
@@ -37,11 +38,14 @@ function App(): JSX.Element {
   const [myPlants, setMyPlants] = useState<MyPlant[]>([]);
   const [loadStatus, setLoadStatus] = useState<boolean>(false);
   const { user } = useContext(userContxt);
+  // TODO make savePlant / removePlant requests with token
+  const { getAccessTokenSilently } = useAuth0();
 
-  function savePlant(plant: Plant): void {
+  async function savePlant(plant: Plant): Promise<void> {
+    const token = await getAccessTokenSilently();
     const newPlant: MyPlant = { name: plant.slug, plantID: parseInt(plant.id) };
     try {
-      saveToMyPlants(newPlant);
+      saveToMyPlants({ plant: newPlant, token, user });
       setMyPlants((oldList: MyPlant[]) => [...oldList, newPlant]);
     } catch (err) {
       console.log(err);

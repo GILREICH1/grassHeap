@@ -1,5 +1,5 @@
 import { SERVER_URL as base_url } from '../utils/config';
-import { Task, MyPlant } from '../common/types';
+import { Task, MyPlant, User } from '../common/types';
 
 export const getTasksByMonth = async (month = ''): Promise<Task[]> => {
   const JSONtasks = await fetch(`${base_url}/tasks/month/${month}`);
@@ -7,13 +7,13 @@ export const getTasksByMonth = async (month = ''): Promise<Task[]> => {
   return tasks;
 };
 
-export const getMyPlants = async () : Promise<MyPlant[]> => {
+export const getMyPlants = async (): Promise<MyPlant[]> => {
   const JSONPlants = await fetch(`${base_url}/myplants`);
   const myPlants = await JSONPlants.json();
   return myPlants;
 };
 
-export const saveTask = async (task : Task) : Promise<Task> => {
+export const saveTask = async (task: Task): Promise<Task> => {
   const JSONTask = JSON.stringify(task);
   const response = await fetch(`${base_url}/tasks`, {
     method: 'POST',
@@ -35,15 +35,26 @@ export const deleteTask = async (_id = ''): Promise<void> => {
   });
 };
 
+interface saveToMyPlantsArgs {
+  plant: MyPlant;
+  user: User;
+  token: string;
+}
 
-export const saveToMyPlants = async (plant: MyPlant): Promise<MyPlant> => {
-  const JSONPlant = JSON.stringify(plant);
+export const saveToMyPlants = async ({
+  plant,
+  user,
+  token,
+}: saveToMyPlantsArgs): Promise<MyPlant> => {
+  const JSONBody = JSON.stringify({ plant, user });
+  console.log(JSONBody);
   const response = await fetch(`${base_url}/myplants`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
     },
-    body: JSONPlant,
+    body: JSONBody,
   });
   return response.json();
 };
@@ -74,12 +85,11 @@ interface Fixedheight {
 interface GifAnswer {
   images: {
     fixed_height: Fixedheight;
-  }
+  };
 }
 
-export const getGIF = async (query = ''): Promise<GifAnswer []> => {
-
-  const JSONQuery = JSON.stringify({query});
+export const getGIF = async (query = ''): Promise<GifAnswer[]> => {
+  const JSONQuery = JSON.stringify({ query });
   const response = await fetch(`${base_url}/gifs`, {
     method: 'POST',
     headers: {

@@ -5,7 +5,7 @@ import { User } from '../../common/types';
 import { SERVER_URL as base_url } from '../../utils/config';
 import Loader from '../Loader/Loader';
 
-const initialUser = { userEmail: '', familyName: '', givenName: '' };
+const initialUser: User = { userEmail: '', familyName: '', givenName: '' };
 
 interface UserContxt {
   user: User;

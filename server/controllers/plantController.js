@@ -1,6 +1,7 @@
 const Plant = require('../models/Plant');
+const User = require('../models/User');
 
-// TODO get user and return myplants property
+// TODO remove this
 async function getMyPlants(_, res) {
   try {
     const plants = await Plant.find();
@@ -13,10 +14,16 @@ async function getMyPlants(_, res) {
 
 // TODO save to myplants property of User
 async function savePlant(req, res) {
+  const { plant, user } = req.body;
   try {
-    const newPlant = new Plant(req.body);
-    await newPlant.save();
-    res.status(201).send(newPlant);
+    const updatedUser = await User.findOneAndUpdate(
+      { userEmail: user.userEmail },
+      { $push: { userPlants: plant } },
+      { new: true },
+    );
+
+    console.log({ updatedUser });
+    res.status(201).send(updatedUser);
   } catch (err) {
     res.status(400).send('failed to save');
   }
