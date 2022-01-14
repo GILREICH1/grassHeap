@@ -10,7 +10,6 @@ import { MyPlant, Plant } from '../../common/types';
 require('dotenv').config();
 
 import {
-  getMyPlants,
   removeFromMyPlants,
   saveToMyPlants,
 } from '../../services/ServerApiServices';
@@ -38,7 +37,6 @@ function App(): JSX.Element {
   const [myPlants, setMyPlants] = useState<MyPlant[]>([]);
   const [loadStatus, setLoadStatus] = useState<boolean>(false);
   const { user } = useContext(userContxt);
-  // TODO make savePlant / removePlant requests with token
   const { getAccessTokenSilently } = useAuth0();
 
   async function savePlant(plant: Plant): Promise<void> {
@@ -70,7 +68,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     if (user.userPlants) setMyPlants(user.userPlants);
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (plants.length) {

@@ -1,9 +1,5 @@
 const router = require('express').Router();
-const {
-  getMyPlants,
-  savePlant,
-  deletePlant,
-} = require('./controllers/plantController');
+const { savePlant, deletePlant } = require('./controllers/plantController');
 
 const {
   getTasks,
@@ -29,7 +25,6 @@ const { checkJwt } = require('./check-jwt');
 router.get('/plants', getAllPlants);
 
 // interact with MyPlants database
-router.get('/myPlants', getMyPlants);
 router.post('/myPlants', checkJwt, savePlant);
 router.delete('/myPlants', checkJwt, deletePlant);
 

@@ -33,7 +33,6 @@ async function deletePlant(req, res) {
 }
 
 module.exports = {
-  getMyPlants,
   savePlant,
   deletePlant,
 };

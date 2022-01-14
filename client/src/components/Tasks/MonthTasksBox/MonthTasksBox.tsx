@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TaskList from '../TaskList/TaskList';
 import {
   deleteTask,
-  getMyPlants,
   getTasksByMonth,
 } from '../../../services/ServerApiServices';
 import AddTaskForm from '../AddTaskForm/AddTaskForm';
 import { getSeason } from './getSeasonFunction';
-import { MyPlant, Task } from '../../../common/types';
+import { Task } from '../../../common/types';
 import styles from './MonthTasksBox.module.scss';
+import { plantsContext } from '../../App/App';
 
 interface MonthProps {
   monthNumber: number;
@@ -19,9 +19,10 @@ interface MonthProps {
 function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [seasonIcon, setSeasonIcon] = useState('');
+  const { myPlants } = useContext(plantsContext);
 
   useEffect(() => {
-    getMyPlants().then((myPlants: MyPlant[]) => {
+    if (myPlants) {
       getTasksByMonth(monthName).then((tasks: Task[]) => {
         // filter tasks to those which are relevant to plants saved in myPlants database OR added manually
         const myTasks = tasks.filter((task: Task) =>
@@ -29,8 +30,8 @@ function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
         );
         setTasks(myTasks);
       });
-    });
-  }, [monthNumber, monthName]);
+    }
+  }, [monthNumber, monthName, myPlants]);
 
   useEffect(() => {
     setSeasonIcon(getSeason(monthNumber + 1));

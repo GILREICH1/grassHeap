@@ -7,12 +7,6 @@ export const getTasksByMonth = async (month = ''): Promise<Task[]> => {
   return tasks;
 };
 
-export const getMyPlants = async (): Promise<MyPlant[]> => {
-  const JSONPlants = await fetch(`${base_url}/myplants`);
-  const myPlants = await JSONPlants.json();
-  return myPlants;
-};
-
 export const saveTask = async (task: Task): Promise<Task> => {
   const JSONTask = JSON.stringify(task);
   const response = await fetch(`${base_url}/tasks`, {
@@ -47,7 +41,6 @@ export const saveToMyPlants = async ({
   token,
 }: saveToMyPlantsArgs): Promise<MyPlant> => {
   const JSONBody = JSON.stringify({ plant, user });
-  console.log(JSONBody);
   const response = await fetch(`${base_url}/myplants`, {
     method: 'POST',
     headers: {
