@@ -59,14 +59,25 @@ export const saveToMyPlants = async ({
   return response.json();
 };
 
-export const removeFromMyPlants = async (plantID = 0): Promise<MyPlant> => {
-  const JSONPlant = JSON.stringify({ plantID });
+interface removePlantsArgs {
+  plantID: number;
+  user: User;
+  token: string;
+}
+
+export const removeFromMyPlants = async ({
+  plantID,
+  user,
+  token,
+}: removePlantsArgs): Promise<MyPlant> => {
+  const JSONBody = JSON.stringify({ plantID, user });
   const response = await fetch(`${base_url}/myplants`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
     },
-    body: JSONPlant,
+    body: JSONBody,
   });
   return response.json();
 };

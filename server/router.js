@@ -31,7 +31,7 @@ router.get('/plants', getAllPlants);
 // interact with MyPlants database
 router.get('/myPlants', getMyPlants);
 router.post('/myPlants', checkJwt, savePlant);
-router.delete('/myPlants', deletePlant);
+router.delete('/myPlants', checkJwt, deletePlant);
 
 // interact with tasks database
 router.get('/tasks', getTasks);

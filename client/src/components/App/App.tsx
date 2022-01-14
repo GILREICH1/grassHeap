@@ -52,8 +52,9 @@ function App(): JSX.Element {
     }
   }
 
-  function removePlant(plantID: number): void {
-    removeFromMyPlants(plantID);
+  async function removePlant(plantID: number): Promise<void> {
+    const token = await getAccessTokenSilently();
+    removeFromMyPlants({ token, plantID, user });
     // const myPlantsCopy = myPlants.filter((plant) => plant.plantID !== plantID);
     setMyPlants((oldPlants: MyPlant[]) =>
       oldPlants.filter((plant: MyPlant) => plant.plantID !== plantID),

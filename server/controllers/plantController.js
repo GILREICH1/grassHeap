@@ -12,7 +12,6 @@ async function getMyPlants(_, res) {
   }
 }
 
-// TODO save to myplants property of User
 async function savePlant(req, res) {
   const { plant, user } = req.body;
   try {
@@ -29,13 +28,18 @@ async function savePlant(req, res) {
   }
 }
 
-// TODO remove from myplants property of User
 async function deletePlant(req, res) {
-  const { plantID } = req.body;
+  const { plantID, user } = req.body;
   try {
-    const deleted = await Plant.deleteOne({
-      plantID,
-    });
+    const deleted = await User.updateOne(
+      { userEmail: user.userEmail },
+      {
+        $pull: {
+          userPlants: { plantID: plantID },
+        },
+      },
+    );
+    console.log({ deleted });
     res.status(202).send(deleted);
   } catch (err) {
     res.status(400).send('failed to delete');
