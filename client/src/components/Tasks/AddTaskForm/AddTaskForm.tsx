@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { saveTask } from '../../../services/ServerApiServices';
 import { Task } from '../../../common/types';
 import styles from './AddTaskForm.module.scss';
+import { plantsContext } from '../../App/App';
 
 interface AddTaskFormProps {
   month: string;
@@ -17,9 +18,9 @@ function AddTaskForm({
   const [crop, setCrop] = useState<string>('');
   const [task, setTask] = useState<string>('');
 
-  // const { myPlants } = useContext(plantsContext);
+  const { plants } = useContext(plantsContext);
 
-  // const plantList = myPlants.map(plant => plant.name).sort();
+  // TODO provide useful response
   function taskIsNew(newTask: Task, tasks: Task[]) {
     const exists = Boolean(
       tasks.find((task: Task) => {
@@ -63,12 +64,18 @@ function AddTaskForm({
         </div>
         <div className={`${styles['form__group']}`}>
           <input
+            list="plant-list"
             className={styles['form__field']}
             required
             value={crop}
             onChange={e => setCrop(e.target.value.toLowerCase())}
           />
           <label className={styles['form__label']}>Crop</label>
+          <datalist id="plant-list">
+            {plants.map(plant => (
+              <option key={plant.id} value={plant.name} />
+            ))}
+          </datalist>
         </div>
         <input className={styles.submit} type="submit" value="Submit" />
       </form>
