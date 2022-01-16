@@ -23,6 +23,7 @@ function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
 
   useEffect(() => {
     if (myPlants) {
+      // TODO get user tasks also
       getTasksByMonth(monthName).then((tasks: Task[]) => {
         // filter tasks to those which are relevant to plants saved in myPlants database OR added manually
         const myTasks = tasks.filter((task: Task) =>
