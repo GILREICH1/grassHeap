@@ -26,10 +26,14 @@ async function saveTask(req, res) {
 
 // TODO delete tasks of User
 async function deleteTask(req, res) {
-  const { _id } = req.body;
+  const { _id, user } = req.body;
   try {
-    const response = await Task.findByIdAndDelete({ _id });
-    res.status(201).send(response);
+    const updatedUser = await User.findOneAndUpdate(
+      { userEmail: user.userEmail },
+      { $pull: { userTasks: { _id } } },
+      { new: true },
+    );
+    res.status(202).send(updatedUser.userTasks);
   } catch (err) {
     res.status(400).send('failed to delete');
   }
