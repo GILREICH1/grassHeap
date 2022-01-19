@@ -52,7 +52,6 @@ function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
       <AddTaskForm
         addNewTask={(task: Task) => setTasks([...tasks, task])}
         month={monthName}
-        tasks={tasks}
       />
     </div>
   );

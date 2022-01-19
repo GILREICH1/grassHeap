@@ -1,4 +1,5 @@
 const Task = require('../models/Task');
+const User = require('../models/User');
 
 async function getTasks(req, res) {
   try {
@@ -9,12 +10,15 @@ async function getTasks(req, res) {
   }
 }
 
-// TODO save to tasks of user
 async function saveTask(req, res) {
+  const { task, user } = req.body;
   try {
-    const newTask = new Task(req.body);
-    await newTask.save();
-    res.status(201).send(newTask);
+    const updatedUser = await User.findOneAndUpdate(
+      { userEmail: user.userEmail },
+      { $push: { userTasks: task } },
+      { new: true },
+    );
+    res.status(201).send(updatedUser);
   } catch (err) {
     res.status(400).send('failed to save');
   }

@@ -10,16 +10,31 @@ export const getTasksByMonth = async (month = ''): Promise<Task[]> => {
   return tasks;
 };
 
-export const saveTask = async (task: Task): Promise<Task> => {
-  const JSONTask = JSON.stringify(task);
+interface saveTaskArgs {
+  task: Task;
+  user: User;
+  token: string;
+}
+
+export const saveTask = async ({
+  task,
+  user,
+  token,
+}: saveTaskArgs): Promise<Task | void> => {
+  const JSONBody = JSON.stringify({ task, user });
+  try {
   const response = await fetch(`${base_url}/tasks`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
     },
-    body: JSONTask,
+      body: JSONBody,
   });
   return response.json();
+  } catch (e) {
+    console.error('failed to save task', e);
+  }
 };
 
 export const deleteTask = async (_id = ''): Promise<void> => {
