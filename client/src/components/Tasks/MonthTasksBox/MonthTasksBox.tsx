@@ -10,6 +10,12 @@ import { getSeason } from './getSeasonFunction';
 import { Task } from '../../../common/types';
 import styles from './MonthTasksBox.module.scss';
 import { plantsContext } from '../../App/App';
+import { userContxt } from '../../Authentication/UserContext';
+import { useAuth0 } from '@auth0/auth0-react';
+
+const filterUserTasksByMonth = (tasks: Task[], monthName: string) => {
+  return tasks.filter(task => task.month === monthName);
+};
 
 interface MonthProps {
   monthNumber: number;
@@ -20,13 +26,18 @@ function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [seasonIcon, setSeasonIcon] = useState('');
   const { myPlants } = useContext(plantsContext);
+  const { user } = useContext(userContxt);
 
   useEffect(() => {
     if (myPlants) {
-      // TODO get user tasks also
       getTasksByMonth(monthName).then((tasks: Task[]) => {
+        const usersMonthTasks = filterUserTasksByMonth(
+          user.userTasks,
+          monthName,
+        );
+        const withUserTasks = [...tasks, ...usersMonthTasks];
         // filter tasks to those which are relevant to plants saved in myPlants database OR added manually
-        const myTasks = tasks.filter((task: Task) =>
+        const myTasks = withUserTasks.filter((task: Task) =>
           myPlants.some(plant => plant.name === task.crop || task.userCreated),
         );
         setTasks(myTasks);
