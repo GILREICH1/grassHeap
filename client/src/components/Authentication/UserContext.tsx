@@ -5,7 +5,13 @@ import { User } from '../../common/types';
 import { SERVER_URL as base_url } from '../../utils/config';
 import Loader from '../Loader/Loader';
 
-const initialUser: User = { userEmail: '', familyName: '', givenName: '' };
+const initialUser: User = {
+  userEmail: '',
+  familyName: '',
+  givenName: '',
+  userPlants: [],
+  userTasks: [],
+};
 
 interface UserContxt {
   user: User;
@@ -26,7 +32,7 @@ const UserContext = ({ children }: UserContextProps) => {
   const { user, getAccessTokenSilently, isLoading, isAuthenticated } =
     useAuth0();
 
-  const getUser = async (userDetails: User) => {
+  const getUser = async (userEmail: string) => {
     try {
       const token = await getAccessTokenSilently();
 
@@ -36,7 +42,7 @@ const UserContext = ({ children }: UserContextProps) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify(userDetails),
+        body: JSON.stringify({ userEmail }),
       });
 
       const responseData: User = await response.json();
@@ -48,11 +54,7 @@ const UserContext = ({ children }: UserContextProps) => {
 
   useEffect(() => {
     if (user && user.email) {
-      getUser({
-        userEmail: user.email,
-        givenName: user.given_name,
-        familyName: user.family_name,
-      }).then(res => {
+      getUser(user.email).then(res => {
         if (res) setLocalUser(res);
       });
     }

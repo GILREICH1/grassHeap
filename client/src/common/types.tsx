@@ -6,8 +6,8 @@ export interface User {
   userEmail: string;
   givenName?: string;
   familyName?: string;
-  userPlants?: MyPlant[];
-  userTasks?: Task[];
+  userPlants: MyPlant[];
+  userTasks: Task[];
 }
 
 export interface MyPlant {
