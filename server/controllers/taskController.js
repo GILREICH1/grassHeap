@@ -18,7 +18,7 @@ async function saveTask(req, res) {
       { $push: { userTasks: task } },
       { new: true },
     );
-    res.status(201).send(updatedUser);
+    res.status(201).send(updatedUser.userTasks);
   } catch (err) {
     res.status(400).send('failed to save');
   }

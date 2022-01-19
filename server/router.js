@@ -32,8 +32,8 @@ router.delete('/myPlants', checkJwt, deletePlant);
 router.get('/tasks', getTasks);
 router.get('/tasks/month/:month', getTasksByMonth);
 router.get('/tasks/crop/:crop', getTasksByCrop);
-router.post('/tasks', saveTask);
-router.delete('/tasks', deleteTask);
+router.post('/tasks', checkJwt, saveTask);
+router.delete('/tasks', checkJwt, deleteTask);
 
 // getWeather
 router.post('/weather', getWeather);

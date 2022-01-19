@@ -20,7 +20,7 @@ export const saveTask = async ({
   task,
   user,
   token,
-}: saveTaskArgs): Promise<Task | void> => {
+}: saveTaskArgs): Promise<Task[] | void> => {
   const JSONBody = JSON.stringify({ task, user });
   try {
     const response = await fetch(`${base_url}/tasks`, {

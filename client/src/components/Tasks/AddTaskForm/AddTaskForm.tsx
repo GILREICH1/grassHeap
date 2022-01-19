@@ -21,8 +21,9 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
     e.preventDefault();
     const token = await getAccessTokenSilently();
     const newTask: Task = { month, crop, task, userCreated: true };
-    await saveTask({ task: newTask, user, token });
-    addNewTask(newTask);
+    const newTasks = await saveTask({ task: newTask, user, token });
+    if (newTasks) addNewTask(newTasks[newTasks.length - 1]);
+
     setTask('');
     setCrop('');
   };
