@@ -1,4 +1,4 @@
-const Plant = require('../models/Plant');
+const { Plant } = require('../models/Plant');
 const User = require('../models/User');
 
 async function savePlant(req, res) {

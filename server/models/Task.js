@@ -6,9 +6,9 @@ const taskSchema = new mongoose.Schema({
   crop: String,
   task: String,
   plantID: Number,
-  userCreated: Boolean
-})
+  userCreated: Boolean,
+});
 
-const Task = mongoose.model('task', taskSchema)
+const Task = mongoose.model('task', taskSchema);
 
-module.exports = Task;
+module.exports = { Task, taskSchema };
