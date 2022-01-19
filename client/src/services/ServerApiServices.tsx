@@ -23,15 +23,15 @@ export const saveTask = async ({
 }: saveTaskArgs): Promise<Task | void> => {
   const JSONBody = JSON.stringify({ task, user });
   try {
-  const response = await fetch(`${base_url}/tasks`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+    const response = await fetch(`${base_url}/tasks`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
-    },
+      },
       body: JSONBody,
-  });
-  return response.json();
+    });
+    return response.json();
   } catch (e) {
     console.error('failed to save task', e);
   }
@@ -57,17 +57,21 @@ export const saveToMyPlants = async ({
   plant,
   user,
   token,
-}: saveToMyPlantsArgs): Promise<MyPlant> => {
+}: saveToMyPlantsArgs): Promise<MyPlant | void> => {
   const JSONBody = JSON.stringify({ plant, user });
-  const response = await fetch(`${base_url}/myplants`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-    body: JSONBody,
-  });
-  return response.json();
+  try {
+    const response = await fetch(`${base_url}/myplants`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSONBody,
+    });
+    return response.json();
+  } catch (e) {
+    console.error('unable to save task', e);
+  }
 };
 
 interface removePlantsArgs {
