@@ -1,0 +1,248 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hello 1`] = `
+<div
+  className="dashboard"
+>
+  <div
+    className="Weather"
+  >
+    <h1>
+      No weather found for 
+       :(
+      <a
+        onClick={[Function]}
+      >
+         try again
+      </a>
+    </h1>
+  </div>
+  <div
+    className="Tasks"
+  >
+    <button
+      className="scroll-btn scroll-btn__back"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <p>
+        ▶
+      </p>
+    </button>
+    <div
+      className="tasks__allmonths"
+    >
+      <div
+        className="tasks__month tasks__month--11"
+      >
+        <div
+          className="MonthTaskBox"
+        >
+          <h2>
+            December
+             
+            
+          </h2>
+          <div
+            className="TaskList"
+          >
+            <div
+              className="TaskList_empty"
+            >
+              <p>
+                No tasks for your plants this month!
+              </p>
+            </div>
+          </div>
+          <form
+            className="submitForm"
+            onSubmit={[Function]}
+          >
+            <h3>
+              Add New Task
+            </h3>
+            <div
+              className="form__group"
+            >
+              <input
+                className="form__field"
+                onChange={[Function]}
+                required={true}
+                value=""
+              />
+              <label
+                className="form__label"
+              >
+                Task
+              </label>
+            </div>
+            <div
+              className="form__group"
+            >
+              <input
+                className="form__field"
+                onChange={[Function]}
+                required={true}
+                value=""
+              />
+              <label
+                className="form__label"
+              >
+                Crop
+              </label>
+            </div>
+            <input
+              className="submit"
+              type="submit"
+              value="Submit"
+            />
+          </form>
+        </div>
+      </div>
+      <div
+        className="tasks__month tasks__month--0"
+      >
+        <div
+          className="MonthTaskBox"
+        >
+          <h2>
+            January
+             
+            
+          </h2>
+          <div
+            className="TaskList"
+          >
+            <div
+              className="TaskList_empty"
+            >
+              <p>
+                No tasks for your plants this month!
+              </p>
+            </div>
+          </div>
+          <form
+            className="submitForm"
+            onSubmit={[Function]}
+          >
+            <h3>
+              Add New Task
+            </h3>
+            <div
+              className="form__group"
+            >
+              <input
+                className="form__field"
+                onChange={[Function]}
+                required={true}
+                value=""
+              />
+              <label
+                className="form__label"
+              >
+                Task
+              </label>
+            </div>
+            <div
+              className="form__group"
+            >
+              <input
+                className="form__field"
+                onChange={[Function]}
+                required={true}
+                value=""
+              />
+              <label
+                className="form__label"
+              >
+                Crop
+              </label>
+            </div>
+            <input
+              className="submit"
+              type="submit"
+              value="Submit"
+            />
+          </form>
+        </div>
+      </div>
+      <div
+        className="tasks__month tasks__month--1"
+      >
+        <div
+          className="MonthTaskBox"
+        >
+          <h2>
+            February
+             
+            
+          </h2>
+          <div
+            className="TaskList"
+          >
+            <div
+              className="TaskList_empty"
+            >
+              <p>
+                No tasks for your plants this month!
+              </p>
+            </div>
+          </div>
+          <form
+            className="submitForm"
+            onSubmit={[Function]}
+          >
+            <h3>
+              Add New Task
+            </h3>
+            <div
+              className="form__group"
+            >
+              <input
+                className="form__field"
+                onChange={[Function]}
+                required={true}
+                value=""
+              />
+              <label
+                className="form__label"
+              >
+                Task
+              </label>
+            </div>
+            <div
+              className="form__group"
+            >
+              <input
+                className="form__field"
+                onChange={[Function]}
+                required={true}
+                value=""
+              />
+              <label
+                className="form__label"
+              >
+                Crop
+              </label>
+            </div>
+            <input
+              className="submit"
+              type="submit"
+              value="Submit"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+    <button
+      className="scroll-btn "
+      disabled={false}
+      onClick={[Function]}
+    >
+      <p>
+        ▶
+      </p>
+    </button>
+  </div>
+</div>
+`;
