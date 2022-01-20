@@ -40,14 +40,24 @@ describe('MonthTasksBox tests', () => {
   });
 
   describe('props', () => {
-    test('no tasks', async () => {
-      jest.mock('../../../../services/ServerApiServices', () => {
-        const getTasksByMonth = jest.fn(() => Promise.resolve([]));
-
-        const deleteTask = jest.fn();
-        return { getTasksByMonth, deleteTask };
+    test('backend task display', async () => {
+      act(() => {
+        render(
+          <TaskItem
+            deleteThisTask={mockedProps.deleteThisTask}
+            task={mocks.taskList[1]}
+          />,
+          container,
+        );
       });
 
+      const pElement = container.querySelector('p');
+      expect(pElement?.textContent).toBe(mocks.taskList[1]['task']);
+
+      const deleteBtn = container.querySelector('.div1 button');
+      expect(deleteBtn).toBeFalsy();
+    });
+    test('user created task display', async () => {
       act(() => {
         render(
           <TaskItem
@@ -57,9 +67,12 @@ describe('MonthTasksBox tests', () => {
           container,
         );
       });
-      const pElement = container.querySelector('p');
 
+      const pElement = container.querySelector('p');
       expect(pElement?.textContent).toBe(mocks.taskList[0]['task']);
+
+      const deleteBtn = container.querySelector('.div1 button');
+      expect(deleteBtn).toBeTruthy();
     });
   });
 });

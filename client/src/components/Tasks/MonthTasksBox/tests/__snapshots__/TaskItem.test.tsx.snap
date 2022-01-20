@@ -26,6 +26,15 @@ exports[`MonthTasksBox tests layout snapshot 1`] = `
   </div>
   <div
     className="div1"
-  />
+  >
+    <div
+      className="bar"
+    />
+    <button
+      onClick={[Function]}
+    >
+      X
+    </button>
+  </div>
 </div>
 `;
