@@ -17,7 +17,7 @@ const {
 } = require('./controllers/weatherController');
 const { getGIFByQuery } = require('./controllers/gifController');
 
-const { getUser, signUpUser } = require('./controllers/userController');
+const { getUser } = require('./controllers/userController');
 
 const { checkJwt } = require('./check-jwt');
 
