@@ -51,10 +51,8 @@ function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
   }, [monthNumber, monthName]);
 
   async function deleteThisTask(_id: string): Promise<void> {
-    console.log(_id);
     const token = await getAccessTokenSilently();
     const newTasksList = await deleteTask({ _id, user, token });
-    console.log(newTasksList);
     if (newTasksList) setTasks(newTasksList);
   }
 

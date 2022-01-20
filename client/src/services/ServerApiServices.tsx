@@ -1,10 +1,7 @@
 import { SERVER_URL as base_url } from '../utils/config';
 import { Task, MyPlant, User } from '../common/types';
 
-// TODO
-// export const getUserTasks = async (): Promise<Task[]> => {};
-
-export const getTasksByMonth = async (month = ''): Promise<Task[]> => {
+export const getTasksByMonth = async (month: string): Promise<Task[]> => {
   const JSONtasks = await fetch(`${base_url}/tasks/month/${month}`);
   const tasks = await JSONtasks.json();
   return tasks;
@@ -130,7 +127,7 @@ interface GifAnswer {
   };
 }
 
-export const getGIF = async (query = ''): Promise<GifAnswer[]> => {
+export const getGIF = async (query: string): Promise<GifAnswer[]> => {
   const JSONQuery = JSON.stringify({ query });
   const response = await fetch(`${base_url}/gifs`, {
     method: 'POST',
