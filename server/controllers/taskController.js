@@ -24,7 +24,6 @@ async function saveTask(req, res) {
   }
 }
 
-// TODO delete tasks of User
 async function deleteTask(req, res) {
   const { _id, user } = req.body;
   try {

@@ -36,15 +36,31 @@ export const saveTask = async ({
     console.error('failed to save task', e);
   }
 };
+interface deleteTaskArgs {
+  _id: string;
+  user: User;
+  token: string;
+}
+export const deleteTask = async ({
+  _id,
+  token,
+  user,
+}: deleteTaskArgs): Promise<Task[] | void> => {
+  const JSONBody = JSON.stringify({ _id, user });
 
-export const deleteTask = async (_id = ''): Promise<void> => {
-  await fetch(`${base_url}/tasks`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ _id }),
-  });
+  try {
+    const response = await fetch(`${base_url}/tasks`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSONBody,
+    });
+    return response.json();
+  } catch (e) {
+    console.log('failed to delete task', e);
+  }
 };
 
 interface saveToMyPlantsArgs {
