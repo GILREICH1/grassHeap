@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthTasksBox tests layout snapshot 1`] = `
+<div
+  className="TaskList"
+>
+  <div
+    className="TaskItem"
+  >
+    <div
+      className="div2"
+    >
+      <h3>
+        squash
+         
+        <img
+          className="taskItem_crop_icon"
+          onError={[Function]}
+          src="https://www.growstuff.org/crops/squash.svg"
+        />
+      </h3>
+    </div>
+    <div
+      className="div3"
+    >
+      <p>
+        January test task1
+      </p>
+    </div>
+    <div
+      className="div1"
+    >
+      <div
+        className="bar"
+      />
+      <button
+        onClick={[Function]}
+      >
+        X
+      </button>
+    </div>
+  </div>
+  <div
+    className="TaskItem"
+  >
+    <div
+      className="div2"
+    >
+      <h3>
+        squash
+         
+        <img
+          className="taskItem_crop_icon"
+          onError={[Function]}
+          src="https://www.growstuff.org/crops/squash.svg"
+        />
+      </h3>
+    </div>
+    <div
+      className="div3"
+    >
+      <p>
+        October test task2
+      </p>
+    </div>
+    <div
+      className="div1"
+    />
+  </div>
+</div>
+`;
+
+exports[`MonthTasksBox tests layout snapshot with tasks 1`] = `
+<div
+  className="TaskList"
+>
+  <div
+    className="TaskItem"
+  >
+    <div
+      className="div2"
+    >
+      <h3>
+        squash
+         
+        <img
+          className="taskItem_crop_icon"
+          onError={[Function]}
+          src="https://www.growstuff.org/crops/squash.svg"
+        />
+      </h3>
+    </div>
+    <div
+      className="div3"
+    >
+      <p>
+        January test task1
+      </p>
+    </div>
+    <div
+      className="div1"
+    >
+      <div
+        className="bar"
+      />
+      <button
+        onClick={[Function]}
+      >
+        X
+      </button>
+    </div>
+  </div>
+  <div
+    className="TaskItem"
+  >
+    <div
+      className="div2"
+    >
+      <h3>
+        squash
+         
+        <img
+          className="taskItem_crop_icon"
+          onError={[Function]}
+          src="https://www.growstuff.org/crops/squash.svg"
+        />
+      </h3>
+    </div>
+    <div
+      className="div3"
+    >
+      <p>
+        October test task2
+      </p>
+    </div>
+    <div
+      className="div1"
+    />
+  </div>
+</div>
+`;
+
+exports[`MonthTasksBox tests layout snapshot without tasks 1`] = `
+<div
+  className="TaskList"
+>
+  <div
+    className="TaskList_empty"
+  >
+    <p>
+      No tasks for your plants this month!
+    </p>
+  </div>
+</div>
+`;
