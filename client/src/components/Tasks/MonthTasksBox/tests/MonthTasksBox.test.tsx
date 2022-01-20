@@ -4,6 +4,7 @@ import MonthTasksBox from '../MonthTasksBox';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { getSeason } from '../getSeasonFunction';
+import mocks from './mocks';
 
 let container: Element;
 

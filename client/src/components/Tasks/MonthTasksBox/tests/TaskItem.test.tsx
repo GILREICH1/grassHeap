@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import mocks from '../../tests/mocks';
+import mocks from './mocks';
 import TaskItem from '../../TaskItem/TaskItem';
 
 describe('MonthTasksBox tests', () => {
