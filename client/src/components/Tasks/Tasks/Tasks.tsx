@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import MonthTaskBox from '../MonthTasksBox/MonthTasksBox';
+import MonthTasksBox from '../MonthTasksBox/MonthTasksBox';
 import { months } from '../../../utils/months';
 import './Tasks.scss';
 import ScrollButton from '../../ScrollButton/ScrollButton';
@@ -24,16 +24,22 @@ function Tasks(): JSX.Element {
         onClick={() => setCurrentMonth(lastMonth)}></ScrollButton>
       <div className="tasks__allmonths">
         <div className={`tasks__month tasks__month--${lastMonth}`}>
-          <MonthTaskBox monthNumber={lastMonth} monthName={months[lastMonth]} />
+          <MonthTasksBox
+            monthNumber={lastMonth}
+            monthName={months[lastMonth]}
+          />
         </div>
         <div className={`tasks__month tasks__month--${currentMonth}`}>
-          <MonthTaskBox
+          <MonthTasksBox
             monthNumber={currentMonth}
             monthName={months[currentMonth]}
           />
         </div>
         <div className={`tasks__month tasks__month--${nextMonth}`}>
-          <MonthTaskBox monthNumber={nextMonth} monthName={months[nextMonth]} />
+          <MonthTasksBox
+            monthNumber={nextMonth}
+            monthName={months[nextMonth]}
+          />
         </div>
       </div>
       <ScrollButton

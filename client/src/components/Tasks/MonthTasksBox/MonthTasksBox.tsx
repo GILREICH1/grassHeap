@@ -22,7 +22,7 @@ interface MonthProps {
   monthName: string;
 }
 
-function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
+function MonthTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [seasonIcon, setSeasonIcon] = useState('');
   const { myPlants } = useContext(plantsContext);
@@ -70,4 +70,4 @@ function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
   );
 }
 
-export default MonthsTasksBox;
+export default MonthTasksBox;
