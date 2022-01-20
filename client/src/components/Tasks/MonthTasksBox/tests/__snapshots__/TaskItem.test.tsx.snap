@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthTasksBox tests layout snapshot 1`] = `
+<div
+  className="TaskItem"
+>
+  <div
+    className="div2"
+  >
+    <h3>
+      squash
+       
+      <img
+        className="taskItem_crop_icon"
+        onError={[Function]}
+        src="https://www.growstuff.org/crops/squash.svg"
+      />
+    </h3>
+  </div>
+  <div
+    className="div3"
+  >
+    <p>
+      test task
+    </p>
+  </div>
+  <div
+    className="div1"
+  />
+</div>
+`;
