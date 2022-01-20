@@ -21,7 +21,7 @@ exports[`MonthTasksBox tests layout snapshot 1`] = `
     className="div3"
   >
     <p>
-      test task
+      January test task1
     </p>
   </div>
   <div

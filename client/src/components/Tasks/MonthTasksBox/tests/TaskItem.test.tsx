@@ -51,12 +51,13 @@ describe('MonthTasksBox tests', () => {
         );
       });
 
-      const pElement = container.querySelector('p');
-      expect(pElement?.textContent).toBe(mocks.taskList[1]['task']);
+      expect(container.textContent).toContain(mocks.taskList[1]['task']);
+      expect(container.textContent).toContain(mocks.taskList[1]['crop']);
 
       const deleteBtn = container.querySelector('.div1 button');
       expect(deleteBtn).toBeFalsy();
     });
+
     test('user created task display', async () => {
       act(() => {
         render(
