@@ -76,4 +76,26 @@ describe('MonthTasksBox tests', () => {
       expect(deleteBtn).toBeTruthy();
     });
   });
+
+  describe('functionality', () => {
+    test('delete task', () => {
+      act(() => {
+        render(
+          <TaskItem
+            deleteThisTask={mockedProps.deleteThisTask}
+            task={mocks.taskList[0]}
+          />,
+          container,
+        );
+      });
+
+      const deleteBtn: HTMLButtonElement | null =
+        container.querySelector('.div1 button');
+      expect(deleteBtn).toBeTruthy();
+      deleteBtn?.click();
+      expect(mockedProps.deleteThisTask).toHaveBeenCalledWith(
+        mocks.taskList[0]['_id'],
+      );
+    });
+  });
 });
