@@ -47,6 +47,7 @@ exports[`MonthTasksBox tests layout snapshot 1`] = `
     >
       <input
         className="form__field"
+        list="plant-list"
         onChange={[Function]}
         required={true}
         value=""
@@ -56,6 +57,9 @@ exports[`MonthTasksBox tests layout snapshot 1`] = `
       >
         Crop
       </label>
+      <datalist
+        id="plant-list"
+      />
     </div>
     <input
       className="submit"
