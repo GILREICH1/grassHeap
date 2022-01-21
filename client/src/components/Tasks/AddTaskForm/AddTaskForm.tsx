@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { saveTask } from '../../../services/ServerApiServices';
 import { Task } from '../../../common/types';
 import styles from './AddTaskForm.module.scss';
+import { plantsContext } from '../../App/App';
 import { userContxt } from '../../Authentication/UserContext';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -14,6 +15,7 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
   const [crop, setCrop] = useState<string>('');
   const [task, setTask] = useState<string>('');
   const { getAccessTokenSilently } = useAuth0();
+  const { plants } = useContext(plantsContext);
 
   const { user } = useContext(userContxt);
 
@@ -21,11 +23,8 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
     e.preventDefault();
     const token = await getAccessTokenSilently();
     const newTask: Task = { month, crop, task, userCreated: true };
-    const tasksUpdated = await saveTask({ task: newTask, user, token });
-    if (tasksUpdated) {
-      const newTask = tasksUpdated[tasksUpdated.length - 1];
-      addNewTask(newTask);
-    }
+    await saveTask({ task: newTask, user, token });
+    addNewTask(newTask);
     setTask('');
     setCrop('');
   };
@@ -45,12 +44,18 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
         </div>
         <div className={`${styles['form__group']}`}>
           <input
+            list="plant-list"
             className={styles['form__field']}
             required
             value={crop}
             onChange={e => setCrop(e.target.value.toLowerCase())}
           />
           <label className={styles['form__label']}>Crop</label>
+          <datalist id="plant-list">
+            {plants.map(plant => (
+              <option key={plant.id} value={plant.name} />
+            ))}
+          </datalist>
         </div>
         <input className={styles.submit} type="submit" value="Submit" />
       </form>
