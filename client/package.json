@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@types/react-test-renderer": "^17.0.1",
+    "@types/uuid": "^8.3.3",
     "sass": "^1.43.4"
   },
   "engines": {
