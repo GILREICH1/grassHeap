@@ -58,7 +58,7 @@ const UserContext = ({ children }: UserContextProps) => {
         if (res) setLocalUser(res);
       });
     }
-  }, [isLoading]);
+  }, [isLoading, user]);
 
   return isLoading ? (
     <Loader />
