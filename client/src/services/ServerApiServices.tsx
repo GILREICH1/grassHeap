@@ -1,6 +1,12 @@
 import { SERVER_URL as base_url } from '../utils/config';
 import { Task, MyPlant, User } from '../common/types';
 
+export const getTasks = async (): Promise<Task[]> => {
+  const JSONtasks = await fetch(`${base_url}/tasks`);
+  const tasks = await JSONtasks.json();
+  return tasks;
+};
+
 export const getTasksByMonth = async (month: string): Promise<Task[]> => {
   const JSONtasks = await fetch(`${base_url}/tasks/month/${month}`);
   const tasks = await JSONtasks.json();
