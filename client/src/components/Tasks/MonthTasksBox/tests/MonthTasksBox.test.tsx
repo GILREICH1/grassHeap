@@ -8,8 +8,6 @@ import mocks from './mocks';
 
 describe('MonthTasksBox tests', () => {
   let container: Element;
-  const monthName = 'January';
-  const monthNumber = 1;
 
   beforeEach(() => {
     // setup a DOM element as a render target
@@ -28,7 +26,13 @@ describe('MonthTasksBox tests', () => {
   describe('layout', () => {
     test('snapshot', () => {
       const tree = renderer
-        .create(<MonthTasksBox monthName="January" monthNumber={1} />)
+        .create(
+          <MonthTasksBox
+            monthNumber={mocks.monthNumber}
+            tasks={mocks.taskList}
+            setTasks={(): void => undefined}
+          />,
+        )
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -45,7 +49,11 @@ describe('MonthTasksBox tests', () => {
 
       act(() => {
         render(
-          <MonthTasksBox monthName={monthName} monthNumber={monthNumber} />,
+          <MonthTasksBox
+            tasks={[]}
+            setTasks={() => undefined}
+            monthNumber={mocks.monthNumber}
+          />,
           container,
         );
       });
@@ -80,14 +88,18 @@ describe('MonthTasksBox tests', () => {
   test('renders month season description', () => {
     act(() => {
       render(
-        <MonthTasksBox monthName={monthName} monthNumber={monthNumber} />,
+        <MonthTasksBox
+          tasks={mocks.taskList}
+          setTasks={() => undefined}
+          monthNumber={mocks.monthNumber}
+        />,
         container,
       );
     });
 
-    const seasonEmoji = getSeason(monthNumber);
+    const seasonEmoji = getSeason(mocks.monthNumber);
     const h2Content = container.querySelector('h2');
     expect(h2Content).toBeTruthy();
-    expect(h2Content?.textContent).toBe(`${monthName} ${seasonEmoji}`);
+    expect(h2Content?.textContent).toBe(`${mocks.monthName} ${seasonEmoji}`);
   });
 });
