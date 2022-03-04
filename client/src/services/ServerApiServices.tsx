@@ -48,7 +48,7 @@ export const deleteTask = async ({
   _id,
   token,
   user,
-}: deleteTaskArgs): Promise<Task[] | void> => {
+}: deleteTaskArgs): Promise<Task[]> => {
   const JSONBody = JSON.stringify({ _id, user });
 
   try {
@@ -63,6 +63,7 @@ export const deleteTask = async ({
     return response.json();
   } catch (e) {
     console.log('failed to delete task', e);
+    return [];
   }
 };
 

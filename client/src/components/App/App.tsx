@@ -37,13 +37,15 @@ function App(): JSX.Element {
   const [myPlants, setMyPlants] = useState<MyPlant[]>([]);
   const [loadStatus, setLoadStatus] = useState<boolean>(false);
   const { user } = useContext(userContxt);
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
 
   async function savePlant(plant: Plant): Promise<void> {
-    const token = await getAccessTokenSilently();
     const newPlant: MyPlant = { name: plant.slug, plantID: parseInt(plant.id) };
     try {
-      saveToMyPlants({ plant: newPlant, token, user });
+      if (isAuthenticated) {
+        const token = await getAccessTokenSilently();
+        saveToMyPlants({ plant: newPlant, token, user });
+      }
       setMyPlants((oldList: MyPlant[]) => [...oldList, newPlant]);
     } catch (err) {
       console.log(err);
@@ -51,9 +53,10 @@ function App(): JSX.Element {
   }
 
   async function removePlant(plantID: number): Promise<void> {
-    const token = await getAccessTokenSilently();
-    removeFromMyPlants({ token, plantID, user });
-    // const myPlantsCopy = myPlants.filter((plant) => plant.plantID !== plantID);
+    if (isAuthenticated) {
+      const token = await getAccessTokenSilently();
+      removeFromMyPlants({ token, plantID, user });
+    }
     setMyPlants((oldPlants: MyPlant[]) =>
       oldPlants.filter((plant: MyPlant) => plant.plantID !== plantID),
     );

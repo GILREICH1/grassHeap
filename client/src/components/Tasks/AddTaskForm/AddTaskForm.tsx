@@ -5,6 +5,7 @@ import styles from './AddTaskForm.module.scss';
 import { plantsContext } from '../../App/App';
 import { userContxt } from '../../Authentication/UserContext';
 import { useAuth0 } from '@auth0/auth0-react';
+import { v4 as uuid } from 'uuid';
 
 interface AddTaskFormProps {
   month: string;
@@ -14,16 +15,18 @@ interface AddTaskFormProps {
 function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
   const [crop, setCrop] = useState<string>('');
   const [task, setTask] = useState<string>('');
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const { plants } = useContext(plantsContext);
 
   const { user } = useContext(userContxt);
 
   const submitHandler = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    const token = await getAccessTokenSilently();
-    const newTask: Task = { month, crop, task, userCreated: true };
-    await saveTask({ task: newTask, user, token });
+    const newTask: Task = { month, crop, task, userCreated: true, _id: uuid() };
+    if (isAuthenticated) {
+      const token = await getAccessTokenSilently();
+      await saveTask({ task: newTask, user, token });
+    }
     addNewTask(newTask);
     setTask('');
     setCrop('');

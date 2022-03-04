@@ -27,7 +27,7 @@ function MonthTasksBox({
 }: MonthProps): JSX.Element {
   const [monthTasks, setMonthTasks] = useState<Task[]>([]);
   const [seasonIcon, setSeasonIcon] = useState('');
-  const { getAccessTokenSilently } = useAuth0();
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const { user } = useContext(userContxt);
   const monthName = months[monthNumber];
 
@@ -42,9 +42,12 @@ function MonthTasksBox({
   }, [monthNumber, tasks]);
 
   async function deleteThisTask(_id: string): Promise<void> {
-    const token = await getAccessTokenSilently();
-    const newTasksList = await deleteTask({ _id, user, token });
-    if (newTasksList) setTasks(newTasksList);
+    if (isAuthenticated) {
+      const token = await getAccessTokenSilently();
+      await deleteTask({ _id, user, token });
+    }
+    const newTasksList: Task[] = tasks.filter(task => task._id !== _id);
+    setTasks(newTasksList);
   }
 
   return (
