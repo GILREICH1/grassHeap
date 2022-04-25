@@ -22,7 +22,13 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
 
   const submitHandler = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    const newTask: Task = { month, crop, task, userCreated: true, _id: uuid() };
+    const newTask: Task = {
+      month,
+      crop,
+      task,
+      userCreated: true,
+      _id: uuid().substring(0, 6),
+    };
     if (isAuthenticated) {
       const token = await getAccessTokenSilently();
       await saveTask({ task: newTask, user, token });
