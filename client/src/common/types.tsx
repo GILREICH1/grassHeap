@@ -109,3 +109,14 @@ export interface APIWeather {
   cod?: number;
   icon_link?: string;
 }
+
+export interface WeatherForecast {
+  dt: number;
+  main: Main;
+  weather: Weather[];
+}
+
+export interface WeatherForecastResponse {
+  cod: string;
+  list: WeatherForecast[];
+}
