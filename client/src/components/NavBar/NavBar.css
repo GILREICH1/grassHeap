@@ -4,7 +4,6 @@
   width: 100%; /* Full width */
   transition: top 0.3s; /* Transition effect */
   background-color: var(--primaryDark);
-  padding: 5px 0;
   z-index: 1;
 }
 
@@ -34,6 +33,15 @@
 }
 #toggle1 {
   display: none;
+}
+
+.login-warning {
+  text-align: center;
+  height: 1rem;
+  text-decoration: double;
+  color: greenyellow;
+  margin-top: 2em;
+  padding-bottom: 0.5em;
 }
 
 /* for desktop/laptop */
@@ -118,5 +126,8 @@
     width: 100%;
     margin: 0;
     padding: 10px 0;
+  }
+  .login-warning {
+    margin-top: 1em;
   }
 }
