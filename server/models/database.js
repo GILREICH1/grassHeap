@@ -19,6 +19,7 @@ const mongoose = require('mongoose');
 
 mongoose
   .connect(connectionURI, {
+    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

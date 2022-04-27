@@ -1,9 +1,5 @@
-const router = require("express").Router();
-const {
-  getMyPlants,
-  savePlant,
-  deletePlant,
-} = require("./controllers/plantController");
+const router = require('express').Router();
+const { savePlant, deletePlant } = require('./controllers/plantController');
 
 const {
   getTasks,
@@ -11,38 +7,42 @@ const {
   getTasksByMonth,
   getTasksByCrop,
   deleteTask,
-} = require("./controllers/taskController");
+} = require('./controllers/taskController');
 
-const {
-  getAllPlants,
-} = require("./controllers/growStuffController");
+const { getAllPlants } = require('./controllers/growStuffController');
 
 const {
   getWeather,
   getFiveDayForecast,
-} = require("./controllers/weatherController");
-const { getGIFByQuery } = require("./controllers/gifController");
+} = require('./controllers/weatherController');
+const { getGIFByQuery } = require('./controllers/gifController');
+
+const { getUser } = require('./controllers/userController');
+
+const { checkJwt } = require('./check-jwt');
 
 // interact with GrowStuff API
-router.get("/plants", getAllPlants);
+router.get('/plants', getAllPlants);
 
 // interact with MyPlants database
-router.get("/myPlants", getMyPlants);
-router.post("/myPlants", savePlant);
-router.delete("/myPlants", deletePlant);
+router.post('/myPlants', checkJwt, savePlant);
+router.delete('/myPlants', checkJwt, deletePlant);
 
 // interact with tasks database
-router.get("/tasks", getTasks);
-router.get("/tasks/month/:month", getTasksByMonth);
-router.get("/tasks/crop/:crop", getTasksByCrop);
-router.post("/tasks", saveTask);
-router.delete("/tasks", deleteTask);
+router.get('/tasks', getTasks);
+router.get('/tasks/month/:month', getTasksByMonth);
+router.get('/tasks/crop/:crop', getTasksByCrop);
+router.post('/tasks', checkJwt, saveTask);
+router.delete('/tasks', checkJwt, deleteTask);
 
 // getWeather
-router.post("/weather", getWeather);
-router.post("/forecast", getFiveDayForecast);
+router.post('/weather', getWeather);
+router.post('/forecast', getFiveDayForecast);
 
 // GET GIPH
-router.post("/gifs", getGIFByQuery);
+router.post('/gifs', getGIFByQuery);
+
+// Users
+router.post('/getUser', checkJwt, getUser);
 
 module.exports = router;

@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const plantSchema = new mongoose.Schema({
   plantID: Number,
-  name: String
-})
+  name: String,
+});
 
-const Plant = mongoose.model('myplant', plantSchema)
+const Plant = mongoose.model('myplant', plantSchema);
 
-module.exports = Plant;
+module.exports = { Plant, plantSchema };

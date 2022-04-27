@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import Navbar from '../NavBar/NavBar';
@@ -10,12 +10,13 @@ import { MyPlant, Plant } from '../../common/types';
 require('dotenv').config();
 
 import {
-  getMyPlants,
   removeFromMyPlants,
   saveToMyPlants,
 } from '../../services/ServerApiServices';
 import { getAllPlants } from '../../services/GrowStuffApiServices';
 import './App.css';
+import { userContxt } from '../Authentication/UserContext';
+import { useAuth0 } from '@auth0/auth0-react';
 
 interface AppCtxt {
   myPlants: MyPlant[];
@@ -35,20 +36,27 @@ function App(): JSX.Element {
   const [plants, setPlants] = useState<Plant[]>([]);
   const [myPlants, setMyPlants] = useState<MyPlant[]>([]);
   const [loadStatus, setLoadStatus] = useState<boolean>(false);
+  const { user } = useContext(userContxt);
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
 
-  function savePlant(plant: Plant): void {
+  async function savePlant(plant: Plant): Promise<void> {
     const newPlant: MyPlant = { name: plant.slug, plantID: parseInt(plant.id) };
     try {
-      saveToMyPlants(newPlant);
+      if (isAuthenticated) {
+        const token = await getAccessTokenSilently();
+        saveToMyPlants({ plant: newPlant, token, user });
+      }
       setMyPlants((oldList: MyPlant[]) => [...oldList, newPlant]);
     } catch (err) {
       console.log(err);
     }
   }
 
-  function removePlant(plantID: number): void {
-    removeFromMyPlants(plantID);
-    // const myPlantsCopy = myPlants.filter((plant) => plant.plantID !== plantID);
+  async function removePlant(plantID: number): Promise<void> {
+    if (isAuthenticated) {
+      const token = await getAccessTokenSilently();
+      removeFromMyPlants({ token, plantID, user });
+    }
     setMyPlants((oldPlants: MyPlant[]) =>
       oldPlants.filter((plant: MyPlant) => plant.plantID !== plantID),
     );
@@ -62,8 +70,8 @@ function App(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    getMyPlants().then((myplants: MyPlant[]) => setMyPlants(myplants));
-  }, []);
+    if (user.userPlants) setMyPlants(user.userPlants);
+  }, [user]);
 
   useEffect(() => {
     if (plants.length) {

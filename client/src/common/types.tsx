@@ -2,6 +2,14 @@ export type TruthySunRequirements = 'Full Sun' | 'Partial Sun' | 'Full Shade';
 
 export type SunRequirements = TruthySunRequirements | '' | null;
 
+export interface User {
+  userEmail: string;
+  givenName?: string;
+  familyName?: string;
+  userPlants: MyPlant[];
+  userTasks: Task[];
+}
+
 export interface MyPlant {
   _id?: string;
   name: string;
@@ -10,7 +18,7 @@ export interface MyPlant {
 }
 
 export interface Task {
-  _id?: string;
+  _id: string;
   month: string;
   week?: string;
   crop: string;

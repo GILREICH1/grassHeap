@@ -31,7 +31,7 @@ function TaskItem({ task, deleteThisTask }: TaskItemProps): JSX.Element {
       <div className={styles.div1}>
         {task.userCreated && <div className={styles.bar}></div>}
         {task.userCreated && (
-          <button onClick={() => deleteThisTask(task._id!)}>X</button>
+          <button onClick={() => deleteThisTask(task._id)}>X</button>
         )}
       </div>
     </div>

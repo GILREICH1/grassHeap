@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthTasksBox tests layout snapshot 1`] = `
+<div
+  className="MonthTaskBox"
+>
+  <h2>
+    January
+     
+    
+  </h2>
+  <div
+    className="TaskList"
+  >
+    <div
+      className="TaskList_empty"
+    >
+      <p>
+        No tasks for your plants this month!
+      </p>
+    </div>
+  </div>
+  <form
+    className="submitForm"
+    onSubmit={[Function]}
+  >
+    <h3>
+      Add New Task
+    </h3>
+    <div
+      className="form__group"
+    >
+      <input
+        className="form__field"
+        onChange={[Function]}
+        required={true}
+        value=""
+      />
+      <label
+        className="form__label"
+      >
+        Task
+      </label>
+    </div>
+    <div
+      className="form__group"
+    >
+      <input
+        className="form__field"
+        list="plant-list"
+        onChange={[Function]}
+        required={true}
+        value=""
+      />
+      <label
+        className="form__label"
+      >
+        Crop
+      </label>
+      <datalist
+        id="plant-list"
+      />
+    </div>
+    <input
+      className="submit"
+      type="submit"
+      value="Submit"
+    />
+  </form>
+</div>
+`;

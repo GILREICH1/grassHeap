@@ -3,48 +3,37 @@ import { saveTask } from '../../../services/ServerApiServices';
 import { Task } from '../../../common/types';
 import styles from './AddTaskForm.module.scss';
 import { plantsContext } from '../../App/App';
+import { userContxt } from '../../Authentication/UserContext';
+import { useAuth0 } from '@auth0/auth0-react';
+import { v4 as uuid } from 'uuid';
 
 interface AddTaskFormProps {
   month: string;
   addNewTask: (task: Task) => void;
-  tasks: Task[];
 }
 
-function AddTaskForm({
-  month,
-  addNewTask,
-  tasks,
-}: AddTaskFormProps): JSX.Element {
+function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
   const [crop, setCrop] = useState<string>('');
   const [task, setTask] = useState<string>('');
-
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const { plants } = useContext(plantsContext);
 
-  // TODO provide useful response
-  function taskIsNew(newTask: Task, tasks: Task[]) {
-    const exists = Boolean(
-      tasks.find((task: Task) => {
-        return (
-          task.month === newTask.month &&
-          task.crop === newTask.crop &&
-          task.task === newTask.task
-        );
-      }),
-    );
-    return !exists;
-  }
+  const { user } = useContext(userContxt);
 
-  async function saveAndAddTask(task: Task) {
-    const fullTask = await saveTask(task);
-    addNewTask(fullTask);
-  }
-
-  const submitHandler = (e: React.FormEvent) => {
+  const submitHandler = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    const newTask: Task = { month, crop, task, userCreated: true };
-    if (taskIsNew(newTask, tasks)) {
-      saveAndAddTask(newTask);
+    const newTask: Task = {
+      month,
+      crop,
+      task,
+      userCreated: true,
+      _id: uuid().substring(0, 6),
+    };
+    if (isAuthenticated) {
+      const token = await getAccessTokenSilently();
+      await saveTask({ task: newTask, user, token });
     }
+    addNewTask(newTask);
     setTask('');
     setCrop('');
   };

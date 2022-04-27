@@ -1,44 +1,53 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TaskList from '../TaskList/TaskList';
-import {
-  deleteTask,
-  getMyPlants,
-  getTasksByMonth,
-} from '../../../services/ServerApiServices';
+import { deleteTask } from '../../../services/ServerApiServices';
 import AddTaskForm from '../AddTaskForm/AddTaskForm';
 import { getSeason } from './getSeasonFunction';
-import { MyPlant, Task } from '../../../common/types';
+import { Task } from '../../../common/types';
 import styles from './MonthTasksBox.module.scss';
+import { userContxt } from '../../Authentication/UserContext';
+import { useAuth0 } from '@auth0/auth0-react';
+import { months } from '../../../utils/months';
+
+const filterUserTasksByMonth = (tasks: Task[], monthName: string) => {
+  return tasks.filter(task => task.month === monthName);
+};
 
 interface MonthProps {
   monthNumber: number;
-  monthName: string;
+  tasks: Task[];
+  setTasks: (tasks: Task[]) => void;
 }
 
-function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
-  const [tasks, setTasks] = useState<Task[]>([]);
+function MonthTasksBox({
+  tasks,
+  monthNumber,
+  setTasks,
+}: MonthProps): JSX.Element {
+  const [monthTasks, setMonthTasks] = useState<Task[]>([]);
   const [seasonIcon, setSeasonIcon] = useState('');
-
-  useEffect(() => {
-    getMyPlants().then((myPlants: MyPlant[]) => {
-      getTasksByMonth(monthName).then((tasks: Task[]) => {
-        // filter tasks to those which are relevant to plants saved in myPlants database OR added manually
-        const myTasks = tasks.filter((task: Task) =>
-          myPlants.some(plant => plant.name === task.crop || task.userCreated),
-        );
-        setTasks(myTasks);
-      });
-    });
-  }, [monthNumber, monthName]);
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { user } = useContext(userContxt);
+  const monthName = months[monthNumber];
 
   useEffect(() => {
     setSeasonIcon(getSeason(monthNumber + 1));
-  }, [monthNumber, monthName]);
+  }, [monthNumber]);
 
-  function deleteThisTask(_id: string): void {
-    setTasks([...tasks].filter(task => task._id !== _id));
-    deleteTask(_id);
+  useEffect(() => {
+    const monthName = months[monthNumber];
+    const filteredTasks = filterUserTasksByMonth(tasks, monthName);
+    setMonthTasks(filteredTasks);
+  }, [monthNumber, tasks]);
+
+  async function deleteThisTask(_id: string): Promise<void> {
+    if (isAuthenticated) {
+      const token = await getAccessTokenSilently();
+      await deleteTask({ _id, user, token });
+    }
+    const newTasksList: Task[] = tasks.filter(task => task._id !== _id);
+    setTasks(newTasksList);
   }
 
   return (
@@ -46,14 +55,13 @@ function MonthsTasksBox({ monthNumber, monthName }: MonthProps): JSX.Element {
       <h2>
         {monthName} {seasonIcon}
       </h2>
-      <TaskList deleteThisTask={deleteThisTask} tasks={tasks} />
+      <TaskList deleteThisTask={deleteThisTask} tasks={monthTasks} />
       <AddTaskForm
         addNewTask={(task: Task) => setTasks([...tasks, task])}
         month={monthName}
-        tasks={tasks}
       />
     </div>
   );
 }
 
-export default MonthsTasksBox;
+export default MonthTasksBox;

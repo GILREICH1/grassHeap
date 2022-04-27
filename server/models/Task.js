@@ -2,13 +2,12 @@ const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema({
   month: String,
-  week: Number,
   crop: String,
   task: String,
-  plantID: Number,
-  userCreated: Boolean
-})
+  _id: String,
+  userCreated: Boolean,
+});
 
-const Task = mongoose.model('task', taskSchema)
+const Task = mongoose.model('task', taskSchema);
 
-module.exports = Task;
+module.exports = { Task, taskSchema };
