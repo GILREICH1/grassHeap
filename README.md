@@ -37,9 +37,9 @@ You can view the app at https://www.grassheap.live/
 - [x] Styling Location Prompt.
 - [x] General App styling.
 - [x] Display showing MyPlants.
-- [ ] Search functionality.
+- [x] User Auth.
+- [x] Search functionality.
 - [ ] More detailed weather report.
-- [ ] User Auth.
 
 ## Running the App Locally
 
