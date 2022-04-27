@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import MonthTasksBox from '../MonthTasksBox/MonthTasksBox';
-import { months } from '../../../utils/months';
 import './Tasks.scss';
 import ScrollButton from '../../ScrollButton/ScrollButton';
 import { Task } from '../../../common/types';
