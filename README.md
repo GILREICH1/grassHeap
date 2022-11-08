@@ -10,7 +10,7 @@
 A lot of task/to-do apps work on a timeframe of days or hours. On the other hand, gardening works in the timeframe of months. grassHeap is a **responsive Single-Page App**
 that tracks and suggests tasks for the month and for the specific plants in your garden. Powered by the <a href="https://github.com/Growstuff/growstuff/wiki/API-Version-0"> GrowStuff API</a>.
 
-You can view the app at https://www.grassheap.live/
+You can view the app at https://grassheap.netlify.app/
 
 <span>
 
