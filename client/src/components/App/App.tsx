@@ -17,6 +17,7 @@ import { getAllPlants } from '../../services/GrowStuffApiServices';
 import './App.css';
 import { userContxt } from '../Authentication/UserContext';
 import { useAuth0 } from '@auth0/auth0-react';
+import Footer from '../footer/Footer';
 
 interface AppCtxt {
   myPlants: MyPlant[];
@@ -91,6 +92,7 @@ function App(): JSX.Element {
               <Route exact path="/plants" component={PlantList} />
               <Route exact path="/" component={Dashboard} />
             </Switch>
+            <Footer />
           </div>
         </Router>
       </plantsContext.Provider>
