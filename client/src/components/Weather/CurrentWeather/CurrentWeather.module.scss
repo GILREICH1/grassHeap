@@ -1,0 +1,21 @@
+@import '../../../common/layout.scss';
+
+.container {
+  @include column;
+  padding: 0.5rem 1rem;
+}
+
+.firstRow {
+  @include row;
+  gap: 1rem;
+}
+
+.gif {
+  width: auto;
+  height: 100px;
+}
+
+.numericData {
+  @include column;
+  justify-content: space-evenly;
+}

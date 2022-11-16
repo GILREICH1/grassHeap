@@ -1,12 +1,57 @@
-.Weather {
-  margin: 1em;
+@import '../../common/layout.scss';
+
+.container {
+  @include column;
+  color: white;
+  border: solid 2px var(--primaryHighlight);
+  border-radius: 15px;
 }
 
-.Weather__icon {
-  cursor: pointer;
-  animation: all 400ms;
+.header {
+  @include row;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--primaryDark);
+  align-self: stretch;
+  margin: 0;
+  height: 3.5rem;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+
+  a {
+    color: var(--primaryHighlight);
+    transition: all 200ms;
+  }
+
+  a:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
 }
 
-.Weather__icon:hover {
-  opacity: 0.7;
+.weather {
+  @include row;
+  gap: 2rem;
+  padding-right: 1rem;
+}
+
+.divider {
+  width: 2px;
+  background: white;
+  height: 150px;
+}
+
+.subtitle {
+  font-size: x-small;
+  padding: 0.2rem 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .weather {
+    @include column;
+  }
+
+  .divider {
+    display: none;
+  }
 }
