@@ -40,3 +40,18 @@
   background: white;
   height: 150px;
 }
+
+.subtitle {
+  font-size: x-small;
+  padding: 0.2rem 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .weather {
+    @include column;
+  }
+
+  .divider {
+    display: none;
+  }
+}

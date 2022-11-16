@@ -2,8 +2,6 @@ import { APIWeather } from '../../../common/types';
 import styles from './CurrentWeather.module.scss';
 import { useWeatherGif } from '../useWeatherGif';
 
-const BBC_URL = 'https://www.bbc.co.uk/weather';
-
 interface Props {
   weather: APIWeather;
 }
@@ -16,16 +14,12 @@ function CurrentWeather({ weather }: Props): JSX.Element {
 
   return (
     <div className={styles['container']}>
-      <div className={styles['firstRow']}>
-        <a href={`${BBC_URL}/${weather.id}`} rel="noreferrer" target="_blank">
-          <img className={styles['gif']} src={gifPath}></img>
-        </a>
-        <div className={styles['numericData']}>
-          <h1>{weather.main?.temp} °C</h1>
-          <h3>{weather.main?.humidity}%</h3>
-        </div>
+      <h2>{'Today'}</h2>
+      <img className={styles['gif']} src={gifPath}></img>
+      <div className={styles['numericData']}>
+        <h3>{weather.main && Math.round(weather.main?.temp)} °C</h3>
+        <h3>{weather.weather[0].description}</h3>
       </div>
-      <h2>{weather.weather[0].description}</h2>
     </div>
   );
 }
