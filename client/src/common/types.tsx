@@ -28,6 +28,7 @@ export interface Task {
 
 interface OpenFarmData {
   attributes: {
+    svg_icon: string;
     main_image_path: string;
     common_names: string[];
     description: string;
@@ -54,6 +55,9 @@ export interface Plant {
   scientific_name?: string;
   created_at: number;
   id: string;
+  perennial: boolean;
+  median_days_to_last_harvest: number;
+  median_days_to_first_harvest: number;
   details: OpenFarmData;
 }
 

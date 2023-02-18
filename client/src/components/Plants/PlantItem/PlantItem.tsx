@@ -4,7 +4,6 @@ import AddButton from './PlantItemAddBtn/AddBtn';
 import RemoveBtn from './PlantItemRemoveBtn/RemoveBtn';
 import { plantsContext } from '../../App/App';
 import { Plant } from '../../../common/types';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import './PlantItem.css';
 
 interface PlantItemProps {
@@ -34,9 +33,14 @@ function PlantItem({
       <div className="PlantItem__text">
         <Link className="PlantItem__a" to={`/plants/${plant.slug}`}>
           {plant.name}
-          <LazyLoadImage
-            src={`https://www.growstuff.org/crops/${plant.slug}.svg`}
-          />
+          {plant.details.attributes.svg_icon ? (
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            <img src={require(`./svgIcons/${plant.slug}.svg`).default} />
+          ) : (
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            <img src={require('./svgIcons/backup.svg').default} />
+          )}
+          {/* <SvgIcon /> */}
         </Link>
         <p className="PlantItem__p">
           {plant.scientific_name || 'not available'}
