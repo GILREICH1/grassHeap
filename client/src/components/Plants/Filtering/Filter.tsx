@@ -12,9 +12,7 @@ interface FilterProps {
 
 const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [activeFilters, setActiveFilters] = useState<TruthySunRequirements[]>(
-    [],
-  );
+  const [sunFilters, setSunFilters] = useState<TruthySunRequirements[]>([]);
   const sunRequirements: TruthySunRequirements[] = [
     'Full Sun',
     'Partial Sun',
@@ -34,9 +32,9 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
     value: TruthySunRequirements;
   }) {
     if (checked) {
-      setActiveFilters(prev => prev.filter(e => e !== value && e));
+      setSunFilters(prev => prev.filter(e => e !== value && e));
     } else {
-      setActiveFilters(prev => {
+      setSunFilters(prev => {
         const newF = [...prev, value];
         return newF.filter(e => e);
       });
@@ -45,13 +43,13 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
 
   useEffect(() => {
     const newFilteredPlants: Plant[] = returnPlantsSearch(
-      activeFilters,
+      sunFilters,
       searchTerm,
       plants,
     );
 
     setFilteredPlants(newFilteredPlants);
-  }, [searchTerm, activeFilters]);
+  }, [searchTerm, sunFilters]);
 
   return (
     <div className={styles.filters}>
@@ -77,7 +75,7 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
           />
         ))}
       </form>
-      {!searchTerm && activeFilters.length === 0 && (
+      {!searchTerm && sunFilters.length === 0 && (
         <SortingButtons setFilteredPlants={setFilteredPlants} plants={plants} />
       )}
     </div>
