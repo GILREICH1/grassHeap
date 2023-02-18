@@ -60,6 +60,9 @@
       "last 1 safari version"
     ]
   },
+  "overrides": {
+    "react-error-overlay": "6.0.9"
+  },
   "devDependencies": {
     "@types/react-test-renderer": "^17.0.1",
     "@types/uuid": "^8.3.3",
