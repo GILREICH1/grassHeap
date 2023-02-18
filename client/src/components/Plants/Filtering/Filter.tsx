@@ -4,6 +4,8 @@ import styles from './Filter.module.scss';
 import FilterCheckBox from './FilterCheckBox';
 import { returnPlantsSearch } from '../helpers';
 import SortingButtons from './SortingButtons';
+import Stack from '@mui/joy/Stack';
+import Textarea from '@mui/joy/Textarea';
 
 interface FilterProps {
   setFilteredPlants: (plants: Plant[]) => void;
@@ -53,28 +55,25 @@ const Filter = ({ setFilteredPlants, plants }: FilterProps): JSX.Element => {
 
   return (
     <div className={styles.filters}>
-      {/* TODO Make modular text input form */}
       <form
         className={styles.searchForm}
         onChange={onSearch}
         onSubmit={e => e.preventDefault()}>
-        <input
-          className={styles['form__field']}
-          placeholder="tomato"
-          id="plant-search"
-          type="text"></input>
-        <input className={styles.submit} type="submit" value="Search" />
+        <Textarea
+          sx={{ my: '12px', maxWidth: '512px', width: '80vw' }}
+          color="neutral"
+          placeholder="Search..."
+        />
       </form>
-      <form className={styles.checkBoxes}>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}>
         {sunRequirements.map(label => (
-          <FilterCheckBox
-            onChange={toggleCheckbox}
-            value={label}
-            key={label}
-            label={label}
-          />
+          <FilterCheckBox onChange={toggleCheckbox} value={label} key={label} />
         ))}
-      </form>
+      </Stack>
       {!searchTerm && sunFilters.length === 0 && (
         <SortingButtons setFilteredPlants={setFilteredPlants} plants={plants} />
       )}

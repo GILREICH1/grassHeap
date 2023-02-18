@@ -1,19 +1,21 @@
+import { Checkbox } from '@mui/joy';
 import React from 'react';
 import { TruthySunRequirements } from '../../../common/types';
 
+type OnChange = ({
+  checked,
+  value,
+}: {
+  checked: boolean;
+  value: TruthySunRequirements;
+}) => void;
+
 interface CheckBoxProps {
-  onChange: ({
-    checked,
-    value,
-  }: {
-    checked: boolean;
-    value: TruthySunRequirements;
-  }) => void;
-  label: string;
+  onChange: OnChange;
   value: TruthySunRequirements;
 }
 
-const CheckBox = ({ onChange, label, value }: CheckBoxProps): JSX.Element => {
+const CheckBox = ({ onChange, value }: CheckBoxProps): JSX.Element => {
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,17 +23,7 @@ const CheckBox = ({ onChange, label, value }: CheckBoxProps): JSX.Element => {
     setChecked(e.target.checked);
   };
 
-  return (
-    <div>
-      <input
-        id={label}
-        type="checkbox"
-        checked={checked}
-        onChange={handleChange}
-      />
-      <label htmlFor={label}>{label}</label>
-    </div>
-  );
+  return <Checkbox label={value} checked={checked} onChange={handleChange} />;
 };
 
 export default React.memo(CheckBox);
