@@ -43,15 +43,8 @@
 }
 
 .PlantItem__btn {
-  font-size: large;
-  font-weight: bold;
-  border-radius: 50%;
-  font-weight: bold;
-  color: var(--primaryWhite);
-  position: absolute;
   top: -5%;
   right: -5%;
-  /* width: 20%; */
 }
 
 .PlantItem__save {
