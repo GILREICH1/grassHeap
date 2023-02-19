@@ -12,8 +12,11 @@ https://coolors.co/efc743-141414-eef0f2-0d21a1-011638
 
 .content {
   margin-top: 4em;
+  position: relative;
 }
 
-footer {
-  color: var(--primaryDark);
+.content::after {
+  content: '';
+  display: block;
+  height: 50px;
 }

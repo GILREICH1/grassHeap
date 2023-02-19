@@ -1,6 +1,7 @@
+import styles from './Footer.module.scss';
 function Footer(): JSX.Element {
   return (
-    <footer>
+    <footer className={styles['footer']}>
       A Project by
       <a href="https://github.com/GILREICH1" target="_blank" rel="noreferrer">
         {' '}
