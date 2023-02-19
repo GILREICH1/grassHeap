@@ -5,24 +5,24 @@
   top: 0;
   width: 100%;
   transition: top 0.3s; /* Transition on scroll */
-  background-color: var(--primaryDark);
+  background-color: var(--primaryHighlight);
   z-index: 1;
 }
 
 .navElement {
-  background-color: var(--primaryDark);
+  background-color: var(--primaryHighlight);
   font-weight: bold;
   font-size: larger;
   padding: 0 5px;
   border-radius: 5px;
-  color: var(--primaryWhite);
+  color: var(--primaryDark);
   text-decoration: none; /* no underline */
   transition: all 0.2s, box-shadow 0.08s ease-in;
 }
 
 .NavLink:hover {
   background-color: var(--secondaryDark);
-  color: var(--primaryWhite);
+  color: var(--primaryDark);
 }
 
 .Navbar__appLinks {
@@ -34,7 +34,7 @@
   text-align: center;
   height: 1rem;
   text-decoration: double;
-  color: var(--primaryWhite);
+  color: var(--primaryDark);
   margin-top: 1rem;
   padding-bottom: 0.5em;
 }

@@ -1,7 +1,7 @@
 .PlantDetails {
   text-align: center;
   margin: 2%;
-  color: var(--primaryWhite);
+  color: var(--primaryDark);
 }
 
 .PlantDetails h1::first-letter {

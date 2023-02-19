@@ -48,11 +48,11 @@
 }
 
 .PlantItem__save {
-  background-color: var(--primaryDark);
+  background-color: var(--primaryHighlight);
 }
 
 .PlantItem__remove {
-  background-color: var(--primaryHighlight);
+  background-color: var(--secondaryHighlight);
   color: black;
 }
 

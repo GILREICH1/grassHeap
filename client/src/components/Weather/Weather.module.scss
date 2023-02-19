@@ -3,7 +3,7 @@
 .container {
   @include column;
   color: white;
-  border: solid 2px var(--primaryHighlight);
+  border: solid 2px var(--secondaryHighlight);
   border-radius: 15px;
 }
 
@@ -11,7 +11,7 @@
   @include row;
   justify-content: center;
   gap: 0.5rem;
-  background-color: var(--primaryDark);
+  background-color: var(--primaryHighlight);
   align-self: stretch;
   margin: 0;
   height: 3.5rem;
@@ -19,7 +19,7 @@
   border-top-right-radius: 15px;
 
   a {
-    color: var(--primaryHighlight);
+    color: var(--secondaryHighlight);
     transition: all 200ms;
   }
 

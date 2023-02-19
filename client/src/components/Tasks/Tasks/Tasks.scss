@@ -11,15 +11,16 @@
 }
 
 .tasks__month {
-  color: var(--primaryWhite);
+  color: var(--primaryDark);
   width: 30%;
   margin: 0.2rem;
   padding: 0.1rem;
   background-color: transparent;
   border-radius: 15px;
-  border: solid 2px var(--primaryHighlight);
+  border: solid 2px var(--secondaryHighlight);
 }
 
+/* for mobile */
 @media only screen and (max-width: 600px) {
   .tasks__allmonths {
     flex-direction: column;
