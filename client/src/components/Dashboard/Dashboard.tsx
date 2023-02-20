@@ -7,7 +7,7 @@ import styles from './Dashboard.module.scss';
 function Dashboard(): JSX.Element {
   return (
     <div className={styles.dashboard}>
-      <Weather />
+      {/* <Weather /> */}
       <Tasks />
       <MyPlantsList />
     </div>
