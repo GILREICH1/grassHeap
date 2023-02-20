@@ -1,5 +1,7 @@
 footer {
-  position: absolute;
-  bottom: -383px;
+  text-align: center;
+  position: fixed;
+  background-color: var(--primaryHighlight);
+  bottom: 0;
   width: 100%;
 }
