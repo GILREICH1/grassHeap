@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { saveTask } from '../../../services/ServerApiServices';
 import { Task } from '../../../common/types';
-import styles from './AddTaskForm.module.scss';
 import { plantsContext } from '../../App/App';
 import { userContxt } from '../../Authentication/UserContext';
 import { useAuth0 } from '@auth0/auth0-react';

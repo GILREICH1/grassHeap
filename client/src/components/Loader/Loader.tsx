@@ -1,3 +1,4 @@
+import Typography from '@mui/joy/Typography';
 import { useEffect, useState } from 'react';
 import { PlantGif } from '../PlantGif/PlantGif';
 import './Loader.css';
@@ -19,7 +20,7 @@ function Loader(): JSX.Element {
 
   return (
     <div className="App__loading">
-      <h1>{`Watering${ellipses[i]}`}</h1>
+      <Typography level="h1">{`Watering${ellipses[i]}`}</Typography>
       <div className="daisies">
         <PlantGif />
       </div>

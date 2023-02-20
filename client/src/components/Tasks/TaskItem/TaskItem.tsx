@@ -24,7 +24,6 @@ function TaskItem({ task, deleteThisTask }: TaskItemProps): JSX.Element {
       alignItems="center"
       sx={{
         p: '8px',
-        outline: 'solid var(--joy-palette-success-200); border-radius: 0.5rem;',
       }}
       spacing={2}>
       <Stack

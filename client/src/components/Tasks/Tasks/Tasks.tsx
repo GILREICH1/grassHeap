@@ -6,6 +6,7 @@ import { Task } from '../../../common/types';
 import { getTasks } from '../../../services/ServerApiServices';
 import { plantsContext } from '../../App/App';
 import { userContxt } from '../../Authentication/UserContext';
+import { Stack } from '@mui/joy';
 
 function Tasks(): JSX.Element {
   const [currentMonth, setCurrentMonth] = useState<number>(0);
@@ -35,27 +36,31 @@ function Tasks(): JSX.Element {
   }, []);
 
   return (
-    <div className="Tasks">
+    <Stack
+      direction="row"
+      justifyContent="space-evenly"
+      alignItems="center"
+      spacing={1}>
       <ScrollButton
         disabled={false}
         type="back"
         onClick={() => setCurrentMonth(lastMonth)}></ScrollButton>
       <div className="tasks__allmonths">
-        <div className={`tasks__month tasks__month--${lastMonth}`}>
+        <div>
           <MonthTasksBox
             setTasks={setTasks}
             tasks={tasks}
             monthNumber={lastMonth}
           />
         </div>
-        <div className={`tasks__month tasks__month--${currentMonth}`}>
+        <div className="tasks__currentMonth">
           <MonthTasksBox
             tasks={tasks}
             setTasks={setTasks}
             monthNumber={currentMonth}
           />
         </div>
-        <div className={`tasks__month tasks__month--${nextMonth}`}>
+        <div>
           <MonthTasksBox
             setTasks={setTasks}
             tasks={tasks}
@@ -67,7 +72,7 @@ function Tasks(): JSX.Element {
         disabled={false}
         type="forward"
         onClick={() => setCurrentMonth(nextMonth)}></ScrollButton>
-    </div>
+    </Stack>
   );
 }
 

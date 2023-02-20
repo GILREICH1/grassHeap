@@ -5,10 +5,10 @@ import { deleteTask } from '../../../services/ServerApiServices';
 import AddTaskForm from '../AddTaskForm/AddTaskForm';
 import { getSeason } from './getSeasonFunction';
 import { Task } from '../../../common/types';
-import styles from './MonthTasksBox.module.scss';
 import { userContxt } from '../../Authentication/UserContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import { months } from '../../../utils/months';
+import Card from '@mui/joy/Card';
 
 const filterUserTasksByMonth = (tasks: Task[], monthName: string) => {
   return tasks.filter(task => task.month === monthName);
@@ -51,7 +51,7 @@ function MonthTasksBox({
   }
 
   return (
-    <div className={styles['MonthTaskBox']}>
+    <Card>
       <h2>
         {monthName} {seasonIcon}
       </h2>
@@ -60,7 +60,7 @@ function MonthTasksBox({
         addNewTask={(task: Task) => setTasks([...tasks, task])}
         month={monthName}
       />
-    </div>
+    </Card>
   );
 }
 
