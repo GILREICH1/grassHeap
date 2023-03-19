@@ -1,3 +1,5 @@
+const { saveDBTask } = require('../controllers/taskController');
+
 const DB_HOST = process.env.DB_HOST;
 const DB_USER = process.env.DB_USER;
 const DB_USER_PASSWORD = process.env.DB_USER_PASSWORD;
@@ -27,5 +29,6 @@ mongoose
   .catch(reason => console.log('Failed to connect to DB', reason));
 
 const db = mongoose.connection;
+saveDBTask();
 
 module.exports = db;

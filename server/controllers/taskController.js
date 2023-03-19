@@ -1,7 +1,8 @@
 const { Task } = require('../models/Task');
 const User = require('../models/User');
+const { taskData } = require('../taskData');
 
-async function getTasks(req, res) {
+async function getTasks(_req, res) {
   try {
     const tasks = await Task.find();
     res.status(200).send(tasks);
@@ -21,6 +22,19 @@ async function saveTask(req, res) {
     res.status(201).send(updatedUser.userTasks);
   } catch (err) {
     res.status(400).send('failed to save');
+  }
+}
+
+async function saveDBTask() {
+  try {
+    const newTaskData = taskData.map(task => ({
+      ...task,
+      crop: task.crop.toLowerCase(),
+    }));
+    await Task.insertMany(newTaskData);
+    console.log('saved successfully');
+  } catch (err) {
+    console.log('save failed');
   }
 }
 
@@ -69,4 +83,5 @@ module.exports = {
   getTasks,
   saveTask,
   getTasksByMonth,
+  saveDBTask,
 };
