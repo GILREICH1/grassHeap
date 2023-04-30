@@ -19,7 +19,7 @@ const ScrollButton = ({
   return (
     <>
       <Button
-        sx={{ height: '10rem' }}
+        sx={{ height: '20rem' }}
         color="success"
         variant="solid"
         size="lg"
