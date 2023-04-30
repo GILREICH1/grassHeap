@@ -20,8 +20,13 @@
   transition: all 0.2s, box-shadow 0.08s ease-in;
 }
 
+.NavLink {
+  border: none;
+}
+
 .NavLink:hover {
-  background-color: var(--secondaryDark);
+  cursor: pointer;
+  background-color: var(--secondaryHighlight);
   color: var(--primaryDark);
 }
 

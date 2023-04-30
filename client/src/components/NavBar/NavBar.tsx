@@ -30,12 +30,12 @@ function Navbar(): JSX.Element {
       <div className="Navbar__appLinks">
         <Link className="NavLink navElement" to="/">
           Dashboard
+          <span className="NavElement__icon">🌱</span>
         </Link>
-        <span className="NavElement__icon">🌱</span>
         <Link className="NavLink navElement" to="/plants">
           Browse Plants
+          <span className="NavElement__icon">🥕</span>
         </Link>
-        <span className="NavElement__icon">🥕</span>
         <AuthNav />
       </div>
       {!isAuthenticated && (

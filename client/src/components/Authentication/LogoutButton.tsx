@@ -4,13 +4,13 @@ const LogoutButton = (): JSX.Element => {
   const { logout } = useAuth0();
   return (
     <button
-      className="btn btn-danger btn-block"
+      className="NavLink navElement btn btn-primary btn-block"
       onClick={() =>
         logout({
           returnTo: window.location.origin,
         })
       }>
-      Log Out
+      Log Out 📤
     </button>
   );
 };

@@ -4,9 +4,9 @@ const LoginButton = (): JSX.Element => {
   const { loginWithRedirect } = useAuth0();
   return (
     <button
-      className="btn btn-primary btn-block"
+      className="NavLink navElement btn btn-primary btn-block"
       onClick={() => loginWithRedirect()}>
-      Log In
+      Log In 📥
     </button>
   );
 };
