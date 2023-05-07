@@ -15,7 +15,6 @@ const {
   getWeather,
   getFiveDayForecast,
 } = require('./controllers/weatherController');
-const { getGIFByQuery } = require('./controllers/gifController');
 
 const { getUser } = require('./controllers/userController');
 
