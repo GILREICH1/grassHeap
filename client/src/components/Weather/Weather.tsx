@@ -61,7 +61,7 @@ function Weather(): JSX.Element {
 
   if (error) {
     return (
-      <h1>
+      <h1 className={styles['header']}>
         No weather found for {city} :(
         <a onClick={() => setModalDisplay(true)}> try again</a>
       </h1>
