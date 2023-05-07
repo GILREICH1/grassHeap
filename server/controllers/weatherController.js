@@ -22,6 +22,7 @@ async function getFiveDayForecast(req, res) {
     const JSONweather = await fetch(path);
     const { cod, list } = await JSONweather.json();
     const filteredList = list.filter(weather => {
+      // returns weather for midday of every day
       return weather.dt_txt.includes('12:00:00');
     });
     const filteredResponse = { cod, list: filteredList };
