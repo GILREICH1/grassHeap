@@ -33,10 +33,6 @@ You can view the app at https://grassheap.onrender.com
 - Works on desktop and mobile.
 
 ## ROADMAP
-
-- [x] Styling Location Prompt.
-- [x] General App styling.
-- [x] Display showing MyPlants.
 - [x] User Auth.
 - [x] Search functionality.
 - [ ] More detailed weather report.
@@ -45,10 +41,10 @@ You can view the app at https://grassheap.onrender.com
 
 You will need a running instance of mongoDB
 
-- Add a .env file according to .env-example format (you will need a free API key from <a target="_blank" rel="noopener noreferrer" href='https://openweathermap.org/api'>openweather</a> and from <a href='https://developers.giphy.com/docs/api#quick-start-guide' target="_blank" rel="noopener noreferrer" >GIPHY</a>
+- Add a .env file according to .env-example format and fill in the required values. (you will need a free API key from <a target="_blank" rel="noopener noreferrer" href='https://openweathermap.org/api'>openweather</a> and from <a href='https://auth0.com/' target="_blank" rel="noopener noreferrer" >Auth0</a>. More info on setting up Auth0 can be found <a href='https://github.com/GILREICH1/grassHeap/issues/14#issuecomment-1537439668'  target="_blank">here</a>)
 - Run `npm i` in the server and client folders.
-- Run `npm start` in client.
-- Run `npm start` in server.
+- Run `npm run dev` in client.
+- Run `npm run start:dev` in server.
 
   ( To see the full app, import some default tasks into your mongoDB grassHeap database, tasks collection using https://docs.google.com/spreadsheets/d/1XVkuqPTibBkkK4_KE3KlAV9ufz_iZ7O8Ly-iar14ybE/edit?usp=sharing )
 
