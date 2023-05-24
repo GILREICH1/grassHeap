@@ -6,11 +6,7 @@ import { userContxt } from '../../Authentication/UserContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import { v4 as uuid } from 'uuid';
 import Input from '@mui/joy/Input';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
 import Button from '@mui/joy/Button';
-import CloseRounded from '@mui/icons-material/CloseRounded';
-import IconButton from '@mui/joy/IconButton';
 
 interface AddTaskFormProps {
   month: string;
@@ -19,7 +15,6 @@ interface AddTaskFormProps {
 
 function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
   const [crop, setCrop] = useState<string>('');
-  const action = React.useRef(null);
   const [task, setTask] = useState<string>('');
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const { plants } = useContext(plantsContext);
@@ -44,6 +39,10 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
     setCrop('');
   };
 
+  const onChange = (e: any, v: any) => {
+    setCrop(e.target.value);
+  };
+
   return (
     <>
       <h3>Add New Task</h3>
@@ -57,41 +56,21 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
         required
       />
       <label id="crop-input-label">Crop</label>
-      <Select
-        action={action}
+      <select
         // @ts-expect-error there is an error here
-        onChange={(_e, v) => setCrop(v)}
-        color="success"
-        placeholder="Choose one..."
-        value={crop}
-        {...(crop && {
-          // display the button and remove select indicator
-          // when user has selected a value
-          endDecorator: (
-            <IconButton
-              size="sm"
-              variant="plain"
-              color="neutral"
-              onMouseDown={event => {
-                // don't open the popup when clicking on this button
-                event.stopPropagation();
-              }}
-              onClick={() => {
-                setCrop('');
-              }}>
-              <CloseRounded />
-            </IconButton>
-          ),
-          indicator: null,
-        })}>
-        {plants.map(plant => {
-          return (
-            <Option key={plant.id} value={plant.name}>
+        onChange={onChange}
+        size={10}
+        // placeholder="Choose one..."
+        value={crop}>
+        <option value="" key="placeholder">
+          {'choose a crop'}
+        </option>
+        {plants.map(plant => (
+          <option key={plant.id} value={plant.name}>
               {plant.name}
-            </Option>
-          );
-        })}
-      </Select>
+          </option>
+        ))}
+      </select>
       <Button
         disabled={!(crop && task)}
         color={crop && task ? 'success' : 'danger'}
