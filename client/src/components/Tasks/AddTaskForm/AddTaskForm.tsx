@@ -7,6 +7,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { v4 as uuid } from 'uuid';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
+import PredictiveInput from './PredictiveInput';
 
 interface AddTaskFormProps {
   month: string;
@@ -39,24 +40,29 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
     setCrop('');
   };
 
-  const onChange = (e: any, v: any) => {
-    setCrop(e.target.value);
+  const onChange = (options: string[]) => {
+    setCrop(options[0]);
   };
 
   return (
     <>
       <h3>Add New Task</h3>
       <label id="task-label">Task</label>
-      <Input
-        value={task}
-        onChange={e => setTask(e.target.value)}
-        color="success"
-        placeholder="water"
-        size="md"
-        required
-      />
-      <label id="crop-input-label">Crop</label>
-      <select
+      <form>
+        <Input
+          value={task}
+          onChange={e => setTask(e.target.value)}
+          color="success"
+          placeholder="water"
+          size="md"
+          required
+        />
+        <label id="crop-input-label">Crop</label>
+        <PredictiveInput
+          options={plants.map(p => p.name)}
+          onChange={onChange}
+        />
+        {/* <select
         // @ts-expect-error there is an error here
         onChange={onChange}
         size={10}
@@ -67,17 +73,18 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
         </option>
         {plants.map(plant => (
           <option key={plant.id} value={plant.name}>
-              {plant.name}
+            {plant.name}
           </option>
         ))}
-      </select>
-      <Button
-        disabled={!(crop && task)}
-        color={crop && task ? 'success' : 'danger'}
-        variant="solid"
-        onClick={submitHandler}>
-        Submit
-      </Button>
+      </select> */}
+        <Button
+          disabled={!(crop && task)}
+          color={crop && task ? 'success' : 'danger'}
+          variant="solid"
+          onClick={submitHandler}>
+          Submit
+        </Button>
+      </form>
     </>
   );
 }
