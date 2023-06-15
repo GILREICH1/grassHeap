@@ -8,6 +8,8 @@ import { v4 as uuid } from 'uuid';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import PredictiveInput from './PredictiveInput';
+import FormLabel from '@mui/joy/FormLabel';
+import styles from './AddTaskForm.module.scss';
 
 interface AddTaskFormProps {
   month: string;
@@ -40,15 +42,16 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
     setCrop('');
   };
 
-  const onChange = (options: string[]) => {
-    setCrop(options[0]);
+  const onPredictiveInputChange = (_e: any, newInputValue: string) => {
+    console.log({ _e, newInputValue });
+    setCrop(newInputValue);
   };
 
   return (
     <>
       <h3>Add New Task</h3>
-      <label id="task-label">Task</label>
-      <form>
+      <FormLabel>Task</FormLabel>
+      <form className={styles['addTask__form']}>
         <Input
           value={task}
           onChange={e => setTask(e.target.value)}
@@ -57,28 +60,15 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
           size="md"
           required
         />
-        <label id="crop-input-label">Crop</label>
         <PredictiveInput
+          onChange={onPredictiveInputChange}
           options={plants.map(p => p.name)}
-          onChange={onChange}
         />
-        {/* <select
-        // @ts-expect-error there is an error here
-        onChange={onChange}
-        size={10}
-        // placeholder="Choose one..."
-        value={crop}>
-        <option value="" key="placeholder">
-          {'choose a crop'}
-        </option>
-        {plants.map(plant => (
-          <option key={plant.id} value={plant.name}>
-            {plant.name}
-          </option>
-        ))}
-      </select> */}
         <Button
-          disabled={!(crop && task)}
+          sx={{
+            m: 0.5,
+          }}
+          disabled={!crop || !task}
           color={crop && task ? 'success' : 'danger'}
           variant="solid"
           onClick={submitHandler}>
