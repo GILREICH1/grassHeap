@@ -43,7 +43,6 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
   };
 
   const onPredictiveInputChange = (_e: any, newInputValue: string) => {
-    console.log({ _e, newInputValue });
     setCrop(newInputValue);
   };
 

@@ -20,6 +20,7 @@ const WeatherModal = ({ changeCity }: WeatherModalProps): JSX.Element => {
         type="text"
         className={styles['form__field']}
         required
+        autoComplete="address-level1"
         value={city}
         onChange={e => setCity(e.target.value)}
       />

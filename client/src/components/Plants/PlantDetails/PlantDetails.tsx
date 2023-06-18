@@ -25,7 +25,7 @@ function PlantDetails(): JSX.Element {
   return (
     <div className="PlantDetails">
       <div className="PlantDetails__text">
-        <h1>
+        <h1 className="PlantDetails__header">
           {plantDetails.name}
           <img
             className="PlantDetails__icon"
