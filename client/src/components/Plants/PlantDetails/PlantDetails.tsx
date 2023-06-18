@@ -25,9 +25,11 @@ function PlantDetails(): JSX.Element {
   return (
     <div className="PlantDetails">
       <div className="PlantDetails__text">
-        <h1>
+        <h1 className="PlantDetails__header">
           {plantDetails.name}
           <img
+            width="30px"
+            height="30px"
             className="PlantDetails__icon"
             src={`https://www.growstuff.org/crops/${plantDetails.slug}.svg`}
           />

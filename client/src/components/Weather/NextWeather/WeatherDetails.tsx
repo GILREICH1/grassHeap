@@ -17,7 +17,8 @@ function WeatherDetails({ forecast: weatherObject }: Props): JSX.Element {
     <div className={styles['container']}>
       <h3>{dayNumber}</h3>
       <img
-        className={styles['icon']}
+        width="auto"
+        height="100px"
         src={`https://openweathermap.org/img/wn/${weatherObject.weather[0].icon}@2x.png`}></img>
       <h3>{Math.round(weatherObject.main.temp)} °C</h3>
       <h3>{weatherObject.weather[0].description}</h3>

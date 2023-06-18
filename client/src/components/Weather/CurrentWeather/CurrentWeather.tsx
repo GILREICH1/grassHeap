@@ -13,7 +13,8 @@ function CurrentWeather({ weather }: Props): JSX.Element {
     <div className={styles['container']}>
       <h2>{'Today'}</h2>
       <img
-        className={styles['icon']}
+        width="auto"
+        height="100px"
         src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}></img>
       <div className={styles['numericData']}>
         <h3>{weather.main && Math.round(weather.main?.temp)} °C</h3>

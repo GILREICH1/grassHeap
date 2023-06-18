@@ -24,8 +24,13 @@
   position: relative;
 }
 
-.PlantDetails__icon {
-  height: 5vh;
+.PlantDetails__header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 
 .PlantDetails__overlay {
