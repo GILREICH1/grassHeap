@@ -6,11 +6,10 @@ import { userContxt } from '../../Authentication/UserContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import { v4 as uuid } from 'uuid';
 import Input from '@mui/joy/Input';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
 import Button from '@mui/joy/Button';
-import CloseRounded from '@mui/icons-material/CloseRounded';
-import IconButton from '@mui/joy/IconButton';
+import PredictiveInput from './PredictiveInput';
+import FormLabel from '@mui/joy/FormLabel';
+import styles from './AddTaskForm.module.scss';
 
 interface AddTaskFormProps {
   month: string;
@@ -19,7 +18,6 @@ interface AddTaskFormProps {
 
 function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
   const [crop, setCrop] = useState<string>('');
-  const action = React.useRef(null);
   const [task, setTask] = useState<string>('');
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const { plants } = useContext(plantsContext);
@@ -44,61 +42,39 @@ function AddTaskForm({ month, addNewTask }: AddTaskFormProps): JSX.Element {
     setCrop('');
   };
 
+  const onPredictiveInputChange = (_e: any, newInputValue: string) => {
+    console.log({ _e, newInputValue });
+    setCrop(newInputValue);
+  };
+
   return (
     <>
       <h3>Add New Task</h3>
-      <label id="task-label">Task</label>
-      <Input
-        value={task}
-        onChange={e => setTask(e.target.value)}
-        color="success"
-        placeholder="water"
-        size="md"
-        required
-      />
-      <label id="crop-input-label">Crop</label>
-      <Select
-        action={action}
-        // @ts-expect-error there is an error here
-        onChange={(_e, v) => setCrop(v)}
-        color="success"
-        placeholder="Choose one..."
-        value={crop}
-        {...(crop && {
-          // display the button and remove select indicator
-          // when user has selected a value
-          endDecorator: (
-            <IconButton
-              size="sm"
-              variant="plain"
-              color="neutral"
-              onMouseDown={event => {
-                // don't open the popup when clicking on this button
-                event.stopPropagation();
-              }}
-              onClick={() => {
-                setCrop('');
-              }}>
-              <CloseRounded />
-            </IconButton>
-          ),
-          indicator: null,
-        })}>
-        {plants.map(plant => {
-          return (
-            <Option key={plant.id} value={plant.name}>
-              {plant.name}
-            </Option>
-          );
-        })}
-      </Select>
-      <Button
-        disabled={!(crop && task)}
-        color={crop && task ? 'success' : 'danger'}
-        variant="solid"
-        onClick={submitHandler}>
-        Submit
-      </Button>
+      <FormLabel>Task</FormLabel>
+      <form className={styles['addTask__form']}>
+        <Input
+          value={task}
+          onChange={e => setTask(e.target.value)}
+          color="success"
+          placeholder="water"
+          size="md"
+          required
+        />
+        <PredictiveInput
+          onChange={onPredictiveInputChange}
+          options={plants.map(p => p.name)}
+        />
+        <Button
+          sx={{
+            m: 0.5,
+          }}
+          disabled={!crop || !task}
+          color={crop && task ? 'success' : 'danger'}
+          variant="solid"
+          onClick={submitHandler}>
+          Submit
+        </Button>
+      </form>
     </>
   );
 }

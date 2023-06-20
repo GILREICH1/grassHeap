@@ -2,7 +2,6 @@
 
 .container {
   @include column;
-  color: white;
   border: solid 2px var(--secondaryHighlight);
   border-radius: 15px;
 }

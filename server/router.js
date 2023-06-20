@@ -15,7 +15,6 @@ const {
   getWeather,
   getFiveDayForecast,
 } = require('./controllers/weatherController');
-const { getGIFByQuery } = require('./controllers/gifController');
 
 const { getUser } = require('./controllers/userController');
 
@@ -38,9 +37,6 @@ router.delete('/tasks', checkJwt, deleteTask);
 // getWeather
 router.post('/weather', getWeather);
 router.post('/forecast', getFiveDayForecast);
-
-// GET GIPH
-router.post('/gifs', getGIFByQuery);
 
 // Users
 router.post('/getUser', checkJwt, getUser);
