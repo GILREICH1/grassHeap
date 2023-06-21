@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddButton from './PlantItemAddBtn/AddBtn';
 import RemoveBtn from './PlantItemRemoveBtn/RemoveBtn';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { plantsContext } from '../../App/App';
 import { Plant } from '../../../common/types';
 import './PlantItem.css';
@@ -42,14 +41,10 @@ function PlantItem({
             <img src={require('./svgIcons/backup.svg').default} />
           )}
           {/* <SvgIcon /> */}
-          <p className="PlantItem__p">
-            {plant.scientific_name || 'not available'}
-          </p>
-          <p className="PlantItem__cta">
-            Learn more
-            <ChevronRightIcon />
-          </p>
         </Link>
+        <p className="PlantItem__p">
+          {plant.scientific_name || 'not available'}
+        </p>
       </div>
       <div className="PlantItem__btnDiv">
         {showButtons ? (

@@ -60,22 +60,9 @@
   width: 60%;
 }
 
-.PlantItem__cta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: none;
-  font-size: 0.8rem;
-  margin: 0;
-}
-
 /* for desktop/laptop */
 @media only screen and (min-width: 600px) {
   .plantItem {
     margin: 4%;
-  }
-
-  .PlantItem__cta {
-    display: none;
   }
 }
