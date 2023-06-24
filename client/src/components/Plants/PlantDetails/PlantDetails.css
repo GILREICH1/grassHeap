@@ -25,7 +25,17 @@
 }
 
 .PlantDetails__icon {
-  height: 5vh;
+  height: 30px;
+  width: 30px;
+}
+
+.PlantDetails__header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 
 .PlantDetails__overlay {
