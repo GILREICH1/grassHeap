@@ -6,7 +6,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { plantsContext } from '../../App/App';
 import { Plant } from '../../../common/types';
 import './PlantItem.css';
-
 interface PlantItemProps {
   plant: Plant;
   inMyPlants: boolean;
@@ -34,14 +33,16 @@ function PlantItem({
       <div className="PlantItem__text">
         <Link className="PlantItem__a" to={`/plants/${plant.slug}`}>
           {plant.name}
-          {plant.details.attributes.svg_icon ? (
-            // eslint-disable-next-line @typescript-eslint/no-var-requires
-            <img src={require(`./svgIcons/${plant.slug}.svg`).default} />
+          {/* {plant.details.attributes.svg_icon ? (
+            <img
+              onError={handleImageError}
+              // eslint-disable-next-line @typescript-eslint/no-var-requires
+              src={require(imageSource).default}
+            />
           ) : (
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             <img src={require('./svgIcons/backup.svg').default} />
-          )}
-          {/* <SvgIcon /> */}
+          )} */}
           <p className="PlantItem__p">
             {plant.scientific_name || 'not available'}
           </p>
